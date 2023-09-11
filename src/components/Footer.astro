@@ -1,0 +1,31 @@
+---
+import SocialIcon from '../components/social-icons/index.astro'
+import Link from "./Link.astro";
+
+import {SITE_METADATA} from '../consts'
+---
+
+<footer>
+    <div class="mt-16 flex flex-col items-center">
+        <div class="mb-3 flex space-x-4">
+            <SocialIcon kind="mail" href={`mailto:${SITE_METADATA.email}`} size={6}/>
+            <SocialIcon kind="github" href={SITE_METADATA.github} size={6}/>
+            <SocialIcon kind="facebook" href={SITE_METADATA.facebook} size={6}/>
+            <SocialIcon kind="youtube" href={SITE_METADATA.youtube} size={6}/>
+            <SocialIcon kind="linkedin" href={SITE_METADATA.linkedin} size={6}/>
+            <SocialIcon kind="twitter" href={SITE_METADATA.twitter} size={6}/>
+        </div>
+        <div class="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
+            <div>{SITE_METADATA.author}</div>
+            <div>{` • `}</div>
+            <div>{`© ${new Date().getFullYear()}`}</div>
+            <div>{` • `}</div>
+            <Link href="/">{SITE_METADATA.title}</Link>
+        </div>
+        <div class="mb-8 text-sm text-gray-500 dark:text-gray-400">
+            <Link href="https://github.com/wanoo21/tailwind-astro-starter-blog">
+                Tailwind Astro Theme
+            </Link>
+        </div>
+    </div>
+</footer>

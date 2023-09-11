@@ -1,0 +1,20 @@
+---
+import {HTMLAttributes} from "astro/types";
+
+type Props = HTMLAttributes<'a'>
+
+const {href, ...rest} = Astro.props;
+
+const isInternalLink = href && href.startsWith('/')
+const isAnchorLink = href && href.startsWith('#')
+---
+
+{
+    (isInternalLink || isAnchorLink) ?
+    <a href={href} {...rest}>
+        <slot/>
+    </a> :
+    <a target="_blank" rel="noopener noreferrer" href={href} {...rest}>
+        <slot/>
+    </a>
+}
