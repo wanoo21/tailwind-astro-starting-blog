@@ -1,10 +1,21 @@
 ---
-import {SITE_METADATA} from '../consts';
-import RootLayout from "../layouts/RootLayout.astro";
+import {getCollection} from "astro:content";
+
+import {SITE_METADATA} from '@/consts';
+import RootLayout from "@/layouts/RootLayout.astro";
+import Link from "@/components/Link.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
 
 const MAX_DISPLAY = 5;
 
-const posts = [];
+let posts = await getCollection('blog', post => {
+    return !post.data.draft;
+})
+
+// Sort posts by date
+posts = posts.sort((a, b) => {
+    return new Date(b.data.date) - new Date(a.data.date);
+})
 ---
 
 <RootLayout title={SITE_METADATA.title} description={SITE_METADATA.description}>
@@ -20,71 +31,67 @@ const posts = [];
         </div>
         <ul class="divide-y divide-gray-200 dark:divide-gray-700">
             {!posts.length && 'No posts found.'}
-            <!--{posts.slice(0, MAX_DISPLAY).map((post) => {-->
-            <!--    const { slug, date, title, summary, tags } = post-->
-            <!--    return (-->
-            <!--            <li class="py-12">-->
-            <!--                <article>-->
-            <!--                    <div class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">-->
-            <!--                        <dl>-->
-            <!--                            <dt class="sr-only">Published on</dt>-->
-            <!--                            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">-->
-            <!--                                &lt;!&ndash;<time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>&ndash;&gt;-->
-            <!--                            </dd>-->
-            <!--                        </dl>-->
-            <!--                        <div class="space-y-5 xl:col-span-3">-->
-            <!--                            <div class="space-y-6">-->
-            <!--                                <div>-->
-            <!--                                    <h2 class="text-2xl font-bold leading-8 tracking-tight">-->
-            <!--                                        <Link-->
-            <!--                                                href={`/blog/${slug}`}-->
-            <!--                                                class="text-gray-900 dark:text-gray-100"-->
-            <!--                                        >-->
-            <!--                                            {title}-->
-            <!--                                        </Link>-->
-            <!--                                    </h2>-->
-            <!--                                    <div class="flex flex-wrap">-->
-            <!--                                        {tags.map((tag) => (-->
-            <!--                                                <Tag key={tag} text={tag} />-->
-            <!--                                        ))}-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="prose max-w-none text-gray-500 dark:text-gray-400">-->
-            <!--                                    {summary}-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                            <div class="text-base font-medium leading-6">-->
-            <!--                                <Link-->
-            <!--                                        href={`/blog/${slug}`}-->
-            <!--                                        class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"-->
-            <!--                                        aria-label={`Read "${title}"`}-->
-            <!--                                >-->
-            <!--                                    Read more &rarr;-->
-            <!--                                </Link>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </article>-->
-            <!--            </li>-->
-            <!--    )-->
-            <!--})}-->
+            {posts.slice(0, MAX_DISPLAY).map((post) => {
+                const {date, title, summary, tags} = post.data;
+                return (
+                        <li class="py-12">
+                            <article>
+                                <div class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                                    <dl>
+                                        <dt class="sr-only">Published on</dt>
+                                        <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                                            <FormattedDate date={date} />
+                                        </dd>
+                                    </dl>
+                                    <div class="space-y-5 xl:col-span-3">
+                                        <div class="space-y-6">
+                                            <div>
+                                                <h2 class="text-2xl font-bold leading-8 tracking-tight">
+                                                    <Link href={`/blog/${post.slug}`}
+                                                          class="text-gray-900 dark:text-gray-100">
+                                                        {title}
+                                                    </Link>
+                                                </h2>
+                                                <div class="flex flex-wrap">
+
+                                                </div>
+                                            </div>
+                                            <div class="prose max-w-none text-gray-500 dark:text-gray-400">
+                                                {summary}
+                                            </div>
+                                        </div>
+                                        <div class="text-base font-medium leading-6">
+                                            <Link
+                                                    href={`/blog/${post.slug}`}
+                                                    class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                                    aria-label={`Read "${title}"`}
+                                            >
+                                                Read more &rarr;
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                )
+            })}
         </ul>
     </div>
-    <!--{posts.length > MAX_DISPLAY && (-->
-    <!--        <div class="flex justify-end text-base font-medium leading-6">-->
-    <!--            <Link-->
-    <!--                    href="/blog"-->
-    <!--                    class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"-->
-    <!--                    aria-label="All posts"-->
-    <!--            >-->
-    <!--                All Posts &rarr;-->
-    <!--            </Link>-->
-    <!--        </div>-->
-    <!--)}-->
+    {posts.length > MAX_DISPLAY && (
+            <div class="flex justify-end text-base font-medium leading-6">
+                <Link
+                        href="/blog"
+                        class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                        aria-label="All posts"
+                >
+                    All Posts &rarr;
+                </Link>
+            </div>
+    )}
+    <!--TODO: Add newsletter form-->
     <!--{siteMetadata.newsletter?.provider && (-->
     <!--        <div class="flex items-center justify-center pt-4">-->
     <!--            <NewsletterForm />-->
     <!--        </div>-->
     <!--)}-->
-
 </RootLayout>
