@@ -1,5 +1,6 @@
 ---
-import {type Page, type CollectionEntry, getEntries} from "astro:content";
+import type {Page, CollectionEntry} from "astro:content";
+
 import FormattedDate from "../components/FormattedDate.astro";
 import Link from "../components/Link.astro";
 import Pagination from "../components/Pagination.astro";
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const {title, description, page} = Astro.props;
+const hasDefaultSlot = Astro.slots.has('default');
 ---
 <RootLayout {title} {description}>
     <div class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -21,7 +23,7 @@ const {title, description, page} = Astro.props;
                 {title}
             </h1>
         </div>
-        {Astro.slots.has('default') && (
+        {hasDefaultSlot && (
                 <div class="prose py-4">
                     <slot/>
                 </div>
