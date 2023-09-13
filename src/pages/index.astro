@@ -1,12 +1,10 @@
 ---
 import {getCollection} from "astro:content";
 
-import {SITE_METADATA} from '@/consts';
+import {SITE_METADATA, ITEMS_PER_PAGE} from '@/consts';
 import RootLayout from "@/layouts/RootLayout.astro";
 import Link from "@/components/Link.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
-
-const MAX_DISPLAY = 5;
 
 let posts = await getCollection('blog', post => {
     return !post.data.draft;
@@ -19,7 +17,6 @@ posts = posts.sort((a, b) => {
 ---
 
 <RootLayout title={SITE_METADATA.title} description={SITE_METADATA.description}>
-
     <div class="divide-y divide-gray-200 dark:divide-gray-700">
         <div class="space-y-2 pb-8 pt-6 md:space-y-5">
             <h1 class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
@@ -31,7 +28,7 @@ posts = posts.sort((a, b) => {
         </div>
         <ul class="divide-y divide-gray-200 dark:divide-gray-700">
             {!posts.length && 'No posts found.'}
-            {posts.slice(0, MAX_DISPLAY).map((post) => {
+            {posts.slice(0, ITEMS_PER_PAGE).map((post) => {
                 const {date, title, summary, tags} = post.data;
                 return (
                         <li class="py-12">
@@ -40,7 +37,7 @@ posts = posts.sort((a, b) => {
                                     <dl>
                                         <dt class="sr-only">Published on</dt>
                                         <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                                            <FormattedDate date={date} />
+                                            <FormattedDate date={date}/>
                                         </dd>
                                     </dl>
                                     <div class="space-y-5 xl:col-span-3">
@@ -77,7 +74,7 @@ posts = posts.sort((a, b) => {
             })}
         </ul>
     </div>
-    {posts.length > MAX_DISPLAY && (
+    {posts.length > ITEMS_PER_PAGE && (
             <div class="flex justify-end text-base font-medium leading-6">
                 <Link
                         href="/blog"

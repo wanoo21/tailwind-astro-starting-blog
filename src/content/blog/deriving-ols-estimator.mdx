@@ -1,7 +1,6 @@
 ---
 title: Deriving the OLS Estimator
 date: '2020-12-21'
-tags: ['next js', 'math', 'ols']
 draft: false
 summary: 'How to derive the OLS Estimator with matrix notation and a tour of math typesetting using markdown with the help of KaTeX.'
 ---
@@ -98,7 +97,7 @@ At times it might be easier to use vector notation. For consistency, I will use 
 
 ## Least Squares
 
-**Start**:  
+**Start**:
 $$y_i = \mathbf{x}'_i \beta + u_i$$
 
 **Assumptions**:
@@ -108,14 +107,14 @@ $$y_i = \mathbf{x}'_i \beta + u_i$$
 3. rank($\mathbf{X}$) = $k$ (no multi-collinearity i.e. full rank)
 4. $Var(\mathbf{U}|\mathbf{X}) = \sigma^2 I_n$ (Homoskedascity)
 
-**Aim**:  
+**Aim**:
 Find $\beta$ that minimises the sum of squared errors:
 
 $$
 Q = \sum_{i=1}^{n}{u_i^2} = \sum_{i=1}^{n}{(y_i - \mathbf{x}'_i\beta)^2} = (Y-X\beta)'(Y-X\beta)
 $$
 
-**Solution**:  
+**Solution**:
 Hints: $Q$ is a $1 \times 1$ scalar, by symmetry $\frac{\partial b'Ab}{\partial b} = 2Ab$.
 
 Take matrix derivative w.r.t $\beta$:

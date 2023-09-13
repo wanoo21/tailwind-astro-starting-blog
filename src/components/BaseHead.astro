@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '@/styles/global.css';
+import {SITE_METADATA} from "@/consts";
 
 interface Props {
     title: string;
@@ -15,7 +16,7 @@ const {title, description, image = '/blog-placeholder-1.jpg'} = Astro.props;
 ---
 
 <!-- Global Metadata -->
-<meta charset="utf-8"/>
+<meta charset="utf-8" lang={SITE_METADATA.language}/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <meta name="generator" content={Astro.generator}/>

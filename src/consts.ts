@@ -3,13 +3,13 @@
 
 export const SITE_METADATA = {
     title: 'Astro Starter Blog',
-    author: 'Tails Azimuth',
-    headerTitle: 'TailwindBlog',
+    author: 'John Doe',
+    headerTitle: 'Astro Starter Blog',
     description: 'A blog created with Astro and Tailwind.css',
     language: 'en-us',
     theme: 'system', // system, dark or light
     siteUrl: 'https://astro-starter-blog.yon.fun/',
-    siteRepo: 'https://github.com/wanoo21/tailwind-astro-starter-blog',
+    siteRepo: 'https://github.com/wanoo21/tailwind-astro-starting-blog',
     siteLogo: '/static/images/logo.png',
     socialBanner: '/static/images/twitter-card.png',
     mastodon: 'https://mastodon.social/@mastodonuser',
@@ -91,3 +91,5 @@ export const SITE_METADATA = {
     //     // },
     // },
 };
+
+export const ITEMS_PER_PAGE = 5;

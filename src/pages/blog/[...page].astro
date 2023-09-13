@@ -1,6 +1,7 @@
 ---
 import {type Page, getCollection} from 'astro:content';
-import RootLayout from "@/layouts/RootLayout.astro";
+import ListLayout from "@/layouts/ListLayout.astro";
+import {ITEMS_PER_PAGE} from "@/consts";
 
 interface Props {
     page: Page;
@@ -11,13 +12,10 @@ export async function getStaticPaths({paginate}) {
         return !post.data.draft;
     })
     posts = posts.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
-    return paginate(posts, {pageSize: 5});
+    return paginate(posts, {pageSize: ITEMS_PER_PAGE});
 }
 
 const {page} = Astro.props;
 ---
 
-<RootLayout title="Blog">
-    {page.currentPage}
-    <p>More to see here soon!</p>
-</RootLayout>
+<ListLayout title="Blog" page={page}/>

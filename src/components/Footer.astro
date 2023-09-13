@@ -16,15 +16,22 @@ import Link from "./Link.astro";
             <SocialIcon kind="twitter" href={SITE_METADATA.twitter} size={6}/>
         </div>
         <div class="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-            <div>{SITE_METADATA.author}</div>
+            <Link href="/about">{SITE_METADATA.author}</Link>
             <div>{` • `}</div>
             <div>{`© ${new Date().getFullYear()}`}</div>
             <div>{` • `}</div>
             <Link href="/">{SITE_METADATA.title}</Link>
         </div>
         <div class="mb-8 text-sm text-gray-500 dark:text-gray-400">
-            <Link href="https://github.com/wanoo21/tailwind-astro-starter-blog">
-                Tailwind Astro Theme
+            <Link href={SITE_METADATA.siteRepo}>
+                {SITE_METADATA.title} {` is open source. `}
+                {` View `}
+                <span class="underline">the source</span>
+                {` code on `}
+                <span class="underline">GitHub</span>
+                {` and `}
+                <span class="underline">give it a star</span>
+                {` if you like it.`}
             </Link>
         </div>
     </div>
