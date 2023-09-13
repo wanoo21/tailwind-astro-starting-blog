@@ -21,8 +21,11 @@ const {title, description, image = '/blog-placeholder-1.jpg'} = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <meta name="generator" content={Astro.generator}/>
 
-<!--TODO: Add the right font-->
 <!-- Font preloads -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" crossorigin>
 <!--<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />-->
 <!--<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />-->
 

@@ -5,6 +5,7 @@ import {SITE_METADATA, ITEMS_PER_PAGE} from '@/consts';
 import RootLayout from "@/layouts/RootLayout.astro";
 import Link from "@/components/Link.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
+import Tag from "@/components/Tag.astro";
 
 let posts = await getCollection('blog', post => {
     return !post.data.draft;
@@ -50,7 +51,9 @@ posts = posts.sort((a, b) => {
                                                     </Link>
                                                 </h2>
                                                 <div class="flex flex-wrap">
-
+                                                    {tags.map(({slug}) => (
+                                                            <Tag slug={slug}/>
+                                                    ))}
                                                 </div>
                                             </div>
                                             <div class="prose max-w-none text-gray-500 dark:text-gray-400">
