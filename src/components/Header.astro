@@ -1,9 +1,9 @@
 ---
+import {SITE_METADATA, NAVIGATION} from '@/consts';
 import HeaderLink from './HeaderLink.astro';
 import Logo from './Logo.astro';
-
-import {SITE_METADATA, NAVIGATION} from '@/consts';
 import MobileNav from "./MobileNav.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
 ---
 
 <header class="flex items-center justify-between py-10">
@@ -37,8 +37,7 @@ import MobileNav from "./MobileNav.astro";
 
         <!--TODO: add theme button-->
         <!--<SearchButton />-->
-        <!--TODO: Add theme switcher-->
-        <!--<ThemeSwitch />-->
+        <ThemeSwitcher />
         <MobileNav/>
     </div>
 </header>
