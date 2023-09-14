@@ -8,7 +8,7 @@ export const SITE_METADATA = {
     headerTitle: 'Astro Starter Blog',
     description: 'A blog created with Astro and Tailwind.css',
     language: 'en-us',
-    theme: 'system', // Options: system, light, dark
+    theme: 'system', // Options: system, light, dark, Does not work yet
     siteUrl: 'https://astro-starter-blog.yon.fun/',
     siteRepo: 'https://github.com/wanoo21/tailwind-astro-starting-blog',
     siteLogo: '/static/images/logo.png',

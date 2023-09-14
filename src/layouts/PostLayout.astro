@@ -7,6 +7,7 @@ import RootLayout from "./RootLayout.astro";
 import {type CollectionEntry, getEntries} from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import Tag from "../components/Tag.astro";
+import ScrollTopAndComments from "../components/ScrollTopAndComments.astro";
 
 interface Props {
     post: CollectionEntry<'blog'>;
@@ -24,8 +25,7 @@ const {Content, headings, remarkPluginFrontmatter} = await post.render();
 ---
 <RootLayout title={post.data.title} description={post.data.summary}>
     <SectionContainer>
-        <!--TODO: Scroll and Comment component-->
-        <!--<ScrollTopAndComment />-->
+        <ScrollTopAndComments />
         <article>
             <div class="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
                 <header class="pt-6 xl:pb-6">
@@ -47,7 +47,7 @@ const {Content, headings, remarkPluginFrontmatter} = await post.render();
                     <dl class="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
                         <dt class="sr-only">Authors</dt>
                         <dd>
-                            <ul class="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
+                            <ul class="flex flex-wrap justify-center items-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
                                 <!--TODO: Add support for multiple authors-->
                                 {authors.map(({data, slug}) => (
                                         <li class="flex items-center space-x-2">
@@ -70,9 +70,9 @@ const {Content, headings, remarkPluginFrontmatter} = await post.render();
                                             </dl>
                                         </li>
                                         <li>
-                                        <span class="text-gray-500 dark:text-gray-400">{
-                                            data.occupation && data.company ? `${data.occupation} at ${data.company}` : data.company
-                                        }</span>
+                                        <span class="text-gray-500 dark:text-gray-400">
+                                            {data.occupation && data.company ? `${data.occupation} at ${data.company}` : data.company}
+                                        </span>
                                         </li>
                                 ))}
                             </ul>
