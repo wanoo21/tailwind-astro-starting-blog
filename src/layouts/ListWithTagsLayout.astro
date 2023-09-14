@@ -1,0 +1,113 @@
+---
+import {type Page, type CollectionEntry, getCollection} from "astro:content";
+
+import Link from "../components/Link.astro";
+import Pagination from "../components/Pagination.astro";
+import RootLayout from "./RootLayout.astro";
+import Tag from "../components/Tag.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+
+interface Props {
+    title: string;
+    description: string;
+    page: Page<CollectionEntry<'blog'>[]>;
+}
+
+const tags = await getCollection('tags');
+const posts = await getCollection('blog');
+
+function tagCount(slug: typeof CollectionEntry<'tags'>['slug']) {
+    return posts.filter((post) => post.data.tags.some(tag => tag.slug === slug)).length;
+}
+
+function isSamePath(path: string) {
+    return Astro.url.pathname === path;
+}
+
+const {title, description, page} = Astro.props;
+const hasDefaultSlot = Astro.slots.has('default');
+const isBlogPage = Astro.url.pathname.startsWith('/blog');
+---
+<RootLayout {title} {description}>
+    <div>
+        <div class="pb-6 pt-6">
+            <h1 class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+                {title}
+            </h1>
+            {hasDefaultSlot && (
+                    <div class="prose dark:prose-invert py-4">
+                        <slot/>
+                    </div>
+            )}
+        </div>
+        <div class="flex sm:space-x-24">
+            <div class="hidden max-h-screen h-full sm:flex flex-wrap bg-gray-50 dark:bg-gray-900/70 shadow-md pt-5 dark:shadow-gray-800/40 rounded min-w-[280px] max-w-[280px] overflow-auto">
+                <div class="py-4 px-6">
+                    {isBlogPage ? (
+                            <h3 class="text-primary-500 font-bold uppercase">All Posts</h3>
+                    ) : (
+                            <Link href="/blog"
+                                    class="font-bold uppercase text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500"
+                            >
+                                All Posts
+                            </Link>
+                    )}
+                    <ul>
+                        {tags.map(({slug, data}) => (
+                                <li class="my-3">
+                                    {isSamePath(`/tag/${slug}`) ? (
+                                            <h3 class="inline py-2 px-3 uppercase text-sm font-bold text-primary-500">
+                                                {`${data.name} (${tagCount(slug)})`}
+                                            </h3>
+                                    ) : (
+                                            <Link
+                                                    href={`/tags/${slug}`}
+                                                    class="py-2 px-3 uppercase text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500"
+                                                    aria-label={`View posts tagged ${data.name}`}
+                                            >
+                                                {`${data.name} (${tagCount(slug)})`}
+                                            </Link>
+                                    )}
+                                </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    {page.data.map(({slug, data: {date, title, summary, tags}}: CollectionEntry<'blog'>) => (
+                            <li class="py-5">
+                                <article class="space-y-2 flex flex-col xl:space-y-0">
+                                    <dl>
+                                        <dt class="sr-only">Published on</dt>
+                                        <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                                            <FormattedDate date={date}/>
+                                        </dd>
+                                    </dl>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <h3 class="text-2xl font-bold leading-8 tracking-tight">
+                                                <Link href={`/blog/${slug}`} class="text-gray-900 dark:text-gray-100">
+                                                    {title}
+                                                </Link>
+                                            </h3>
+                                            <div class="flex flex-wrap">
+                                                {tags.map(({slug}) =>
+                                                        <Tag slug={slug}/>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div class="prose max-w-none text-gray-500 dark:text-gray-400">
+                                            {summary}
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                    ))}
+                </ul>
+                {(page.url.next || page.url.prev) && (
+                        <Pagination page={page}/>)}
+            </div>
+        </div>
+    </div>
+</RootLayout>

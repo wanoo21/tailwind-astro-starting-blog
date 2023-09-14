@@ -1,9 +1,10 @@
 ---
 import {type Page, getCollection, type CollectionEntry} from 'astro:content';
 
-import ListLayout from "@/layouts/ListLayout.astro";
+// import ListLayout from "@/layouts/ListLayout.astro";
 import {ITEMS_PER_PAGE} from "@/consts";
 import {excludeDrafts, sortBlogPosts} from "@/functions";
+import ListWithTagsLayout from "../../../layouts/ListWithTagsLayout.astro";
 
 interface Props {
     page: Page<CollectionEntry<'blog'>>;
@@ -24,6 +25,10 @@ const {page, entry} = Astro.props;
 const {Content} = await entry.render()
 ---
 
-<ListLayout title={entry.data.name} description={entry.data.description} page={page}>
+<!--<ListLayout title={entry.data.name} description={entry.data.description} page={page}>-->
+<!--    <Content/>-->
+<!--</ListLayout>-->
+
+<ListWithTagsLayout title={entry.data.name} description={entry.data.description} page={page}>
     <Content/>
-</ListLayout>
+</ListWithTagsLayout>

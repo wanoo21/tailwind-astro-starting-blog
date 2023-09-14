@@ -1,8 +1,9 @@
 ---
 import {type Page, getCollection} from 'astro:content';
-import ListLayout from "@/layouts/ListLayout.astro";
+// import ListLayout from "@/layouts/ListLayout.astro";
 import {ITEMS_PER_PAGE} from "@/consts";
 import {sortBlogPosts, excludeDrafts} from "@/functions";
+import ListWithTagsLayout from "../../layouts/ListWithTagsLayout.astro";
 
 interface Props {
     page: Page;
@@ -16,4 +17,5 @@ export async function getStaticPaths({paginate}) {
 const {page} = Astro.props;
 ---
 
-<ListLayout title="Blog" page={page}/>
+<!--<ListLayout title="Blog" page={page}/>-->
+<ListWithTagsLayout title="Blog" page={page}/>
