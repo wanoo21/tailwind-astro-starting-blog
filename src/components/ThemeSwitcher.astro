@@ -52,4 +52,5 @@
 
     // Add event listener
     document.querySelector('button[aria-label="Toggle Dark Mode"]').addEventListener('click', toggleTheme)
+    document.addEventListener("astro:after-swap", () => setTheme(localStorage.getItem('theme')));
 </script>

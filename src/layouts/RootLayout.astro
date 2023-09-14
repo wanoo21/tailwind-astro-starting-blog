@@ -1,5 +1,6 @@
 ---
 import type {CollectionEntry} from 'astro:content';
+import {ViewTransitions} from 'astro:transitions';
 
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
@@ -14,6 +15,7 @@ const {title, description} = Astro.props;
 ---
 
 <html lang={SITE_METADATA.language} class="scroll-smooth">
+<ViewTransitions />
 <BaseHead title={title} description={description}/>
 <body class="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
 
