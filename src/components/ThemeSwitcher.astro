@@ -15,6 +15,8 @@
 </button>
 
 <script client:load>
+    import {SITE_METADATA} from "@/consts"
+
     // Detect system preference change
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
         setTheme(event.matches ? 'dark' : 'light')
@@ -38,8 +40,11 @@
 
     // Detect system preference
     if (!localStorage.getItem('theme')) {
-        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-        setTheme(darkModeMediaQuery.matches ? 'dark' : 'light')
+        let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (SITE_METADATA.theme !== 'system') {
+            isDark = SITE_METADATA.theme === 'dark'
+        }
+        setTheme(isDark ? 'dark' : 'light')
     }
 
     // Set initial theme

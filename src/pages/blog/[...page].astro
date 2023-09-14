@@ -2,16 +2,14 @@
 import {type Page, getCollection} from 'astro:content';
 import ListLayout from "@/layouts/ListLayout.astro";
 import {ITEMS_PER_PAGE} from "@/consts";
+import {sortBlogPosts, excludeDrafts} from "@/functions";
 
 interface Props {
     page: Page;
 }
 
 export async function getStaticPaths({paginate}) {
-    let posts = await getCollection('blog', post => {
-        return !post.data.draft;
-    })
-    posts = posts.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+    const posts = await getCollection('blog', excludeDrafts).then(sortBlogPosts)
     return paginate(posts, {pageSize: ITEMS_PER_PAGE});
 }
 

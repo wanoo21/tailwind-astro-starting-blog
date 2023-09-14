@@ -6,15 +6,9 @@ import RootLayout from "@/layouts/RootLayout.astro";
 import Link from "@/components/Link.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import Tag from "@/components/Tag.astro";
+import {excludeDrafts, sortBlogPosts} from "@/functions";
 
-let posts = await getCollection('blog', post => {
-    return !post.data.draft;
-})
-
-// Sort posts by date
-posts = posts.sort((a, b) => {
-    return new Date(b.data.date) - new Date(a.data.date);
-})
+const posts = await getCollection('blog', excludeDrafts).then(sortBlogPosts)
 ---
 
 <RootLayout title={SITE_METADATA.title} description={SITE_METADATA.description}>

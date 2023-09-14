@@ -1,7 +1,9 @@
 ---
 import {type Page, getCollection, type CollectionEntry} from 'astro:content';
+
 import ListLayout from "@/layouts/ListLayout.astro";
 import {ITEMS_PER_PAGE} from "@/consts";
+import {excludeDrafts, sortBlogPosts} from "@/functions";
 
 interface Props {
     page: Page<CollectionEntry<'blog'>>;
@@ -10,10 +12,7 @@ interface Props {
 
 export async function getStaticPaths({paginate}) {
     const tags = await getCollection('tags');
-    let posts = await getCollection('blog', post => {
-        return !post.data.draft;
-    })
-    posts = posts.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+    const posts = await getCollection('blog', excludeDrafts).then(sortBlogPosts);
 
     return tags.flatMap(entry => {
         const tagPosts = posts.filter(post => post.data.tags.some(({slug}) => slug === entry.slug));
