@@ -1,33 +1,24 @@
 ![img.png](img.png)
 
 # Tailwind Astro Starter Project
-[//]: # ([![GitHub Repo stars]&#40;https://img.shields.io/github/stars/timlrx/tailwind-nextjs-starter-blog?style=social&#41;]&#40;https://GitHub.com/timlrx/tailwind-nextjs-starter-blog/stargazers/&#41;)
-[//]: # ([![GitHub forks]&#40;https://img.shields.io/github/forks/timlrx/tailwind-nextjs-starter-blog?style=social&#41;]&#40;https://GitHub.com/timlrx/tailwind-nextjs-starter-blog/network/&#41;)
-[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Ftimlrxx)](https://twitter.com/ipwanciu)
+[![GitHub Repo stars](https://img.shields.io/github/stars/wanoo21/tailwind-astro-starting-blog?style=social)](https://GitHub.com/wanoo21/tailwind-astro-starting-blog/stargazers/)
+[![GitHub forks](https://img.shields.io/github/forks/wanoo21/tailwind-astro-starting-blog?style=social)](https://GitHub.com/wanoo21/tailwind-astro-starting-blog/network/)
+[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fipwanciu)](https://twitter.com/ipwanciu)
 
 [//]: # ([![Sponsor]&#40;https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/timlrx&#41;]&#40;https://github.com/sponsors/timlrx&#41;)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/timlrx/tailwind-nextjs-starter-blog)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/wanoo21/tailwind-astro-starting-blog)
     
 
 This template is perfect for those who want to use Tailwind CSS and Astro to build a blog. 
 
 It is inspired by the [Tailwind Next.js Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) - one of the most popular Next.js blogging templates.
 
-Check out the documentation below to get started.
-
 Feature request or Facing issue? Check the [discussion page](https://github.com/wanoo21/tailwind-astro-starting-blog/discussions) to see if it has been brought up previously. Otherwise, feel free to start a new discussion thread. All ideas are welcomed!
 
 ## Demo
 
-<div style="position: relative; padding-top: 65%;">
-  <iframe
-    src="https://customer-w761vftc3ypzggyf.cloudflarestream.com/068c6c661a69812ae69736b8a6a93175/iframe?muted=true&poster=https%3A%2F%2Fcustomer-w761vftc3ypzggyf.cloudflarestream.com%2F068c6c661a69812ae69736b8a6a93175%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
-    style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
-    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-    allowfullscreen="true"
-  ></iframe>
-</div>
+[Live Demo](https://tasb.yon.fun/) - Deployed on Vercel.
 
 ## Features
 
