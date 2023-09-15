@@ -1,33 +1,70 @@
+![img.png](img.png)
+
 # Tailwind Astro Starter Project
+[//]: # ([![GitHub Repo stars]&#40;https://img.shields.io/github/stars/timlrx/tailwind-nextjs-starter-blog?style=social&#41;]&#40;https://GitHub.com/timlrx/tailwind-nextjs-starter-blog/stargazers/&#41;)
+[//]: # ([![GitHub forks]&#40;https://img.shields.io/github/forks/timlrx/tailwind-nextjs-starter-blog?style=social&#41;]&#40;https://GitHub.com/timlrx/tailwind-nextjs-starter-blog/network/&#41;)
+[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Ftimlrxx)](https://twitter.com/ipwanciu)
 
-This is a version of the [Tailwind Next.js Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) ported to [Astro](https://astro.build).
+[//]: # ([![Sponsor]&#40;https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/timlrx&#41;]&#40;https://github.com/sponsors/timlrx&#41;)
 
-More info coming soon!
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/timlrx/tailwind-nextjs-starter-blog)
+    
 
-## 🚀 Project Structure
+This template is perfect for those who want to use Tailwind CSS and Astro to build a blog. 
 
-Inside of your Astro project, you'll see the following folders and files:
+It is inspired by the [Tailwind Next.js Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) - one of the most popular Next.js blogging templates.
 
-```
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+Check out the documentation below to get started.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Feature request or Facing issue? Check the [discussion page](https://github.com/wanoo21/tailwind-astro-starting-blog/discussions) to see if it has been brought up previously. Otherwise, feel free to start a new discussion thread. All ideas are welcomed!
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Demo
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+<div style="position: relative; padding-top: 65%;">
+  <iframe
+    src="https://customer-w761vftc3ypzggyf.cloudflarestream.com/068c6c661a69812ae69736b8a6a93175/iframe?muted=true&poster=https%3A%2F%2Fcustomer-w761vftc3ypzggyf.cloudflarestream.com%2F068c6c661a69812ae69736b8a6a93175%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+    style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
+    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+    allowfullscreen="true"
+  ></iframe>
+</div>
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Features
+
+- Astro with Typescript
+- Astro MDX support
+- Easy styling customization with [Tailwind 3.3](https://tailwindcss.com/blog/tailwindcss-v3-3) and primary color attribute
+- ~~Perfect lighthouse score~~ - Still have to make some improvements
+- Mobile-friendly view
+- Light and dark theme
+- ~~Font optimization~~ - Not yet implemented
+- Automatic image optimization via Astro image component
+- Support for tags - each unique tag will be its own page
+- Support for multiple authors
+- ~~3 different blog layouts~~ - Only 2 for now
+- ~~2 different blog listing layouts~~ - Only 1 for now
+- Support for nested routing of blog posts
+- Projects page
+- ~~SEO friendly~~ still working on this, but already supports RSS feed, sitemaps and more!
+
+Even thought these features looks the same as the original template, they are implemented in a different way, and there are more to come.
+
+However, there are some features that are not in the original template, like:
+
+- Support for multiple authors pages - **each author will have** its own page, with a list of all the posts written by him/her.
+- Support for multiple tags pages - **each tag has its own page with custom description**, that can be customized with markdown. 
+- Related posts - **each post has** a list of related posts, provided by the author inside the markdown file.
+- Pagination inside blog/tags pages - **each blog/tags page has** a pagination.
+- Cool animations provided by Astro.
+- And many more that would come in the future.
+
+## Extend / Customize
+
+`src/consts.ts` contains a list of constants that you can customize to your liking, including the blog title, description, author, social media links, etc.
+`src/functions.ts` contains a list of functions that changes the default behavior of the template, including default post sorting and exclude draft posts.
+`src/content/authors/default.mdx` contains the default author information. You can add more authors by adding more `.mdx` files in the `src/content/authors` folder.
+`src/content/tags/default.mdx` contains the default tag information. You can add more tags by adding more `.mdx` files in the `src/content/tags` folder.
+`src/content/config.ts` contains all fields for author, blog and tags pages. Check what's required and what's not. You can also add more fields if you want to.
 
 ## 🧞 Commands
 
