@@ -29,25 +29,33 @@
 </div>
 
 <script client:visible>
-    const scrollToTopButton = document.getElementById('scrollToTopButton');
-    const commentsAndScrollToTopButtons = document.getElementById('commentsAndScrollToTopButtons');
+    // Prevents the script from being executed multiple times
+    // This is due to Astro's ViewTransition feature
+    globalThis.isInitialized = false;
+
+    if (!globalThis.isInitialized) {
+        const scrollToTopButton = document.getElementById('scrollToTopButton');
+        const commentsAndScrollToTopButtons = document.getElementById('commentsAndScrollToTopButtons');
 
 
-    scrollToTopButton.addEventListener('click', () => {
-        window.scrollTo({top: 0, behavior: 'smooth'})
-    });
+        scrollToTopButton.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'})
+        });
 
-    window.addEventListener('scroll', () => {
-        commentsAndScrollToTopButtons.classList.toggle('md:hidden', window.scrollY < 50)
-        commentsAndScrollToTopButtons.classList.toggle('md:flex', window.scrollY >= 50)
-    })
+        window.addEventListener('scroll', () => {
+            commentsAndScrollToTopButtons.classList.toggle('md:hidden', window.scrollY < 50)
+            commentsAndScrollToTopButtons.classList.toggle('md:flex', window.scrollY >= 50)
+        })
 
-    // const handleScrollToComment = () => {
-    //     const comment = document.getElementById('comment')
-    //     if (comment) {
-    //         comment.scrollIntoView({
-    //             behavior: 'smooth',
-    //         })
-    //     }
-    // }
+        // const handleScrollToComment = () => {
+        //     const comment = document.getElementById('comment')
+        //     if (comment) {
+        //         comment.scrollIntoView({
+        //             behavior: 'smooth',
+        //         })
+        //     }
+        // }
+        globalThis.isInitialized = true;
+    }
+
 </script>
