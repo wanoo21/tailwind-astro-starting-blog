@@ -52,9 +52,13 @@ However, there are some features that are not in the original template, like:
 ## Extend / Customize
 
 `src/consts.ts` contains a list of constants that you can customize to your liking, including the blog title, description, author, social media links, etc.
+
 `src/functions.ts` contains a list of functions that changes the default behavior of the template, including default post sorting and exclude draft posts.
+
 `src/content/authors/default.mdx` contains the default author information. You can add more authors by adding more `.mdx` files in the `src/content/authors` folder.
+
 `src/content/tags/default.mdx` contains the default tag information. You can add more tags by adding more `.mdx` files in the `src/content/tags` folder.
+
 `src/content/config.ts` contains all fields for author, blog and tags pages. Check what's required and what's not. You can also add more fields if you want to.
 
 ## 🧞 Commands
