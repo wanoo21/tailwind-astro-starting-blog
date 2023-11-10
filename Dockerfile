@@ -1,7 +1,11 @@
-FROM --platform=linux/amd64 node:19.9-alpine as build
-EXPOSE 3000
-WORKDIR /app
-RUN rm -rf node_modules
-COPY . /app
-RUN npm ci
-CMD ["npm", "start"]
+FROM node:18-alpine
+
+WORKDIR /project
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 4321
+
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
