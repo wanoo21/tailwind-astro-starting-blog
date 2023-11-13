@@ -37,10 +37,12 @@ import {NAVIGATION} from '@/consts';
     </nav>
 </div>
 
-<script client:load>
-  document.querySelectorAll('.toggle-menu').forEach((button) => {
-    button.addEventListener('click', () => onToggleNav());
-  });
+<script>
+  function addListener() {
+    document.querySelectorAll('.toggle-menu').forEach((button) => {
+      button.addEventListener('click', () => onToggleNav());
+    });
+  }
 
   function onToggleNav() {
     const isNavHidden = document.body.style.overflow === '';
@@ -48,4 +50,7 @@ import {NAVIGATION} from '@/consts';
     document.getElementById('mobileMenuContainer').classList.toggle('translate-x-0', isNavHidden);
     document.body.style.overflow = isNavHidden ? 'hidden' : '';
   }
+
+  addListener();
+  document.addEventListener("astro:after-swap", () => addListener());
 </script>

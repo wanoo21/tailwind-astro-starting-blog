@@ -14,37 +14,40 @@
     </svg>
 </button>
 
-<script client:load lang="ts">
-    // import {SITE_METADATA} from "../consts";
+<script>
+  // import {SITE_METADATA} from "../consts";
 
+  globalThis.isThemeSwitherInitialized = false
+
+  if (!globalThis.isThemeSwitherInitialized) {
     // Detect system preference change
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        setTheme(event.matches ? 'dark' : 'light')
+      setTheme(event.matches ? 'dark' : 'light')
     })
 
     // Set theme
     function setTheme(newTheme) {
-        localStorage.setItem('theme', newTheme)
-        document.documentElement.classList.remove('dark', 'light')
-        document.documentElement.classList.add(newTheme)
-        document.querySelector('button[aria-label="Toggle Dark Mode"] .sun').classList.toggle('hidden', newTheme !== 'dark')
-        document.querySelector('button[aria-label="Toggle Dark Mode"] .moon').classList.toggle('hidden', newTheme !== 'light')
+      localStorage.setItem('theme', newTheme)
+      document.documentElement.classList.remove('dark', 'light')
+      document.documentElement.classList.add(newTheme)
+      document.querySelector('button[aria-label="Toggle Dark Mode"] .sun').classList.toggle('hidden', newTheme !== 'dark')
+      document.querySelector('button[aria-label="Toggle Dark Mode"] .moon').classList.toggle('hidden', newTheme !== 'light')
     }
 
     // Toggle theme
     function toggleTheme() {
-        const currentTheme = localStorage.getItem('theme')
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
-        setTheme(newTheme)
+      const currentTheme = localStorage.getItem('theme')
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+      setTheme(newTheme)
     }
 
     // Detect system preference
     if (!localStorage.getItem('theme')) {
-        let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        // if (SITE_METADATA.theme !== 'system') {
-        //     isDark = SITE_METADATA.theme === 'dark'
-        // }
-        setTheme(isDark ? 'dark' : 'light')
+      let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // if (SITE_METADATA.theme !== 'system') {
+      //     isDark = SITE_METADATA.theme === 'dark'
+      // }
+      setTheme(isDark ? 'dark' : 'light')
     }
 
     // Set initial theme
@@ -52,5 +55,11 @@
 
     // Add event listener
     document.querySelector('button[aria-label="Toggle Dark Mode"]').addEventListener('click', toggleTheme)
-    document.addEventListener("astro:after-swap", () => setTheme(localStorage.getItem('theme')));
+    globalThis.isThemeSwitherInitialized = true
+  }
+
+  document.addEventListener("astro:after-swap", () => {
+      document.querySelector('button[aria-label="Toggle Dark Mode"]').addEventListener('click', toggleTheme)
+      setTheme(localStorage.getItem('theme'))
+  });
 </script>
