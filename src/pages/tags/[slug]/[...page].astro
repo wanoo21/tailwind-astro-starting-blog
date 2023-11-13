@@ -4,7 +4,7 @@ import {type Page, getCollection, type CollectionEntry} from 'astro:content';
 // import ListLayout from "@/layouts/ListLayout.astro";
 import {ITEMS_PER_PAGE} from "@/consts";
 import {excludeDrafts, sortBlogPosts} from "@/functions";
-import ListWithTagsLayout from "../../../layouts/ListWithTagsLayout.astro";
+import ListWithTagsLayout from "@/layouts/ListWithTagsLayout.astro";
 
 interface Props {
     page: Page<CollectionEntry<'blog'>>;

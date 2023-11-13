@@ -27,29 +27,25 @@ import {NAVIGATION} from '@/consts';
         </button>
     </div>
     <nav class="fixed mt-8 h-full">
-        {NAVIGATION.map(({href, title}) => (
-                <div class="px-12 py-4">
-                    <Link href={href} class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
-                        {title}
-                    </Link>
-                </div>
-        ))}
+      {NAVIGATION.map(({href, title}) => (
+              <div class="px-12 py-4">
+                  <Link href={href} class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
+                    {title}
+                  </Link>
+              </div>
+      ))}
     </nav>
 </div>
 
+<script client:load>
+  document.querySelectorAll('.toggle-menu').forEach((button) => {
+    button.addEventListener('click', () => onToggleNav());
+  });
 
-<script>
-    const mobileToggleButton = document.querySelectorAll('.toggle-menu');
-    const mobileMenuContainer = document.getElementById('mobileMenuContainer');
-
-    mobileToggleButton.forEach((button) => {
-        button.addEventListener('click', () => onToggleNav());
-    });
-
-    function onToggleNav() {
-        const isNavHidden = document.body.style.overflow === '';
-        mobileMenuContainer.classList.toggle('translate-x-full', !isNavHidden);
-        mobileMenuContainer.classList.toggle('translate-x-0', isNavHidden);
-        document.body.style.overflow = isNavHidden ? 'hidden' : '';
-    }
+  function onToggleNav() {
+    const isNavHidden = document.body.style.overflow === '';
+    document.getElementById('mobileMenuContainer').classList.toggle('translate-x-full', !isNavHidden);
+    document.getElementById('mobileMenuContainer').classList.toggle('translate-x-0', isNavHidden);
+    document.body.style.overflow = isNavHidden ? 'hidden' : '';
+  }
 </script>
