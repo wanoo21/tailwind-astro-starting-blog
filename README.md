@@ -73,3 +73,13 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+### 🐳 Docker Commands
+
+All Docker commands are run from the root of the project, from a terminal:
+
+| Command                               | Action                                                   |
+| :------------------------------------ | :------------------------------------------------------- |
+| `docker build -t app:1.0.0 .`         | Build the Docker image for the Astro application.        |
+| `docker run -p 80:4321 app:1.0.0`     | Run a Docker container with the built Astro application. |
+| `docker pull edwardb11/app:2.0.0`     | Download the Docker image from Docker Hub.               |
