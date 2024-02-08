@@ -2,7 +2,7 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "strictNullChecks": true,
-    "baseUrl": "/Users/ip/Projects/tailwind-astro-starting-blog",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
       "@/solid/*": ["src/components/solidjs/*"],
