@@ -7,7 +7,7 @@ import RootLayout from "./RootLayout.astro";
 import {type CollectionEntry, getEntries} from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import Tag from "../components/Tag.astro";
-import ScrollTopAndComments from "../components/ScrollTopAndComments.astro";
+import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
 
 interface Props {
     post: CollectionEntry<'blog'>;
@@ -25,7 +25,7 @@ const {Content, headings, remarkPluginFrontmatter} = await post.render();
 ---
 <RootLayout title={post.data.title} description={post.data.summary}>
     <SectionContainer>
-        <ScrollTopAndComments />
+        <ScrollTopAndComments client:only="solid-js" />
         <article>
             <div class="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
                 <header class="pt-6 xl:pb-6">

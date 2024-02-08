@@ -2,6 +2,7 @@ import {defineConfig} from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
+import solidJs from "@astrojs/solid-js";
 
 import {SITE_METADATA} from "./src/consts.ts";
 
@@ -9,5 +10,5 @@ import {SITE_METADATA} from "./src/consts.ts";
 export default defineConfig({
     prefetch: true,
     site: SITE_METADATA.siteUrl,
-    integrations: [mdx(), sitemap(), tailwind()]
+    integrations: [mdx(), sitemap(), tailwind(), solidJs()]
 });

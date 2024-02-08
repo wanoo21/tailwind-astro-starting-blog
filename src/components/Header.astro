@@ -2,8 +2,8 @@
 import {SITE_METADATA, NAVIGATION} from '@/consts';
 import HeaderLink from './HeaderLink.astro';
 import Logo from './Logo.astro';
-import MobileNav from "./MobileNav.astro";
-import ThemeSwitcher from "./ThemeSwitcher.astro";
+import MobileNav from "@/solid/MobileNav.tsx";
+import ThemeSwitcher from "@/solid/ThemeSwitcher.tsx";
 ---
 
 <header class="flex items-center justify-between py-10">
@@ -13,31 +13,32 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
                 <div class="mr-3">
                     <Logo/>
                 </div>
-                {typeof SITE_METADATA.headerTitle === 'string' ? (
-                        <div class="hidden h-6 text-2xl font-semibold sm:block">
-                            {SITE_METADATA.headerTitle}
-                        </div>
-                ) : (
-                    SITE_METADATA.headerTitle
-                )}
+              {typeof SITE_METADATA.headerTitle === 'string' ? (
+                      <div class="hidden h-6 text-2xl font-semibold sm:block">
+                        {SITE_METADATA.headerTitle}
+                      </div>
+              ) : (
+                SITE_METADATA.headerTitle
+              )}
             </div>
         </a>
     </div>
     <div class="flex items-center leading-5 space-x-4 sm:space-x-6">
-        {NAVIGATION
-            .filter((link) => link.href !== '/')
-            .map((link) => (
-                    <HeaderLink
-                            href={link.href}
-                            class="hidden sm:block font-medium text-gray-900 dark:text-gray-100"
-                    >
-                        {link.title}
-                    </HeaderLink>
-            ))}
+      {NAVIGATION
+      .filter((link) => link.href !== '/')
+      .map((link) => (
+              <HeaderLink
+                      href={link.href}
+                      class="hidden sm:block font-medium text-gray-900 dark:text-gray-100"
+              >
+                {link.title}
+              </HeaderLink>
+      ))}
 
-        <!--TODO: add theme button-->
-        <!--<SearchButton />-->
-        <ThemeSwitcher />
-        <MobileNav />
+        <div class="flex gap-4">
+            <!--<SearchButton />-->
+            <ThemeSwitcher client:only="solid-js"/>
+            <MobileNav client:only="solid-js" />
+        </div>
     </div>
 </header>
