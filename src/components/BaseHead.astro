@@ -4,16 +4,18 @@
 import '@/styles/global.css';
 import {SITE_METADATA} from "@/consts";
 import {ViewTransitions} from 'astro:transitions';
+import '@fontsource/onest';
 
 interface Props {
   title: string;
   description: string;
   image?: string;
+  robots?: string; // default to SITE_METADATA.robots
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const {title, description, image = '/blog-placeholder-1.jpg'} = Astro.props;
+const {title, description, image = '/blog-placeholder-1.jpg', robots = SITE_METADATA.robots} = Astro.props;
 ---
 
 <head>
@@ -23,21 +25,15 @@ const {title, description, image = '/blog-placeholder-1.jpg'} = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
     <meta name="generator" content={Astro.generator}/>
 
-    <!-- Font preloads -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet" crossorigin>
-    <!--<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />-->
-    <!--<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />-->
-
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL}/>
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description}/>
+
+    <!-- Robots -->
+    <meta name="robots" content={robots}>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website"/>

@@ -1,5 +1,6 @@
 ---
-import {type Page, type CollectionEntry, getCollection} from "astro:content";
+import {getCollection} from "astro:content";
+import {type Page, type CollectionEntry} from "astro:content";
 
 import Link from "../components/Link.astro";
 import Pagination from "../components/Pagination.astro";
@@ -16,7 +17,7 @@ interface Props {
 const tags = await getCollection('tags');
 const posts = await getCollection('blog');
 
-function tagCount(slug: typeof CollectionEntry<'tags'>['slug']) {
+function tagCount(slug: CollectionEntry<'tags'>['slug']) {
     return posts.filter((post) => post.data.tags.some(tag => tag.slug === slug)).length;
 }
 

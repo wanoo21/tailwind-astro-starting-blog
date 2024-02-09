@@ -14,7 +14,7 @@ module.exports = {
                 14: '3.5rem',
             },
             fontFamily: {
-                sans: ['Space Grotesk', ...fontFamily.sans],
+                sans: ['Onest', ...fontFamily.sans],
             },
             colors: {
                 primary: colors.pink,

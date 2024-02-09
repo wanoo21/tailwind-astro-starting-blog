@@ -22,13 +22,14 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 
 ## Features
 
-- Astro with Typescript
+- Astro v4 with Typescript
 - Astro MDX support
+- [Solid-js](https://solidjs.com) for some interactivity
 - Easy styling customization with [Tailwind 3.3](https://tailwindcss.com/blog/tailwindcss-v3-3) and primary color attribute
 - ~~Perfect lighthouse score~~ - Still have to make some improvements
 - Mobile-friendly view
 - Light and dark theme
-- ~~Font optimization~~ - Not yet implemented
+- Font optimization via [@fontsource](https://fontsource.org/)
 - Automatic image optimization via Astro image component
 - Support for tags - each unique tag will be its own page
 - Support for multiple authors

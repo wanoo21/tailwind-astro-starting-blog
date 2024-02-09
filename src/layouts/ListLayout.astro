@@ -31,33 +31,33 @@ const hasDefaultSlot = Astro.slots.has('default');
         <ul>
             {!page.data.length && 'No posts found.'}
             {page.data.map(({slug, data: {date, title, summary, tags}}: CollectionEntry<'blog'>) => (
-                            <li class="py-4">
-                                <article class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                                    <dl>
-                                        <dt class="sr-only">Published on</dt>
-                                        <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                                            <FormattedDate date={date}/>
-                                        </dd>
-                                    </dl>
-                                    <div class="space-y-3 xl:col-span-3">
-                                        <div>
-                                            <h3 class="text-2xl font-bold leading-8 tracking-tight">
-                                                <Link href={`/blog/${slug}`} class="text-gray-900 dark:text-gray-100">
-                                                    {title}
-                                                </Link>
-                                            </h3>
-                                            <div class="flex flex-wrap">
-                                                {tags.map(({slug}) =>
-                                                        <Tag slug={slug}/>
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div class="prose max-w-none text-gray-500 dark:text-gray-400">
-                                            {summary}
-                                        </div>
-                                    </div>
-                                </article>
-                            </li>
+                <li class="py-4">
+                    <article class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                        <dl>
+                            <dt class="sr-only">Published on</dt>
+                            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                                <FormattedDate date={date}/>
+                            </dd>
+                        </dl>
+                        <div class="space-y-3 xl:col-span-3">
+                            <div>
+                                <h3 class="text-2xl font-bold leading-8 tracking-tight">
+                                    <Link href={`/blog/${slug}`} class="text-gray-900 dark:text-gray-100">
+                                        {title}
+                                    </Link>
+                                </h3>
+                                <div class="flex flex-wrap">
+                                    {tags.map(({slug}) =>
+                                            <Tag slug={slug}/>
+                                    )}
+                                </div>
+                            </div>
+                            <div class="prose max-w-none text-gray-500 dark:text-gray-400">
+                                {summary}
+                            </div>
+                        </div>
+                    </article>
+                </li>
                 )
             )}
         </ul>

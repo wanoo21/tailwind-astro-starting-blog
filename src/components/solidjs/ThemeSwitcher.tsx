@@ -1,9 +1,14 @@
 import {createEffect, createSignal, onMount} from "solid-js";
+import {SITE_METADATA} from "@/consts";
 
 export default function ThemeSwitcher() {
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  let preferredTheme = mediaQuery.matches ? 'dark' : 'light';
+  if (SITE_METADATA.theme !== 'system') {
+    preferredTheme = SITE_METADATA.theme;
+  }
   const savedTheme = localStorage.getItem('theme');
-  const [theme, setTheme] = createSignal(savedTheme || (mediaQuery.matches ? 'dark' : 'light'));
+  const [theme, setTheme] = createSignal(savedTheme || preferredTheme);
 
   onMount(() => {
     mediaQuery.addEventListener('change', (event: MediaQueryListEvent) => {
