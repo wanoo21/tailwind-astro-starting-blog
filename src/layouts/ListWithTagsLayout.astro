@@ -12,6 +12,7 @@ interface Props {
     title: string;
     description: string;
     page: Page<CollectionEntry<'blog'>[]>;
+    robots?: string;
 }
 
 const tags = await getCollection('tags');
@@ -26,11 +27,11 @@ function isSamePath(path: string) {
     return Astro.url.pathname === path;
 }
 
-const {title, description, page} = Astro.props;
+const {title, description, robots, page} = Astro.props;
 const hasDefaultSlot = Astro.slots.has('default');
 const isBlogPage = Astro.url.pathname.startsWith('/blog');
 ---
-<RootLayout {title} {description}>
+<RootLayout {title} {description} {robots}>
     <div>
         <div class="pb-6 pt-6">
             <h1 class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">

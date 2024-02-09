@@ -23,12 +23,14 @@ export async function getStaticPaths({paginate}) {
 
 const {page, entry} = Astro.props;
 const {Content} = await entry.render()
+
+let robots = null;
+if (page.currentPage > 1) {
+    // Ask search engines to not index paginated pages
+    robots = "noindex, follow";
+}
 ---
 
-<!--<ListLayout title={entry.data.name} description={entry.data.description} page={page}>-->
-<!--    <Content/>-->
-<!--</ListLayout>-->
-
-<ListWithTagsLayout title={entry.data.name} description={entry.data.description} page={page}>
+<ListWithTagsLayout title={entry.data.name} description={entry.data.description} page={page} {robots}>
     <Content/>
 </ListWithTagsLayout>

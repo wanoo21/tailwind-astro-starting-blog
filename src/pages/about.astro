@@ -6,6 +6,6 @@ const author = await getEntry('authors', 'default')
 const {Content} = await author.render();
 ---
 
-<AuthorLayout content={author.data}>
+<AuthorLayout content={author.data} slug={author.slug}>
 	<Content />
 </AuthorLayout>

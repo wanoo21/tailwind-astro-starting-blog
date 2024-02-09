@@ -11,12 +11,13 @@ interface Props {
     title: string;
     description: string;
     page: Page<CollectionEntry<'blog'>[]>;
+    robots?: string;
 }
 
-const {title, description, page} = Astro.props;
+const {title, description, page, robots} = Astro.props;
 const hasDefaultSlot = Astro.slots.has('default');
 ---
-<RootLayout {title} {description}>
+<RootLayout {title} {description} {robots}>
     <div class="divide-y divide-gray-200 dark:divide-gray-700">
         <div class="space-y-2 pb-8 pt-6 md:space-y-5">
             <h1 class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">

@@ -8,13 +8,15 @@ import SectionContainer from "../components/SectionContainer.astro";
 
 import {SITE_METADATA} from "../consts";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+    robots?: string;
+};
 
-const {title, description} = Astro.props;
+const {title, description, robots} = Astro.props;
 ---
 
 <html lang={SITE_METADATA.language} class="scroll-smooth">
-<BaseHead title={title} description={description}/>
+<BaseHead {title} {description} {robots}/>
 <body class="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
 
 <!--TODO: Add Google Analytics-->

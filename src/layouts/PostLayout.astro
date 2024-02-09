@@ -79,6 +79,13 @@ const {Content, headings, remarkPluginFrontmatter} = await post.render();
                         </dd>
                     </dl>
                     <div class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+                        {post.data.draft && (
+                          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 dark:bg-yellow-500 dark:border-yellow-300 mt-10">
+                              <p class="leading-5 text-yellow-700 dark:text-yellow-300">
+                                  This is a draft. It might be incomplete or have errors.
+                              </p>
+                          </div>
+                        )}
                         <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
                             <slot/>
                             <Content/>
