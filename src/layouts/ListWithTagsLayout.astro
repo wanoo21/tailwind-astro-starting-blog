@@ -18,6 +18,7 @@ const tags = await getCollection('tags');
 const posts = await getCollection('blog');
 
 function tagCount(slug: CollectionEntry<'tags'>['slug']) {
+    if (!posts) return 0;
     return posts.filter((post) => post.data.tags.some(tag => tag.slug === slug)).length;
 }
 

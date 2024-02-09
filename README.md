@@ -26,7 +26,6 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - Astro MDX support
 - [Solid-js](https://solidjs.com) for some interactivity
 - Easy styling customization with [Tailwind 3.3](https://tailwindcss.com/blog/tailwindcss-v3-3) and primary color attribute
-- ~~Perfect lighthouse score~~ - Still have to make some improvements
 - Mobile-friendly view
 - Light and dark theme
 - Font optimization via [@fontsource](https://fontsource.org/)
@@ -38,6 +37,9 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - Support for nested routing of blog posts
 - Projects page
 - ~~SEO friendly~~ still working on this, but already supports RSS feed, sitemaps and more!
+- Almost Perfect lighthouse score (for mobile - 99/95/100/88) - [Lighthouse Report](https://pagespeed.web.dev/analysis/https-tasb-yon-fun/gp1vypobei?form_factor=mobile) 
+
+![img_1.png](img_1.png)
 
 Even thought these features looks the same as the original template, they are implemented in a different way, and there are more to come.
 
