@@ -20,10 +20,19 @@ const authors: CollectionEntry<'authors'>[] = await getEntries(post.data.authors
 const tags: CollectionEntry<'tags'> = await getEntries(post.data.tags);
 const related: CollectionEntry<'blog'>[] = await getEntries(post.data.related);
 
-// TODO: Later add support for headings and remarkPluginFrontmatter
-const {Content, headings, remarkPluginFrontmatter} = await post.render();
+const articleOgDetails = {
+    publishedTime: post.data.date,
+    modifiedTime: post.data.lastmod,
+    authors: authors.map(({data}) => data.name),
+    authorTwitter: authors.map(({data}) => data.twitter).at(0),
+    tags: tags.map(({data}) => data.name),
+    // poster: post.data.poster
+}
+
+// TODO: Later add support for headings
+const {Content, headings} = await post.render();
 ---
-<RootLayout title={post.data.title} description={post.data.summary}>
+<RootLayout title={post.data.title} description={post.data.summary} article={articleOgDetails}>
     <SectionContainer>
         <ScrollTopAndComments client:only="solid-js" />
         <article>
@@ -52,8 +61,7 @@ const {Content, headings, remarkPluginFrontmatter} = await post.render();
                                 {authors.map(({data, slug}) => (
                                         <li class="flex items-center space-x-2">
                                             {data.avatar && (
-                                                    <Image src={data.avatar} width={38} height={38} alt="avatar"
-                                                           class="h-10 w-10 rounded-full"/>
+                                                    <Image src={data.avatar} width={38} height={38} alt="avatar" class="h-10 w-10 rounded-full"/>
                                             )}
                                             <dl class="whitespace-nowrap text-sm font-medium leading-5">
                                                 <dt class="sr-only">Name</dt>

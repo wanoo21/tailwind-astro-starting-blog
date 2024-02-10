@@ -36,7 +36,7 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - ~~2 different blog listing layouts~~ - Only 1 for now
 - Support for nested routing of blog posts
 - Projects page
-- ~~SEO friendly~~ still working on this, but already supports RSS feed, sitemaps and more!
+- **Fully SEO optimized**, including Open Graph and Twitter Cards
 - Almost Perfect lighthouse score (for mobile - 99/95/100/88) - [Lighthouse Report](https://pagespeed.web.dev/analysis/https-tasb-yon-fun/gp1vypobei?form_factor=mobile) 
 
 ![img_1.png](img_1.png)

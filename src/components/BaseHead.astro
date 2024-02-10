@@ -1,64 +1,98 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
 import '@/styles/global.css';
 import {SITE_METADATA} from "@/consts";
 import {ViewTransitions} from 'astro:transitions';
 import '@fontsource/onest';
+import {SEO} from "astro-seo";
+import {getEntry} from "astro:content";
+import Favicon from '@/assets/favicon.svg';
+import {getImage} from "astro:assets";
+import type {ImageMetadata} from "astro";
 
 interface Props {
   title: string;
   description: string;
-  image?: string;
+  ogImage?: string;
   robots?: string; // default to SITE_METADATA.robots
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    authors: string[];
+    authorTwitter?: string;
+    tags: string[];
+    poster: string | ImageMetadata
+  }
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const {title, description, robots = SITE_METADATA.robots, article} = Astro.props;
 
-const {title, description, image = '/blog-placeholder-1.jpg', robots = SITE_METADATA.robots} = Astro.props;
+// The default author is the site creator
+const creator = await getEntry('authors', 'default');
+
+// Optimize favicon and touch icons
+const favicon = await getImage({src: Favicon, width: 16, height: 16});
+const appleTouchIcon = await getImage({src: Favicon, width: 76, height: 76});
+const favicon32 = await getImage({src: Favicon, width: 32, height: 32});
+const favicon16 = await getImage({src: Favicon, width: 16, height: 16});
+
+// Default open graph image, later replaced with the actual image from the article
+const importedOgImage = await import(`../assets/og-image.png`).then((m) => m.default);
+const openGraphImage = await getImage({src: importedOgImage, width: 1200, height: 630});
 ---
 
 <head>
-    <!-- Global Metadata -->
-    <meta charset="utf-8" lang={SITE_METADATA.language}/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <meta name="generator" content={Astro.generator}/>
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href={canonicalURL}/>
-
-    <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name="description" content={description}/>
-
-    <!-- Robots -->
-    <meta name="robots" content={robots}>
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content={Astro.url}/>
-    <meta property="og:title" content={title}/>
-    <meta property="og:description" content={description}/>
-    <meta property="og:image" content={new URL(image, Astro.url)}/>
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image"/>
-    <meta property="twitter:url" content={Astro.url}/>
-    <meta property="twitter:title" content={title}/>
-    <meta property="twitter:description" content={description}/>
-    <meta property="twitter:image" content={new URL(image, Astro.url)}/>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png"/>
-    <link rel="manifest" href="/static/favicons/site.webmanifest"/>
-    <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5"/>
-    <meta name="msapplication-TileColor" content="#000000"/>
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff"/>
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000"/>
-    <link rel="alternate" type="application/rss+xml" href="/rss.xml"/>
-
+    <SEO title={title} description={description} robots={robots} url={Astro.url} charset="utf-8"
+         extend={{
+           meta: [
+             {name: 'theme-color', content: '#fff', media: '(prefers-color-scheme: light)'},
+             {name: 'theme-color', content: '#000', media: '(prefers-color-scheme: dark)'},
+             {name: 'viewport', content: 'width=device-width,initial-scale=1'},
+           ],
+           link: [
+             {rel: 'icon', type: `image/svg`, href: favicon.src},
+             {rel: 'apple-touch-icon', sizes: '76x76', href: appleTouchIcon.src},
+             {rel: 'icon', type: 'image/svg', sizes: '32x32', href: favicon32.src},
+             {rel: 'icon', type: 'image/svg', sizes: '16x16', href: favicon16.src},
+             {rel: 'mask-icon', href: favicon16.src, color: 'black'},
+             {rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml'},
+           ]
+         }}
+         twitter={{
+           card: 'summary',
+           site: creator.data.twitter,
+           creator: (article?.authorTwitter || creator.data.twitter).replace('https://twitter.com/', '@'),
+           title,
+           description,
+           image: openGraphImage.src
+         }}
+         openGraph={{
+           basic: {
+             type: 'website',
+             url: Astro.url,
+             title,
+             description,
+             image: openGraphImage.src,
+           },
+           image: {
+             url: openGraphImage.src,
+             type: `image/${openGraphImage.options.format}`,
+             width: openGraphImage.options.width,
+             height: openGraphImage.options.height,
+             alt: title,
+           },
+           optional: {
+             locale: SITE_METADATA.locale,
+           },
+           ...(article && {
+               article: {
+                 publishedTime: article.publishedTime,
+                 modifiedTime: article.modifiedTime,
+                 authors: article.authors,
+                 tags: article.tags
+               }
+             }
+           )
+         }}
+    />
     <ViewTransitions/>
 </head>

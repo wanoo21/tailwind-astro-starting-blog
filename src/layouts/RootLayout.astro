@@ -1,6 +1,6 @@
 ---
 import type {CollectionEntry} from 'astro:content';
-
+import type {ImageMetadata} from "astro";
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -9,14 +9,22 @@ import SectionContainer from "../components/SectionContainer.astro";
 import {SITE_METADATA} from "../consts";
 
 type Props = CollectionEntry<'blog'>['data'] & {
-    robots?: string;
+  robots?: string;
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    authors: string[];
+    authorTwitter?: string;
+    tags: string[];
+    poster: string | ImageMetadata
+  };
 };
 
-const {title, description, robots} = Astro.props;
+const {title, description, robots, article} = Astro.props;
 ---
 
 <html lang={SITE_METADATA.language} class="scroll-smooth">
-<BaseHead {title} {description} {robots}/>
+<BaseHead {title} {description} {robots} {article}/>
 <body class="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
 
 <!--TODO: Add Google Analytics-->
