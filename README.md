@@ -32,8 +32,8 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - Automatic image optimization via Astro image component
 - Support for tags - each unique tag will be its own page
 - Support for multiple authors
-- ~~3 different blog layouts~~ - Only 2 for now
-- ~~2 different blog listing layouts~~ - Only 1 for now
+- 2 different blog post layouts, including a full-width cover image
+- 2 different blog listing layouts
 - Support for nested routing of blog posts
 - Projects page
 - **Fully SEO optimized**, including Open Graph and Twitter Cards

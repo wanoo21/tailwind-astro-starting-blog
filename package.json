@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro build && astro preview",
     "astro": "astro"
   },
   "dependencies": {
@@ -18,6 +18,7 @@
     "@fontsource/onest": "^5.0.2",
     "astro": "^4.3.5",
     "astro-meta-tags": "^0.2.1",
+    "astro-robots-txt": "^1.0.0",
     "astro-seo": "^0.8.0",
     "solid-js": "^1.8.14",
     "tailwindcss": "^3.3.5"

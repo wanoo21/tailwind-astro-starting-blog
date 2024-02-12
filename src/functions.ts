@@ -25,5 +25,5 @@ export const sortBlogPosts = (posts: CollectionEntry<'blog'>[] | null): Collecti
  */
 export const excludeDrafts = ({data}: CollectionEntry<'blog'>): boolean => {
     // Usually this should be like this - import.meta.env.PROD ? !data.draft : true; but for the purpose of the demo, we are displaying drafts as well
-    return import.meta.env.PROD ? data.draft : !data.draft;
+    return import.meta.env.PROD ? true : true;
 }

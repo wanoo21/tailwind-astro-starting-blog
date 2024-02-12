@@ -15,7 +15,6 @@ export const SITE_METADATA = {
   robots: 'index, follow', // Options: index, noindex, follow, nofollow
 
   // These are not supported yet
-  // https://github.com/Destiner/astro-analytics
   // https://github.com/silent1mezzo/astro-social-share
   analytics: {
     fantom: {
