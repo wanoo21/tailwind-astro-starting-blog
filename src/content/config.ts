@@ -26,7 +26,7 @@ const blog = defineCollection({
     tags: z.array(reference('tags')).default(['default']),
     lastmod: z.coerce.date().optional(),
     draft: z.boolean().default(false),
-    summary: z.string().optional(),
+    summary: z.string(),
     images: z.string().optional(),
     authors: z.array(reference('authors')).default(['default']),
     postLayout: z.enum(['simple', 'column']).default(POST_METADATA.defaultLayout as 'simple' | 'column'),
