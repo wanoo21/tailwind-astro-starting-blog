@@ -1,0 +1,23 @@
+---
+export interface Props {
+  url: string;
+  id: string;
+}
+
+const { id, url } = Astro.props;
+
+const scriptUrl = new URL('matomo.js', url).href;
+const trackerUrl = new URL('matomo.php', url).href;
+---
+
+<script async src={scriptUrl}></script>
+<script define:vars={{id, trackerUrl}}>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    _paq.push(['setTrackerUrl', trackerUrl]);
+    _paq.push(['setSiteId', id]);
+  })();
+</script>

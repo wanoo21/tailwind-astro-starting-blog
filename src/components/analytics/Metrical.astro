@@ -1,0 +1,14 @@
+---
+export interface Props {
+  app: string;
+}
+
+const { app } = Astro.props;
+---
+
+<script async src="https://cdn.metrical.xyz/script.js" type="text/javascript"></script>
+<script define:vars={{app}}>
+window.metrical = {
+  app,
+};
+</script>

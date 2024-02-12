@@ -1,0 +1,43 @@
+---
+import {SITE_METADATA} from '@/consts'
+import GoogleAnalytics from "./analytics/GoogleAnalytics.astro";
+import Fathom from "./analytics/Fathom.astro";
+import MinimalAnalytics from "./analytics/MinimalAnalytics.astro";
+import SimpleAnalytics from "./analytics/SimpleAnalytics.astro";
+import Matomo from "./analytics/Matomo.astro";
+import Plausible from "./analytics/Plausible.astro";
+// import Amplitude from "./analytics/Amplitude.astro"; // Not yet implemented
+import Metrical from "./analytics/Metrical.astro";
+import Umami from "./analytics/Umami.astro";
+
+const {
+  analytics: {
+    googleAnalyticsId,
+    fantom,
+    minimalAnalyticsId,
+    simpleAnalytics,
+    matomo,
+    plausible,
+    umami,
+    amplitudeApiKey,
+    metricalApp
+  }
+} = SITE_METADATA;
+---
+
+{googleAnalyticsId && (
+<GoogleAnalytics id={googleAnalyticsId}/>)}
+{fantom.site && (
+<Fathom ...fantom/>)}
+{minimalAnalyticsId && (
+<MinimalAnalytics id={minimalAnalyticsId}/>)}
+{simpleAnalytics && (
+<SimpleAnalytics/>)}
+{matomo.id && matomo.url && (
+<Matomo ...matomo/>)}
+{plausible.domain && (
+<Plausible ...plausible/>)}
+{umami.site && umami.dataId && (
+<Umami ...umami/>)}
+{metricalApp && (
+<Metrical app={metricalApp}/>)}

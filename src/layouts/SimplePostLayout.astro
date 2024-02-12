@@ -1,0 +1,106 @@
+---
+import SectionContainer from "../components/SectionContainer.astro";
+import PageTitle from "../components/PageTitle.astro";
+import Link from "../components/Link.astro";
+import RootLayout from "./RootLayout.astro";
+import {type CollectionEntry, getEntries} from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
+import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
+import PostCover from "../components/PostCover.astro";
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  next?: CollectionEntry<'blog'>;
+  prev?: CollectionEntry<'blog'>;
+}
+
+const {post, next, prev} = Astro.props as Props;
+const authors: CollectionEntry<'authors'>[] = await getEntries(post.data.authors);
+const tags: CollectionEntry<'tags'> = await getEntries(post.data.tags);
+// const related: CollectionEntry<'blog'>[] = await getEntries(post.data.related);
+
+const articleOgDetails = {
+  publishedTime: post.data.date,
+  modifiedTime: post.data.lastmod,
+  authors: authors.map(({data}) => data.name),
+  authorTwitter: authors.map(({data}) => data.twitter).at(0),
+  tags: tags.map(({data}) => data.name),
+  cover: post.data.cover
+}
+
+// TODO: Later add support for headings
+const {Content, headings} = await post.render();
+---
+<RootLayout title={post.data.title} description={post.data.summary} article={articleOgDetails}>
+    <SectionContainer>
+        <ScrollTopAndComments client:only="solid-js"/>
+        <article>
+            <header>
+              {post.data.cover && (
+                  <div class="space-y-1 pb-10 text-center dark:border-gray-700">
+                      <PostCover {post}/>
+                  </div>
+              )}
+                <div class="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
+                    <dl>
+                        <div>
+                            <dt class="sr-only">Published on</dt>
+                            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                                <FormattedDate date={post.data.date}/>
+                            </dd>
+                        </div>
+                    </dl>
+                    <div>
+                        <PageTitle>{post.data.title}</PageTitle>
+                    </div>
+                </div>
+            </header>
+            <div class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0">
+              {post.data.draft && (
+                      <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 dark:bg-yellow-500 dark:border-yellow-300 mt-10">
+                          <p class="leading-5 text-yellow-700 dark:text-yellow-300">
+                              This is a draft. It might be incomplete or have errors.
+                          </p>
+                      </div>
+              )}
+                <div class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+                    <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
+                        <slot/>
+                        <Content/>
+                    </div>
+                </div>
+                <!--{siteMetadata.comments && (-->
+                <!--        <div class="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">-->
+                <!--            <Comments slug={slug} />-->
+                <!--        </div>-->
+                <!--)}-->
+                <footer>
+                    <div class="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
+                      {prev && (
+                              <div class="pt-4 xl:pt-8">
+                                  <Link
+                                          href={`/blog/${prev.slug}`}
+                                          class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                          aria-label={`Previous post: ${prev.data.title}`}
+                                  >
+                                      &larr; {prev.data.title}
+                                  </Link>
+                              </div>
+                      )}
+                      {next && (
+                              <div class="pt-4 xl:pt-8">
+                                  <Link
+                                          href={`/blog/${next.slug}`}
+                                          class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                                          aria-label={`Next post: ${next.data.title}`}
+                                  >
+                                    {next.data.title} &rarr;
+                                  </Link>
+                              </div>
+                      )}
+                    </div>
+                </footer>
+            </div>
+        </article>
+    </SectionContainer>
+</RootLayout>

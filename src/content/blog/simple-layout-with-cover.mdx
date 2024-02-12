@@ -1,0 +1,28 @@
+---
+title: Simple layout with cover
+postLayout: simple
+date: '2024-02-12'
+cover: '@/assets/og-image.png'
+---
+
+This is a simple layout with a cover image. The cover image is set in the front matter of the markdown file.
+
+To set a cover image, add the `cover` key to the front matter of the markdown file. The value of the `cover` key should be the path to the image file. The path should be relative to the `src` directory.
+
+Additionally, you can use '@' to refer to the `src` directory. For example, `@/assets/og-image.png` refers to the `src/assets/og-image.png` file.
+
+**The cover image is optional.** If you don't set a cover image, the title and date will be displayed at the top of the page.
+
+```markdown
+---
+title: Simple layout with cover
+postLayout: simple
+date: '2024-02-12'
+cover: '@/assets/og-image.png'
+---
+```
+
+The cover image is displayed at the top of the page. The title and date are displayed below the cover image. The rest of the content is displayed below the title and date.
+
+The cover is responsive and using Astro's built-in image optimization. It will be displayed at the top of the page on large screens and at the top of the content on small screens.
+

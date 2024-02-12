@@ -16,7 +16,7 @@ export default function ScrollTopAndComments() {
   });
 
   return (
-    <div class="fixed bottom-8 right-8 hidden flex-col gap-3 md:hidden" ref={divRef}>
+    <div class="fixed bottom-8 right-8 hidden flex-col gap-3 md:hidden z-10" ref={divRef}>
       {/*<button*/}
       {/*  aria-label="Scroll To Comment"*/}
       {/*  class="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"*/}

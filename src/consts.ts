@@ -15,25 +15,32 @@ export const SITE_METADATA = {
   robots: 'index, follow', // Options: index, noindex, follow, nofollow
 
   // These are not supported yet
-  // analytics: {
-  //     // If you want to use an analytics provider you have to add it to the
-  //     // content security policy in the `next.config.js` file.
-  //     // supports Plausible, Simple Analytics, Umami, Posthog or Google Analytics.
-  //     umamiAnalytics: {
-  //         // We use an env variable for this site to avoid other users cloning our analytics ID
-  //         umamiWebsiteId: process.env.NEXT_UMAMI_ID, // e.g. 123e4567-e89b-12d3-a456-426614174000
-  //     },
-  //     // plausibleAnalytics: {
-  //     //   plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
-  //     // },
-  //     // simpleAnalytics: {},
-  //     // posthogAnalytics: {
-  //     //   posthogProjectApiKey: '', // e.g. 123e4567-e89b-12d3-a456-426614174000
-  //     // },
-  //     // googleAnalytics: {
-  //     //   googleAnalyticsId: '', // e.g. G-XXXXXXX
-  //     // },
-  // },
+  // https://github.com/Destiner/astro-analytics
+  // https://github.com/silent1mezzo/astro-social-share
+  analytics: {
+    fantom: {
+      site: null, // Add your site id here
+      src: 'https://cdn.usefantom.com/fantom.js',
+    },
+    googleAnalyticsId: null, // Add your Google Analytics id here
+    metricalApp: null, // Add your Metrical app here
+    plausible: {
+      domain: null, // Add your domain here
+      src: 'https://plausible.io/js/plausible.js',
+    },
+    simpleAnalytics: false, // Activate Simple Analytics
+    umami: {
+      site: null, // Add your site id here
+      dataId: null, // Add your data id here
+      host: '/umami.js', // Add your host here
+    },
+    // amplitudeApiKey: null, // Add your Amplitude Api Key here, not yet implemented
+    matomo: {
+      id: null, // Add your Matomo id here
+      url: null, // Add your Matomo url here
+    },
+    minimalAnalyticsId: null, // Add your Minimal Analytics id here
+  },
   // newsletter: {
   //     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
   //     // Please add your .env file and modify it according to your selection
@@ -97,3 +104,13 @@ export const NAVIGATION = [
     {href: '/projects', title: 'Projects'},
     {href: '/about', title: 'About'},
 ]
+
+export const POST_METADATA = {
+  defaultLayout: 'column', // Default layout for blog posts, options: simple and column
+  showFullWidthCover: false, // Show full width cover image in blog post
+  showTags: true, // Show tags in blog post, TODO: Add support for hiding tags
+  showDate: true, // Show date in blog post, TODO: Add support for hiding date
+  showSummary: true, // Show summary in blog post, TODO: Add support for hiding summary
+  showAuthors: true, // Show authors in blog post, TODO: Add support for hiding authors
+  showRelatedPosts: true, // Show related posts in blog post, TODO: Add support for hiding related posts
+}

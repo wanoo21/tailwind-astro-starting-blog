@@ -8,6 +8,7 @@ import {getEntry} from "astro:content";
 import Favicon from '@/assets/favicon.svg';
 import {getImage} from "astro:assets";
 import type {ImageMetadata} from "astro";
+import Analytics from "./Analytics.astro";
 
 interface Props {
   title: string;
@@ -20,7 +21,7 @@ interface Props {
     authors: string[];
     authorTwitter?: string;
     tags: string[];
-    poster: string | ImageMetadata
+    cover: string | ImageMetadata
   }
 }
 
@@ -35,9 +36,14 @@ const appleTouchIcon = await getImage({src: Favicon, width: 76, height: 76});
 const favicon32 = await getImage({src: Favicon, width: 32, height: 32});
 const favicon16 = await getImage({src: Favicon, width: 16, height: 16});
 
-// Default open graph image, later replaced with the actual image from the article
-const importedOgImage = await import(`../assets/og-image.png`).then((m) => m.default);
-const openGraphImage = await getImage({src: importedOgImage, width: 1200, height: 630});
+// Optimize open graph image
+let openGraphImage;
+if (article?.cover) {
+  openGraphImage = await getImage({src: article.cover, width: 1200, height: 630});
+} else {
+  const importedOgImage = await import(`../assets/og-image.png`).then((m) => m.default);
+  openGraphImage = await getImage({src: importedOgImage, width: 1200, height: 630});
+}
 ---
 
 <head>
@@ -94,5 +100,6 @@ const openGraphImage = await getImage({src: importedOgImage, width: 1200, height
            )
          }}
     />
+    <Analytics />
     <ViewTransitions/>
 </head>

@@ -8,6 +8,7 @@ import {type CollectionEntry, getEntries} from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import Tag from "../components/Tag.astro";
 import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
+import PostCover from "../components/PostCover.astro";
 
 interface Props {
     post: CollectionEntry<'blog'>;
@@ -26,7 +27,7 @@ const articleOgDetails = {
     authors: authors.map(({data}) => data.name),
     authorTwitter: authors.map(({data}) => data.twitter).at(0),
     tags: tags.map(({data}) => data.name),
-    // poster: post.data.poster
+    cover: post.data.cover
 }
 
 // TODO: Later add support for headings
@@ -38,6 +39,11 @@ const {Content, headings} = await post.render();
         <article>
             <div class="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
                 <header class="pt-6 xl:pb-6">
+                    {post.data.cover && (
+                      <div class="space-y-1 pb-10 text-center dark:border-gray-700">
+                          <PostCover {post}/>
+                      </div>
+                    )}
                     <div class="space-y-1 text-center">
                         <dl class="space-y-10">
                             <div>
