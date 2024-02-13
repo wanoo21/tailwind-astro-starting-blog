@@ -11,9 +11,9 @@ import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
 import PostCover from "../components/PostCover.astro";
 
 interface Props {
-    post: CollectionEntry<'blog'>;
-    next?: CollectionEntry<'blog'>;
-    prev?: CollectionEntry<'blog'>;
+  post: CollectionEntry<'blog'>;
+  next?: CollectionEntry<'blog'>;
+  prev?: CollectionEntry<'blog'>;
 }
 
 const {post, next, prev} = Astro.props as Props;
@@ -22,12 +22,12 @@ const tags: CollectionEntry<'tags'> = await getEntries(post.data.tags);
 const related: CollectionEntry<'blog'>[] = await getEntries(post.data.related);
 
 const articleOgDetails = {
-    publishedTime: post.data.date,
-    modifiedTime: post.data.lastmod,
-    authors: authors.map(({data}) => data.name),
-    authorTwitter: authors.map(({data}) => data.twitter).at(0),
-    tags: tags.map(({data}) => data.name),
-    cover: post.data.cover
+  publishedTime: post.data.date,
+  modifiedTime: post.data.lastmod,
+  authors: authors.map(({data}) => data.name),
+  authorTwitter: authors.map(({data}) => data.twitter).at(0),
+  tags: tags.map(({data}) => data.name),
+  cover: post.data.cover
 }
 
 // TODO: Later add support for headings
@@ -35,15 +35,10 @@ const {Content, headings} = await post.render();
 ---
 <RootLayout title={post.data.title} description={post.data.summary} article={articleOgDetails}>
     <SectionContainer>
-        <ScrollTopAndComments client:only="solid-js" />
+        <ScrollTopAndComments client:only="solid-js"/>
         <article>
             <div class="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
                 <header class="pt-6 xl:pb-6">
-                    {post.data.cover && (
-                      <div class="space-y-1 pb-10 text-center dark:border-gray-700">
-                          <PostCover {post}/>
-                      </div>
-                    )}
                     <div class="space-y-1 text-center">
                         <dl class="space-y-10">
                             <div>
@@ -53,9 +48,15 @@ const {Content, headings} = await post.render();
                                 </dd>
                             </div>
                         </dl>
-                        <div>
-                            <PageTitle>{post.data.title}</PageTitle>
-                        </div>
+                        <PageTitle>{post.data.title}</PageTitle>
+                    </div>
+                  {post.data.cover && (
+                          <div class="space-y-1 pb-10 text-center dark:border-gray-700">
+                              <PostCover {post}/>
+                          </div>
+                  )}
+                    <div class="pb-0 text-center">
+                        <p>{post.data.summary}</p>
                     </div>
                 </header>
                 <div class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
@@ -64,42 +65,41 @@ const {Content, headings} = await post.render();
                         <dd>
                             <ul class="flex flex-wrap justify-center items-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
                                 <!--TODO: Add support for multiple authors-->
-                                {authors.map(({data, slug}) => (
-                                        <li class="flex items-center space-x-2">
-                                            {data.avatar && (
-                                                    <Image src={data.avatar} width={38} height={38} alt="avatar" class="h-10 w-10 rounded-full"/>
-                                            )}
-                                            <dl class="whitespace-nowrap text-sm font-medium leading-5">
-                                                <dt class="sr-only">Name</dt>
-                                                <dd class="text-gray-900 dark:text-gray-100">{data.name}</dd>
-                                                <dt class="sr-only">Twitter</dt>
-                                                <dd>
-                                                    {data.twitter && (
-                                                            <Link href={data.twitter}
-                                                                  class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                                                                {data.twitter.replace('https://twitter.com/', '@')}
-                                                            </Link>
-                                                    )}
-                                                </dd>
-                                            </dl>
-                                        </li>
-                                        <li>
-                                        <span class="text-gray-500 dark:text-gray-400">
-                                            {data.occupation && data.company ? `${data.occupation} at ${data.company}` : data.company}
-                                        </span>
-                                        </li>
-                                ))}
+                              {authors.map(({data, slug}) => (
+                                      <li class="flex items-center space-x-2">
+                                        {data.avatar && (
+                                                <Image src={data.avatar} width={38} height={38} alt="avatar"
+                                                       class="h-10 w-10 rounded-full"/>
+                                        )}
+                                          <dl class="whitespace-nowrap text-sm font-medium leading-5">
+                                              <dt class="sr-only">Name</dt>
+                                              <dd class="text-gray-900 dark:text-gray-100">{data.name}</dd>
+                                              <dt class="sr-only">Twitter</dt>
+                                              <dd>
+                                                {data.twitter && (
+                                                        <Link href={data.twitter}
+                                                              class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                                                          {data.twitter.replace('https://twitter.com/', '@')}
+                                                        </Link>
+                                                )}
+                                              </dd>
+                                          </dl>
+                                      </li>
+                                      <li class="text-gray-500 dark:text-gray-400">
+                                        {data.occupation && data.company ? `${data.occupation} at ${data.company}` : data.company}
+                                      </li>
+                              ))}
                             </ul>
                         </dd>
                     </dl>
                     <div class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-                        {post.data.draft && (
-                          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 dark:bg-yellow-500 dark:border-yellow-300 mt-10">
-                              <p class="leading-5 text-yellow-700 dark:text-yellow-300">
-                                  This is a draft. It might be incomplete or have errors.
-                              </p>
-                          </div>
-                        )}
+                      {post.data.draft && (
+                              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 dark:bg-yellow-500 dark:border-yellow-300 mt-10">
+                                  <p class="leading-5 text-yellow-700 dark:text-yellow-300">
+                                      This is a draft. It might be incomplete or have errors.
+                                  </p>
+                              </div>
+                      )}
                         <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
                             <slot/>
                             <Content/>
@@ -122,56 +122,56 @@ const {Content, headings} = await post.render();
                     </div>
                     <footer>
                         <div class="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
-                            {tags && (
-                                    <div class="py-4 xl:py-8">
-                                        <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                                            Tags
-                                        </h2>
-                                        <div class="flex flex-wrap">
-                                            {tags.map((tag) => (
-                                                    <Tag tag={tag}/>
-                                            ))}
-                                        </div>
-                                    </div>
-                            )}
-                            {(next || prev) && (
-                                    <div class="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                                        {prev && (
-                                                <div>
-                                                    <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                                                        Previous Article
-                                                    </h2>
-                                                    <div class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                                                        <Link href={`/blog/${prev.slug}`}>{prev.data.title}</Link>
-                                                    </div>
+                          {tags && (
+                                  <div class="py-4 xl:py-8">
+                                      <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                                          Tags
+                                      </h2>
+                                      <div class="flex flex-wrap">
+                                        {tags.map((tag) => (
+                                                <Tag tag={tag}/>
+                                        ))}
+                                      </div>
+                                  </div>
+                          )}
+                          {(next || prev) && (
+                                  <div class="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
+                                    {prev && (
+                                            <div>
+                                                <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                                                    Previous Article
+                                                </h2>
+                                                <div class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                                                    <Link href={`/blog/${prev.slug}`}>{prev.data.title}</Link>
                                                 </div>
-                                        )}
-                                        {next && (
-                                                <div>
-                                                    <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                                                        Next Article
-                                                    </h2>
-                                                    <div class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                                                        <Link href={`/blog/${next.slug}`}>{next.data.title}</Link>
-                                                    </div>
+                                            </div>
+                                    )}
+                                    {next && (
+                                            <div>
+                                                <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                                                    Next Article
+                                                </h2>
+                                                <div class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                                                    <Link href={`/blog/${next.slug}`}>{next.data.title}</Link>
                                                 </div>
-                                        )}
-                                    </div>
-                            )}
-                            {related.length > 0 && (
-                                    <div class="py-4 xl:pb-8">
-                                        <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                                            Related Articles
-                                        </h2>
-                                        <ul class="flex flex-wrap gap-2 xl:space-x-0 xl:space-y-0">
-                                            {related.map((post) => (
-                                                    <li class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                                                        <Link href={`/blog/${post.slug}`}>{post.data.title}</Link>
-                                                    </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                            )}
+                                            </div>
+                                    )}
+                                  </div>
+                          )}
+                          {related.length > 0 && (
+                                  <div class="py-4 xl:pb-8">
+                                      <h2 class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                                          Related Articles
+                                      </h2>
+                                      <ul class="flex flex-wrap gap-2 xl:space-x-0 xl:space-y-0">
+                                        {related.map((post) => (
+                                                <li class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                                                    <Link href={`/blog/${post.slug}`}>{post.data.title}</Link>
+                                                </li>
+                                        ))}
+                                      </ul>
+                                  </div>
+                          )}
                         </div>
                         <div class="pt-4 xl:pt-8">
                             <Link

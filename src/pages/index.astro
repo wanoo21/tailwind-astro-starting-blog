@@ -6,6 +6,7 @@ import RootLayout from "@/layouts/RootLayout.astro";
 import Link from "@/components/Link.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import Tag from "@/components/Tag.astro";
+import {Image} from "astro:assets";
 import {excludeDrafts, sortBlogPosts} from "@/functions";
 
 const posts = await getCollection('blog', excludeDrafts).then(sortBlogPosts)
@@ -24,17 +25,28 @@ const posts = await getCollection('blog', excludeDrafts).then(sortBlogPosts)
         <ul class="divide-y divide-gray-200 dark:divide-gray-700">
             {!posts.length && 'No posts found.'}
             {posts.slice(0, ITEMS_PER_PAGE).map((post) => {
-                const {date, title, summary, tags} = post.data;
+                const {date, title, summary, tags, cover} = post.data;
                 return (
                         <li class="py-12">
                             <article>
-                                <div class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                                    <dl>
-                                        <dt class="sr-only">Published on</dt>
-                                        <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                                            <FormattedDate date={date}/>
-                                        </dd>
-                                    </dl>
+                                <div class="space-y-2 xl:grid xl:grid-cols-4 space-x-4 xl:space-y-0 xl:items-start">
+                                    <div class="space-y-5 xl:col-span-1">
+                                        {cover && (
+                                          <Image
+                                            src={cover}
+                                            alt={title}
+                                            widths={[300, 600, 1000]}
+                                            sizes="100vw"
+                                            class="object-cover rounded-lg"
+                                          />
+                                        )}
+                                        <dl>
+                                            <dt class="sr-only">Published on</dt>
+                                            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                                                <FormattedDate date={date}/>
+                                            </dd>
+                                        </dl>
+                                    </div>
                                     <div class="space-y-5 xl:col-span-3">
                                         <div class="space-y-6">
                                             <div>

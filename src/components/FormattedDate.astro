@@ -1,4 +1,5 @@
 ---
+import {SITE_METADATA} from "../consts";
 interface Props {
 	date: Date;
 }
@@ -8,7 +9,7 @@ const { date } = Astro.props;
 
 <time datetime={date.toISOString()}>
 	{
-		date.toLocaleDateString('en-us', {
+		date.toLocaleDateString(SITE_METADATA.language, {
 			year: 'numeric',
 			month: 'short',
 			day: 'numeric',

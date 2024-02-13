@@ -11,7 +11,6 @@ export const SITE_METADATA = {
   theme: 'system', // Options: system, light, dark
   siteUrl: 'https://tasb.yon.fun/',
   siteRepo: 'https://github.com/wanoo21/tailwind-astro-starting-blog',
-  locale: 'en-US',
   robots: 'index, follow', // Options: index, noindex, follow, nofollow
 
   // These are not supported yet

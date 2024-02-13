@@ -36,23 +36,22 @@ const {Content, headings} = await post.render();
         <ScrollTopAndComments client:only="solid-js"/>
         <article>
             <header>
-              {post.data.cover && (
-                  <div class="space-y-1 pb-10 text-center dark:border-gray-700">
-                      <PostCover {post}/>
-                  </div>
-              )}
-                <div class="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
+                <div class="space-y-1 pb-10 text-center dark:border-gray-700">
                     <dl>
-                        <div>
-                            <dt class="sr-only">Published on</dt>
-                            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                                <FormattedDate date={post.data.date}/>
-                            </dd>
-                        </div>
+                        <dt class="sr-only">Published on</dt>
+                        <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                            <FormattedDate date={post.data.date}/>
+                        </dd>
                     </dl>
-                    <div>
-                        <PageTitle>{post.data.title}</PageTitle>
-                    </div>
+                    <PageTitle>{post.data.title}</PageTitle>
+                </div>
+              {post.data.cover && (
+                      <div class="space-y-1 pb-10 text-center dark:border-gray-700">
+                          <PostCover {post}/>
+                      </div>
+              )}
+                <div class="pb-10 text-center border-b border-gray-200">
+                    <p>{post.data.summary}</p>
                 </div>
             </header>
             <div class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0">
