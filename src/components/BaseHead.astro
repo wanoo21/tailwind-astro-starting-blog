@@ -1,13 +1,13 @@
 ---
-import '@/styles/global.css';
-import {SITE_METADATA} from "@/consts";
-import {ViewTransitions} from 'astro:transitions';
-import '@fontsource/onest';
-import {SEO} from "astro-seo";
-import {getEntry} from "astro:content";
-import Favicon from '@/assets/favicon.svg';
-import {getImage} from "astro:assets";
-import type {ImageMetadata} from "astro";
+import "@/styles/global.css";
+import { SITE_METADATA } from "@/consts";
+import { ViewTransitions } from "astro:transitions";
+import "@fontsource/onest";
+import { SEO } from "astro-seo";
+import { getEntry } from "astro:content";
+import Favicon from "@/assets/favicon.svg";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import Analytics from "./Analytics.astro";
 
 interface Props {
@@ -21,85 +21,118 @@ interface Props {
     authors: string[];
     authorTwitter?: string;
     tags: string[];
-    cover: string | ImageMetadata
-  }
+    cover: string | ImageMetadata;
+  };
 }
 
-const {title, description, robots = SITE_METADATA.robots, article} = Astro.props;
+const {
+  title,
+  description,
+  robots = SITE_METADATA.robots,
+  article,
+} = Astro.props;
 
 // The default author is the site creator
-const creator = await getEntry('authors', 'default');
+const creator = await getEntry("authors", "default");
 
 // Optimize favicon and touch icons
-const favicon = await getImage({src: Favicon, width: 16, height: 16});
-const appleTouchIcon = await getImage({src: Favicon, width: 76, height: 76});
-const favicon32 = await getImage({src: Favicon, width: 32, height: 32});
-const favicon16 = await getImage({src: Favicon, width: 16, height: 16});
+const favicon = await getImage({ src: Favicon, width: 16, height: 16 });
+const appleTouchIcon = await getImage({ src: Favicon, width: 76, height: 76 });
+const favicon32 = await getImage({ src: Favicon, width: 32, height: 32 });
+const favicon16 = await getImage({ src: Favicon, width: 16, height: 16 });
 
 // Optimize open graph image
 let openGraphImage;
 if (article?.cover) {
-  openGraphImage = await getImage({src: article.cover, width: 1200, height: 630});
+  openGraphImage = await getImage({
+    src: article.cover,
+    width: 1200,
+    height: 630,
+  });
 } else {
-  const importedOgImage = await import(`../assets/og-image.png`).then((m) => m.default);
-  openGraphImage = await getImage({src: importedOgImage, width: 1200, height: 630});
+  const importedOgImage = await import(`../assets/og-image.png`).then(
+    (m) => m.default
+  );
+  openGraphImage = await getImage({
+    src: importedOgImage,
+    width: 1200,
+    height: 630,
+  });
 }
+
+const twitterCreator = article?.authorTwitter || creator.data.twitter;
+const isProduction = import.meta.env.PROD;
 ---
 
 <head>
-    <SEO title={title} description={description} robots={robots} url={Astro.url} charset="utf-8"
-         extend={{
-           meta: [
-             {name: 'theme-color', content: '#fff', media: '(prefers-color-scheme: light)'},
-             {name: 'theme-color', content: '#000', media: '(prefers-color-scheme: dark)'},
-             {name: 'viewport', content: 'width=device-width,initial-scale=1'},
-           ],
-           link: [
-             {rel: 'icon', type: `image/svg`, href: favicon.src},
-             {rel: 'apple-touch-icon', sizes: '76x76', href: appleTouchIcon.src},
-             {rel: 'icon', type: 'image/svg', sizes: '32x32', href: favicon32.src},
-             {rel: 'icon', type: 'image/svg', sizes: '16x16', href: favicon16.src},
-             {rel: 'mask-icon', href: favicon16.src, color: 'black'},
-             {rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml'},
-           ]
-         }}
-         twitter={{
-           card: 'summary',
-           site: creator.data.twitter,
-           creator: (article?.authorTwitter || creator.data.twitter).replace('https://twitter.com/', '@'),
-           title,
-           description,
-           image: openGraphImage.src
-         }}
-         openGraph={{
-           basic: {
-             type: 'website',
-             url: Astro.url,
-             title,
-             description,
-             image: openGraphImage.src,
-           },
-           image: {
-             url: openGraphImage.src,
-             type: `image/${openGraphImage.options.format}`,
-             width: openGraphImage.options.width,
-             height: openGraphImage.options.height,
-             alt: title,
-           },
-           optional: {
-             locale: SITE_METADATA.locale,
-           },
-           ...(article && {
-               article: {
-                 publishedTime: article.publishedTime,
-                 modifiedTime: article.modifiedTime,
-                 authors: article.authors,
-                 tags: article.tags
-               }
-             }
-           )
-         }}
-    />
-    <Analytics />
-    <ViewTransitions/>
+  <SEO
+    title={title}
+    description={description}
+    robots={robots}
+    url={Astro.url}
+    charset="utf-8"
+    extend={{
+      meta: [
+        {
+          name: "theme-color",
+          content: "#fff",
+          media: "(prefers-color-scheme: light)",
+        },
+        {
+          name: "theme-color",
+          content: "#000",
+          media: "(prefers-color-scheme: dark)",
+        },
+        { name: "viewport", content: "width=device-width,initial-scale=1" },
+      ],
+      link: [
+        { rel: "icon", type: `image/svg`, href: favicon.src },
+        { rel: "apple-touch-icon", sizes: "76x76", href: appleTouchIcon.src },
+        { rel: "icon", type: "image/svg", sizes: "32x32", href: favicon32.src },
+        { rel: "icon", type: "image/svg", sizes: "16x16", href: favicon16.src },
+        { rel: "mask-icon", href: favicon16.src, color: "black" },
+        { rel: "alternate", type: "application/rss+xml", href: "/rss.xml" },
+      ],
+    }}
+    openGraph={{
+      basic: {
+        type: "website",
+        url: Astro.url,
+        title,
+        image: openGraphImage.src,
+      },
+      image: {
+        url: openGraphImage.src,
+        type: `image/${openGraphImage.options.format}`,
+        width: openGraphImage.options.width,
+        height: openGraphImage.options.height,
+        alt: title,
+      },
+      optional: {
+        locale: SITE_METADATA.language,
+        description,
+      },
+      ...(article && {
+        article: {
+          publishedTime: article.publishedTime,
+          modifiedTime: article.modifiedTime,
+          authors: article.authors,
+          tags: article.tags,
+        },
+      }),
+      ...(twitterCreator && {
+        twitter: {
+          card: "summary",
+          site: creator.data.twitter,
+          creator: twitterCreator.replace("https://twitter.com/", "@"),
+          title,
+          description,
+          image: openGraphImage.src,
+        },
+      }),
+    }}
+    }
+  />
+  {isProduction && <Analytics />}
+  <ViewTransitions />
 </head>

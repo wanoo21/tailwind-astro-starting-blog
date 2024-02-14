@@ -1,7 +1,7 @@
 import {onMount} from "solid-js";
 
 export default function ScrollTopAndComments() {
-  let divRef: HTMLDivElement;
+  let divRef!: HTMLDivElement;
 
   const handleScrollToTop = () => {
     window.scrollTo({top: 0, behavior: 'smooth'})

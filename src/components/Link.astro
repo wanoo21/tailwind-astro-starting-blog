@@ -5,8 +5,8 @@ type Props = HTMLAttributes<'a'>
 
 const {href, ...rest} = Astro.props;
 
-const isInternalLink = href && href.startsWith('/')
-const isAnchorLink = href && href.startsWith('#')
+const isInternalLink = href && !href.toString().startsWith('http');
+const isAnchorLink = href && href.toString().startsWith('#');
 ---
 
 {
