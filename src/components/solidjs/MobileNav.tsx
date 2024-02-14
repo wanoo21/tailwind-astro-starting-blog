@@ -25,7 +25,7 @@ export default function MobileNav() {
       </svg>
     </button>
       <div ref={menuRef}
-        class="translate-x-full fixed left-0 top-0 z-10 h-full w-full transform opacity-95 dark:opacity-[0.98] bg-white duration-300 ease-in-out dark:bg-gray-950">
+        class="translate-x-full fixed left-0 top-0 h-full w-full transform opacity-95 dark:opacity-[0.98] bg-white duration-300 ease-in-out dark:bg-gray-950 z-20">
         <div class="flex justify-end">
           <button class="mr-8 mt-11 h-8 w-8" aria-label="Toggle Menu" onClick={toggleMenu}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
