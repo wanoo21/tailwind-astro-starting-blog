@@ -1,21 +1,30 @@
 ---
-import {type Page, getCollection} from 'astro:content';
+import { getCollection } from "astro:content";
 // import ListLayout from "@/layouts/ListLayout.astro";
-import {ITEMS_PER_PAGE} from "@/consts";
-import {sortBlogPosts, excludeDrafts} from "@/functions";
+import { ITEMS_PER_PAGE, SITE_METADATA } from "@/consts";
+import { sortBlogPosts, excludeDrafts } from "@/functions";
 import ListWithTagsLayout from "@/layouts/ListWithTagsLayout.astro";
+import type { Page } from "astro";
 
 interface Props {
-    page: Page;
+  page: Page;
 }
 
-export async function getStaticPaths({paginate}) {
-    const posts = await getCollection('blog', excludeDrafts).then(sortBlogPosts)
-    return paginate(posts, {pageSize: ITEMS_PER_PAGE});
+export async function getStaticPaths({ paginate }) {
+  const posts = await getCollection("blog", excludeDrafts).then(sortBlogPosts);
+  return paginate(posts, { pageSize: ITEMS_PER_PAGE });
 }
 
-const {page} = Astro.props;
+const { page } = Astro.props;
+let titleTemplate = "";
+let robots;
+
+if (page.currentPage > 1) {
+  titleTemplate = `%s - Page ${page.currentPage}`;
+  // Ask search engines to not index paginated pages
+  robots = "noindex, follow";
+}
 ---
 
-<!--<ListLayout title="Blog" page={page}/>-->
-<ListWithTagsLayout title="Blog" page={page}/>
+<!--<ListLayout {...SITE_METADATA.pages.blog} page={page} {robots} {titleTemplate}/>-->
+<ListWithTagsLayout {...SITE_METADATA.pages.blog} page={page} {robots} {titleTemplate} />

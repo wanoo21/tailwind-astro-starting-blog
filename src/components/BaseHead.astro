@@ -4,10 +4,9 @@ import { SITE_METADATA } from "@/consts";
 import { ViewTransitions } from "astro:transitions";
 import "@fontsource/onest";
 import { SEO } from "astro-seo";
-import { getEntry } from "astro:content";
+import { getEntry, type CollectionEntry } from "astro:content";
 import Favicon from "@/assets/favicon.svg";
 import { getImage } from "astro:assets";
-import type { ImageMetadata } from "astro";
 import Analytics from "./Analytics.astro";
 
 interface Props {
@@ -15,13 +14,14 @@ interface Props {
   description: string;
   ogImage?: string;
   robots?: string; // default to SITE_METADATA.robots
+  titleTemplate?: string; 
   article?: {
-    publishedTime: string;
-    modifiedTime?: string;
+    publishedTime: Date;
+    modifiedTime?: Date;
     authors: string[];
     authorTwitter?: string;
     tags: string[];
-    cover: string | ImageMetadata;
+    cover: CollectionEntry<"blog">["data"]["cover"];
   };
 }
 
@@ -30,6 +30,7 @@ const {
   description,
   robots = SITE_METADATA.robots,
   article,
+  titleTemplate
 } = Astro.props;
 
 // The default author is the site creator
@@ -67,8 +68,11 @@ const isProduction = import.meta.env.PROD;
 <head>
   <SEO
     title={title}
+    {titleTemplate}
+    titleDefault={SITE_METADATA.title}
     description={description}
-    robots={robots}
+    nofollow={robots.includes("nofollow")}
+    noindex={robots.includes("noindex")}
     url={Astro.url}
     charset="utf-8"
     extend={{
@@ -94,6 +98,16 @@ const isProduction = import.meta.env.PROD;
         { rel: "alternate", type: "application/rss+xml", href: "/rss.xml" },
       ],
     }}
+    twitter={{
+      ...(twitterCreator && {
+        card: "summary_large_image",
+          // site: creator.data.twitter,
+          creator: twitterCreator.replace("https://twitter.com/", "@"),
+          title,
+          description,
+          image: openGraphImage.src,
+      } || {}),
+    }}
     openGraph={{
       basic: {
         type: "website",
@@ -114,24 +128,13 @@ const isProduction = import.meta.env.PROD;
       },
       ...(article && {
         article: {
-          publishedTime: article.publishedTime,
-          modifiedTime: article.modifiedTime,
+          publishedTime: article.publishedTime.toISOString(),
+          modifiedTime: article.modifiedTime?.toISOString(),
           authors: article.authors,
           tags: article.tags,
         },
       }),
-      ...(twitterCreator && {
-        twitter: {
-          card: "summary",
-          site: creator.data.twitter,
-          creator: twitterCreator.replace("https://twitter.com/", "@"),
-          title,
-          description,
-          image: openGraphImage.src,
-        },
-      }),
     }}
-    }
   />
   {isProduction && <Analytics />}
   <ViewTransitions />

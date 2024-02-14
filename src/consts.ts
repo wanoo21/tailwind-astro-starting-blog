@@ -13,6 +13,21 @@ export const SITE_METADATA = {
   siteRepo: "https://github.com/wanoo21/tailwind-astro-starting-blog",
   robots: "index, follow", // Options: index, noindex, follow, nofollow
 
+  pages: {
+    tags: {
+      title: "Tags",
+      description: "All tags used in the blog",
+    },
+    projects: {
+      title: "Projects",
+      description: "All projects",
+    },
+    blog: {
+      title: "Blog",
+      description: "All blog posts",
+    },
+  },
+
   // These are not supported yet
   // https://github.com/silent1mezzo/astro-social-share
   analytics: {
@@ -93,7 +108,7 @@ export const SITE_METADATA = {
 /**
  * Default posts per page for pagination.
  */
-export const ITEMS_PER_PAGE = 5;
+export const ITEMS_PER_PAGE = 2;
 
 export const NAVIGATION = [
   { href: "/", title: "Home" },

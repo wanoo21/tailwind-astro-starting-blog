@@ -1,5 +1,6 @@
 ---
-import type {Page, CollectionEntry} from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import type { Page } from "astro";
 
 import FormattedDate from "../components/FormattedDate.astro";
 import Link from "../components/Link.astro";
@@ -8,61 +9,70 @@ import RootLayout from "./RootLayout.astro";
 import Tag from "../components/Tag.astro";
 
 interface Props {
-    title: string;
-    description: string;
-    page: Page<CollectionEntry<'blog'>[]>;
-    robots?: string;
+  title: string;
+  description: string;
+  titleTemplate?: string;
+  page: Page<CollectionEntry<"blog">>;
+  robots?: string;
 }
 
-const {title, description, page, robots} = Astro.props;
-const hasDefaultSlot = Astro.slots.has('default');
+const { title, description, page, robots, titleTemplate } = Astro.props;
+const hasDefaultSlot = Astro.slots.has("default");
 ---
-<RootLayout {title} {description} {robots}>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700">
-        <div class="space-y-2 pb-8 pt-6 md:space-y-5">
-            <h1 class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-                {title}
-            </h1>
-            {hasDefaultSlot && (
-                    <div class="prose dark:prose-invert py-4">
-                        <slot/>
-                    </div>
-            )}
-        </div>
-        <ul>
-            {!page.data.length && 'No posts found.'}
-            {page.data.map(({slug, data: {date, title, summary, tags}}: CollectionEntry<'blog'>) => (
-                <li class="py-4">
-                    <article class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                        <dl>
-                            <dt class="sr-only">Published on</dt>
-                            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                                <FormattedDate date={date}/>
-                            </dd>
-                        </dl>
-                        <div class="space-y-3 xl:col-span-3">
-                            <div>
-                                <h3 class="text-2xl font-bold leading-8 tracking-tight">
-                                    <Link href={`/blog/${slug}`} class="text-gray-900 dark:text-gray-100">
-                                        {title}
-                                    </Link>
-                                </h3>
-                                <div class="flex flex-wrap">
-                                    {tags.map(({slug}) =>
-                                            <Tag slug={slug}/>
-                                    )}
-                                </div>
-                            </div>
-                            <div class="prose max-w-none text-gray-500 dark:text-gray-400">
-                                {summary}
-                            </div>
-                        </div>
-                    </article>
-                </li>
-                )
-            )}
-        </ul>
+
+<RootLayout {title} {description} {robots} {titleTemplate}>
+  <div class="divide-y divide-gray-200 dark:divide-gray-700">
+    <div class="space-y-2 pb-8 pt-6 md:space-y-5">
+      <h1
+        class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+      >
+        {title}
+      </h1>
+      {
+        hasDefaultSlot && (
+          <div class="prose dark:prose-invert py-4">
+            <slot />
+          </div>
+        )
+      }
     </div>
-    {(page.url.next || page.url.prev) && (
-            <Pagination page={page}/>)}
+    <ul>
+      {!page.data.length && "No posts found."}
+      {
+        page.data.map(({ slug, data: { date, title, summary, tags } }) => (
+          <li class="py-4">
+            <article class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+              <dl>
+                <dt class="sr-only">Published on</dt>
+                <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <FormattedDate date={date} />
+                </dd>
+              </dl>
+              <div class="space-y-3 xl:col-span-3">
+                <div>
+                  <h3 class="text-2xl font-bold leading-8 tracking-tight">
+                    <Link
+                      href={`/blog/${slug}`}
+                      class="text-gray-900 dark:text-gray-100"
+                    >
+                      {title}
+                    </Link>
+                  </h3>
+                  <div class="flex flex-wrap">
+                    {tags.map(({ slug }) => (
+                      <Tag slug={slug} />
+                    ))}
+                  </div>
+                </div>
+                <div class="prose max-w-none text-gray-500 dark:text-gray-400">
+                  {summary}
+                </div>
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  {(page.url.next || page.url.prev) && <Pagination page={page} />}
 </RootLayout>

@@ -1,10 +1,11 @@
 ---
-import {type Page, getCollection, type CollectionEntry} from 'astro:content';
+import {getCollection, type CollectionEntry} from 'astro:content';
 
 // import ListLayout from "@/layouts/ListLayout.astro";
 import {ITEMS_PER_PAGE} from "@/consts";
 import {excludeDrafts, sortBlogPosts} from "@/functions";
 import ListWithTagsLayout from "@/layouts/ListWithTagsLayout.astro";
+import type { Page } from 'astro';
 
 interface Props {
     page: Page<CollectionEntry<'blog'>>;
@@ -24,13 +25,15 @@ export async function getStaticPaths({paginate}) {
 const {page, entry} = Astro.props;
 const {Content} = await entry.render()
 
-let robots = null;
+let robots;
+let titleTemplate = ''
 if (page.currentPage > 1) {
     // Ask search engines to not index paginated pages
     robots = "noindex, follow";
+    titleTemplate = `%s - Page ${page.currentPage}`;
 }
 ---
 
-<ListWithTagsLayout title={entry.data.name} description={entry.data.description} page={page} {robots}>
+<ListWithTagsLayout title={entry.data.name} description={entry.data.description} page={page} {robots} {titleTemplate}>
     <Content/>
 </ListWithTagsLayout>

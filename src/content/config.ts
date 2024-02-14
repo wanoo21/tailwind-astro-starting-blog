@@ -7,7 +7,7 @@ const authors = defineCollection({
     name: z.string(),
     avatar: z.string().optional(),
     occupation: z.string().optional(),
-    shortBio: z.string().optional(),
+    shortBio: z.string(),
     company: z.string().optional(),
     email: z.string().email(),
     twitter: z.string().url().optional(),
@@ -40,7 +40,7 @@ const tags = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
-    description: z.string().optional(),
+    description: z.string(),
     // TODO: Add support for images and layout
     // image: z.string().optional(),
     // layout: z.string().optional(),
