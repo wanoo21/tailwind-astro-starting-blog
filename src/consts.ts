@@ -4,38 +4,38 @@
  * A few of these are not used yet, and are subject to change, example of this is Author.
  */
 export const SITE_METADATA = {
-  title: 'Astro Starter Blog',
-  headerTitle: 'Astro Starter Blog',
-  description: 'A blog created with Astro and Tailwind.css',
-  language: 'en-US',
-  theme: 'system', // Options: system, light, dark
-  siteUrl: 'https://tasb.yon.fun/',
-  siteRepo: 'https://github.com/wanoo21/tailwind-astro-starting-blog',
-  robots: 'index, follow', // Options: index, noindex, follow, nofollow
+  title: "Astro Starter Blog",
+  headerTitle: "Astro Starter Blog",
+  description: "A blog created with Astro and Tailwind.css",
+  language: "en-US",
+  theme: "system", // Options: system, light, dark
+  siteUrl: "https://tasb.yon.fun/",
+  siteRepo: "https://github.com/wanoo21/tailwind-astro-starting-blog",
+  robots: "index, follow", // Options: index, noindex, follow, nofollow
 
   // These are not supported yet
   // https://github.com/silent1mezzo/astro-social-share
   analytics: {
     fantom: {
-      site: '', // Add your site id here
-      src: 'https://cdn.usefantom.com/fantom.js',
+      site: "", // Add your site id here
+      src: "https://cdn.usefantom.com/fantom.js",
     },
     googleAnalyticsId: null, // Add your Google Analytics id here
     metricalApp: null, // Add your Metrical app here
     plausible: {
-      domain: '', // Add your domain here
-      src: 'https://plausible.io/js/plausible.js',
+      domain: "", // Add your domain here
+      src: "https://plausible.io/js/plausible.js",
     },
     simpleAnalytics: false, // Activate Simple Analytics
     umami: {
-      site: '', // Add your site id here
-      dataId: '', // Add your data id here
-      host: '/umami.js', // Add your host here
+      site: "", // Add your site id here
+      dataId: "", // Add your data id here
+      host: "/umami.js", // Add your host here
     },
     // amplitudeApiKey: null, // Add your Amplitude Api Key here, not yet implemented
     matomo: {
-      id: '', // Add your Matomo id here
-      url: '', // Add your Matomo url here
+      id: "", // Add your Matomo id here
+      url: "", // Add your Matomo url here
     },
     minimalAnalyticsId: null, // Add your Minimal Analytics id here
   },
@@ -96,19 +96,19 @@ export const SITE_METADATA = {
 export const ITEMS_PER_PAGE = 5;
 
 export const NAVIGATION = [
-    {href: '/', title: 'Home'},
-    {href: '/blog', title: 'Blog'},
-    {href: '/tags', title: 'Tags'},
-    {href: '/projects', title: 'Projects'},
-    {href: '/about', title: 'About'},
-]
+  { href: "/", title: "Home" },
+  { href: "/blog", title: "Blog" },
+  { href: "/tags", title: "Tags" },
+  { href: "/projects", title: "Projects" },
+  { href: "/about", title: "About" },
+];
 
 export const POST_METADATA = {
-  defaultLayout: 'column', // Default layout for blog posts, options: simple and column
+  defaultLayout: "column", // Default layout for blog posts, options: simple and column
   showFullWidthCover: false, // Show full width cover image in blog post
   showTags: true, // Show tags in blog post, TODO: Add support for hiding tags
   showDate: true, // Show date in blog post, TODO: Add support for hiding date
   showSummary: true, // Show summary in blog post, TODO: Add support for hiding summary
   showAuthors: true, // Show authors in blog post, TODO: Add support for hiding authors
   showRelatedPosts: true, // Show related posts in blog post, TODO: Add support for hiding related posts
-}
+};

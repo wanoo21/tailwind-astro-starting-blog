@@ -1,7 +1,13 @@
 ---
-import {Image} from 'astro:assets';
-import LogoImage from '@/assets/logo.svg';
-import {SITE_METADATA} from "@/consts";
+import { Image } from "astro:assets";
+import LogoImage from "@/assets/logo.svg";
+import { SITE_METADATA } from "@/consts";
 ---
 
-<Image src={LogoImage} alt={SITE_METADATA.title} width={80} height={80} loading="eager" />
+<Image
+  src={LogoImage}
+  alt={SITE_METADATA.title}
+  width={80}
+  height={80}
+  loading="eager"
+/>

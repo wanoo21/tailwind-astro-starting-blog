@@ -1,33 +1,42 @@
 ---
-import {Picture} from "astro:assets";
-import type {CollectionEntry} from "astro:content";
-import {POST_METADATA} from "../consts";
+import { Picture } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { POST_METADATA } from "../consts";
 
 type Props = {
-  post: CollectionEntry<'blog'>;
+  post: CollectionEntry<"blog">;
   full?: boolean;
-}
+};
 
-const {post} = Astro.props;
+const { post } = Astro.props;
 const full = POST_METADATA.showFullWidthCover;
 ---
 
 <div class="w-full">
-    <div class:list={{'ml-[calc(-50vw+50%)] mr-[calc(-50vw+50%)]': full, '-mx-6 md:-mx-8 2xl:-mx-24': !full}}
-         class='relative mt-6'>
-        <div class="relative aspect-[2/1] w-full">
-            <Picture
-                    widths={[300, 600, 1000, 2000]}
-                    sizes="100vw"
-                    src={post.data.cover!} alt={post.data.title} formats={['avif', 'webp']} loading="eager" />
-        </div>
+  <div
+    class:list={{
+      "ml-[calc(-50vw+50%)] mr-[calc(-50vw+50%)]": full,
+      "-mx-6 md:-mx-8 2xl:-mx-24": !full,
+    }}
+    class="relative mt-6"
+  >
+    <div class="relative aspect-[2/1] w-full">
+      <Picture
+        widths={[300, 600, 1000, 2000]}
+        sizes="100vw"
+        src={post.data.cover!}
+        alt={post.data.title}
+        formats={["avif", "webp"]}
+        loading="eager"
+      />
     </div>
+  </div>
 </div>
 
 <style>
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 </style>
