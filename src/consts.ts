@@ -17,25 +17,25 @@ export const SITE_METADATA = {
   // https://github.com/silent1mezzo/astro-social-share
   analytics: {
     fantom: {
-      site: null, // Add your site id here
+      site: '', // Add your site id here
       src: 'https://cdn.usefantom.com/fantom.js',
     },
     googleAnalyticsId: null, // Add your Google Analytics id here
     metricalApp: null, // Add your Metrical app here
     plausible: {
-      domain: null, // Add your domain here
+      domain: '', // Add your domain here
       src: 'https://plausible.io/js/plausible.js',
     },
     simpleAnalytics: false, // Activate Simple Analytics
     umami: {
-      site: null, // Add your site id here
-      dataId: null, // Add your data id here
+      site: '', // Add your site id here
+      dataId: '', // Add your data id here
       host: '/umami.js', // Add your host here
     },
     // amplitudeApiKey: null, // Add your Amplitude Api Key here, not yet implemented
     matomo: {
-      id: null, // Add your Matomo id here
-      url: null, // Add your Matomo url here
+      id: '', // Add your Matomo id here
+      url: '', // Add your Matomo url here
     },
     minimalAnalyticsId: null, // Add your Minimal Analytics id here
   },
