@@ -27,7 +27,7 @@ const posts = await getCollection("blog", excludeDrafts).then(sortBlogPosts);
       {!posts.length && "No posts found."}
       {
         posts.slice(0, ITEMS_PER_PAGE).map((post) => {
-          const { date, title, summary, tags, cover } = post.data;
+          const { title, summary, tags } = post.data;
           return (
             <li class="py-12">
               <article>

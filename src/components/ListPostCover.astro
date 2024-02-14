@@ -13,7 +13,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="relative h-[200px] overflow-hidden bg-primary-50 rounded-lg" class:list={Astro.props.class}>
+<div class="relative h-[200px] overflow-hidden bg-primary-50 dark:bg-opacity-10 rounded-lg" class:list={Astro.props.class}>
   {
     cover && (
       <Image
