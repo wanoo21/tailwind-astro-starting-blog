@@ -15,7 +15,15 @@ export default function MobileNav() {
 
   return (
     <>
-      <button aria-label="Toggle Menu" class="sm:hidden" ref={buttonRef} onClick={toggleMenu}></button>
+    <button aria-label="Toggle Menu" class="sm:hidden" ref={buttonRef} onClick={toggleMenu}>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-8 w-8 text-gray-900 dark:text-gray-100">
+        <path
+          fill-rule="evenodd"
+          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </button>
       <div ref={menuRef}
         class="translate-x-full fixed left-0 top-0 z-10 h-full w-full transform opacity-95 dark:opacity-[0.98] bg-white duration-300 ease-in-out dark:bg-gray-950">
         <div class="flex justify-end">
