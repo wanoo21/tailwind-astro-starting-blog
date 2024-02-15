@@ -2,14 +2,17 @@
 type Props = {
   title: string;
   class?: string;
-}
+};
 
 const { title, class: className } = Astro.props;
 ---
 
-<details class:list={className} class="prose dark:prose-invert block w-full">
-    <summary class="cursor-pointer md:p-4 p-3">{title}</summary>
-    <div class="md:pb-4 pb-3">
-        <slot />
-    </div>
+<details
+  class:list={className}
+  class="prose dark:prose-invert block w-full max-w-none"
+>
+  <summary class="cursor-pointer md:p-4 p-3">{title}</summary>
+  <div class="md:px-4 px-3 md:pb-4 pb-3">
+    <slot />
+  </div>
 </details>

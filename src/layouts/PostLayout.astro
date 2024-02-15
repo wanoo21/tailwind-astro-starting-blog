@@ -149,12 +149,11 @@ const { Content, headings } = await post.render();
                     {headings.map(({ slug, text, depth }) => (
                       <li
                         class:list={{
-                          "ml-0": depth === 1,
-                          "ml-4": depth === 2,
-                          "ml-8": depth === 3,
-                          "ml-12": depth === 4,
-                          "ml-16": depth === 5,
-                          "ml-20": depth === 6,
+                          "ml-0": depth === 2,
+                          "ml-4": depth === 3,
+                          "ml-8": depth === 4,
+                          "ml-12": depth === 5,
+                          "ml-16": depth === 6,
                         }}
                       >
                         <Link href={`#${slug}`} class="no-underline">
