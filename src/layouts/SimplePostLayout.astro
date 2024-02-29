@@ -7,6 +7,9 @@ import { type CollectionEntry, getEntries } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
 import PostCover from "../components/PostCover.astro";
+import DetailsSummary from "../components/DetailsSummary.astro";
+import SocialShareButtons from "../components/SocialShareButtons.astro";
+import { POST_METADATA } from "@/consts";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -55,15 +58,19 @@ const { Content, headings } = await post.render();
           <PageTitle>{post.data.title}</PageTitle>
         </div>
         {
-          post.data.cover && (
+          post.data.cover && POST_METADATA.showCover && (
             <div class="space-y-1 pb-10 text-center dark:border-gray-700">
               <PostCover {post} />
             </div>
           )
         }
-        <div class="pb-10 text-center border-b border-gray-200">
-          <p>{post.data.summary}</p>
-        </div>
+        {
+          POST_METADATA.showSummary && (
+            <div class="pb-10 text-center border-b border-gray-200">
+              <p>{post.data.summary}</p>
+            </div>
+          )
+        }
       </header>
       <div
         class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0"
@@ -77,6 +84,41 @@ const { Content, headings } = await post.render();
             </div>
           )
         }
+        {
+          ["top", "both"].includes(POST_METADATA.showShareButtons) ? (
+            <SocialShareButtons
+              title={post.data.title}
+              description={post.data.summary}
+              class="mt-4"
+            />
+          ) : null
+        }
+        {
+          headings.length > 0 && POST_METADATA.showTableOfContents && (
+            <DetailsSummary
+              class="border border-gray-100 dark:border-gray-600 rounded mt-4 max-w-none"
+              title="Table of content"
+            >
+              <ul class="space-y-2 list-none mt-0 ps-0">
+                {headings.map(({ slug, text, depth }) => (
+                  <li
+                    class:list={{
+                      "ml-0": depth === 2,
+                      "ml-4": depth === 3,
+                      "ml-8": depth === 4,
+                      "ml-12": depth === 5,
+                      "ml-16": depth === 6,
+                    }}
+                  >
+                    <Link href={`#${slug}`} class="no-underline">
+                      {text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </DetailsSummary>
+          )
+        }
         <div
           class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0"
         >
@@ -85,6 +127,15 @@ const { Content, headings } = await post.render();
             <Content />
           </div>
         </div>
+        {
+          ["bottom", "both"].includes(POST_METADATA.showShareButtons) ? (
+            <SocialShareButtons
+              client:visible
+              title={post.data.title}
+              description={post.data.summary}
+            />
+          ) : null
+        }
         <!--{siteMetadata.comments && (-->
         <!--        <div class="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">-->
         <!--            <Comments slug={slug} />-->

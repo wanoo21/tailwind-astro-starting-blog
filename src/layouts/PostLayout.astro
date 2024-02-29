@@ -10,6 +10,7 @@ import Tag from "../components/Tag.astro";
 import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
 import PostCover from "../components/PostCover.astro";
 import DetailsSummary from "../components/DetailsSummary.astro";
+import SocialShareButtons from "../components/SocialShareButtons.astro";
 import { POST_METADATA } from "@/consts";
 
 interface Props {
@@ -68,9 +69,13 @@ const { Content, headings } = await post.render();
               </div>
             )
           }
-          <div class="pb-0 text-center">
-            <p>{post.data.summary}</p>
-          </div>
+          {
+            POST_METADATA.showSummary && (
+              <div class="pb-0 text-center">
+                <p>{post.data.summary}</p>
+              </div>
+            )
+          }
         </header>
         <div
           class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
@@ -140,6 +145,11 @@ const { Content, headings } = await post.render();
               )
             }
             {
+              ['top', 'both'].includes(POST_METADATA.showShareButtons) ? (
+                <SocialShareButtons title={post.data.title} description={post.data.summary} class="mt-4" />
+              ) : null
+            }
+            {
               headings.length > 0 && POST_METADATA.showTableOfContents && (
                 <DetailsSummary
                   class="border border-gray-100 dark:border-gray-600 rounded mt-4 max-w-none"
@@ -170,6 +180,11 @@ const { Content, headings } = await post.render();
               <slot />
               <Content />
             </div>
+            {
+              ['bottom', 'both'].includes(POST_METADATA.showShareButtons) ? (
+                <SocialShareButtons client:visible title={post.data.title} description={post.data.summary} />
+              ) : null
+            }
             <!--    <div class="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">-->
             <!--        <Link href={discussUrl(path)} rel="nofollow">-->
             <!--            Discuss on Twitter-->
