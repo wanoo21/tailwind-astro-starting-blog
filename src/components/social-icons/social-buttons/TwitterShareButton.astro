@@ -1,0 +1,33 @@
+---
+import TwitterIcon from "../icons/Twitter.astro";
+
+type Props = {
+  description?: string;
+  via?: string;
+};
+
+const { description, via } = Astro.props;
+
+let URL = `https://twitter.com/intent/tweet?url=${Astro.request.url}`;
+
+if (description) URL += `&text=${description}`;
+if (via) URL += `&via=${via}`;
+---
+
+<a
+  class="social-share-btn"
+  target="_blank"
+  href={URL}
+  rel="noopener noreferrer"
+>
+  <TwitterIcon />
+</a>
+
+<style>
+  a {
+    margin-right: 10px;
+  }
+  svg:hover {
+    fill: #000000;
+  }
+</style>

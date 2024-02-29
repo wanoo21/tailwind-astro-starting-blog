@@ -1,0 +1,30 @@
+---
+import RedditIcon from "../icons/Reddit.astro";
+
+type Props = {
+  title?: string;
+};
+
+const { title } = Astro.props;
+
+const encoded_url = encodeURIComponent(Astro.request.url);
+const URL = `https://www.reddit.com/submit?url=${encoded_url}&title=${title}`;
+---
+
+<a
+  class="social-share-btn"
+  target="_blank"
+  href={URL}
+  rel="noopener noreferrer"
+>
+  <RedditIcon />
+</a>
+
+<style>
+  a {
+    margin-right: 10px;
+  }
+  svg:hover {
+    fill: #ff4500;
+  }
+</style>
