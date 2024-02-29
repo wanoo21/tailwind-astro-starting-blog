@@ -1,10 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 // import ListLayout from "@/layouts/ListLayout.astro";
-import { ITEMS_PER_PAGE, SITE_METADATA } from "@/consts";
+import { ITEMS_PER_PAGE } from "@/consts";
 import { sortBlogPosts, excludeDrafts } from "@/functions";
 import ListWithTagsLayout from "@/layouts/ListWithTagsLayout.astro";
 import type { Page } from "astro";
+import { useTranslations } from "@/i18n";
+
+const t = useTranslations();
 
 interface Props {
   page: Page;
@@ -20,15 +23,16 @@ let titleTemplate = "";
 let robots;
 
 if (page.currentPage > 1) {
-  titleTemplate = `%s - Page ${page.currentPage}`;
+  titleTemplate = t("seo.pagination.page", { page: `${page.currentPage}` });
   // Ask search engines to not index paginated pages
   robots = "noindex, follow";
 }
 ---
 
-<!-- <ListLayout {...SITE_METADATA.pages.blog} page={page} {robots} {titleTemplate}/> -->
+<!-- <ListLayout title={t('pages.blog.title')} description={t('pages.blog.description')} page={page} {robots} {titleTemplate}/> -->
 <ListWithTagsLayout
-  {...SITE_METADATA.pages.blog}
+  title={t('pages.blog.title')}
+  description={t('pages.blog.description')}
   page={page}
   {robots}
   {titleTemplate}

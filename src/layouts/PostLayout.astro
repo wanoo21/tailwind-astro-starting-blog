@@ -38,7 +38,6 @@ const articleOgDetails = {
   cover: post.data.cover,
 };
 
-// TODO: Later add support for headings
 const { Content, headings } = await post.render();
 ---
 
@@ -185,7 +184,7 @@ const { Content, headings } = await post.render();
             </div>
             {
               ['bottom', 'both'].includes(POST_METADATA.showShareButtons) ? (
-                <SocialShareButtons client:visible title={post.data.title} description={post.data.summary} />
+                <SocialShareButtons title={post.data.title} description={post.data.summary} />
               ) : null
             }
             <!--    <div class="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">-->

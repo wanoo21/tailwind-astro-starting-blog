@@ -23,7 +23,7 @@ const { title, description, via } = Astro.props;
 <div class="flex gap-2" class:list={Astro.props.class}>
     <FacebookShareButton />
     <LinkedInShareButton />
-    <RedditShareButton />
+    <RedditShareButton {title} />
     <TwitterShareButton {title} {description} {via} />
     <span>{t('components.socialShareButtons.sharing')}</span>
 </div>
