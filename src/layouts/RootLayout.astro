@@ -5,7 +5,9 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SectionContainer from "../components/SectionContainer.astro";
 
-import { SITE_METADATA } from "../consts";
+import { useTranslations } from "@/i18n";
+
+const t = useTranslations();
 
 type Props = {
   title: string;
@@ -23,7 +25,7 @@ type Props = {
 };
 ---
 
-<html lang={SITE_METADATA.language} class="scroll-smooth">
+<html lang={t("siteMetadata.language")} class="scroll-smooth">
   <BaseHead {...Astro.props} />
   <body
     class="bg-white text-black antialiased dark:bg-gray-950 dark:text-white"
