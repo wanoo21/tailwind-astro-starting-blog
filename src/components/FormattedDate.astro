@@ -1,18 +1,21 @@
 ---
-import {SITE_METADATA} from "../consts";
+import { useTranslations } from "@/i18n";
+
+const t = useTranslations();
+
 interface Props {
-	date: Date;
+  date: Date;
 }
 
 const { date } = Astro.props;
 ---
 
 <time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString(SITE_METADATA.language, {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
+  {
+    date.toLocaleDateString(t("siteMetadata.language"), {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  }
 </time>

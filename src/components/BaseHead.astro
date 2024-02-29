@@ -14,7 +14,7 @@ interface Props {
   description: string;
   ogImage?: string;
   robots?: string; // default to SITE_METADATA.robots
-  titleTemplate?: string; 
+  titleTemplate?: string;
   article?: {
     publishedTime: Date;
     modifiedTime?: Date;
@@ -30,7 +30,7 @@ const {
   description,
   robots = SITE_METADATA.robots,
   article,
-  titleTemplate
+  titleTemplate,
 } = Astro.props;
 
 // The default author is the site creator
@@ -99,14 +99,15 @@ const isProduction = import.meta.env.PROD;
       ],
     }}
     twitter={{
-      ...(twitterCreator && {
+      ...((twitterCreator && {
         card: "summary_large_image",
-          // site: creator.data.twitter,
-          creator: twitterCreator.replace("https://twitter.com/", "@"),
-          title,
-          description,
-          image: openGraphImage.src,
-      } || {}),
+        // site: creator.data.twitter,
+        creator: twitterCreator.replace("https://twitter.com/", "@"),
+        title,
+        description,
+        image: openGraphImage.src,
+      }) ||
+        {}),
     }}
     openGraph={{
       basic: {

@@ -1,14 +1,14 @@
 import rss from '@astrojs/rss';
 import {getCollection} from 'astro:content';
-import {SITE_METADATA} from '../consts';
+import { useTranslations } from '@/i18n';
 
-const {title, description} = SITE_METADATA;
+const t = useTranslations();
 
 export async function GET(context) {
     const posts = await getCollection('blog');
     return rss({
-        title,
-        description,
+        title: t('siteMetadata.title'),
+        description: t('siteMetadata.description'),
         site: context.site,
         items: posts.map(({slug, data: {title, summary, tags, date}}) => ({
             title,

@@ -1,12 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import LogoImage from "@/assets/logo.svg";
-import { SITE_METADATA } from "@/consts";
+import { useTranslations } from "@/i18n";
+
+const t = useTranslations();
 ---
 
 <Image
   src={LogoImage}
-  alt={SITE_METADATA.title}
+  alt={t("siteMetadata.title")}
   widths={[40, 80]}
   sizes={`(max-width: 640px) 40px, 80px`}
   loading="eager"

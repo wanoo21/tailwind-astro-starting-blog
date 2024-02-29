@@ -2,6 +2,9 @@
 import { Image } from "astro:assets";
 import FormattedDate from "./FormattedDate.astro";
 import type { CollectionEntry } from "astro:content";
+import { useTranslations } from "@/i18n";
+
+const t = useTranslations();
 
 type Props = {
   post: CollectionEntry<"blog">;
@@ -26,7 +29,7 @@ const {
     )
   }
   <dl>
-    <dt class="sr-only">Published on</dt>
+    <dt class="sr-only">{t('components.listPostCover.publishedAt')}</dt>
     <dd
       class="text-xs py-0 px-2 font-medium leading-6 text-primary-50 bg-primary-700 rounded-lg m-1 absolute bottom-0 z-10"
     >

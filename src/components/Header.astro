@@ -4,11 +4,14 @@ import HeaderLink from "./HeaderLink.astro";
 import Logo from "./Logo.astro";
 import MobileNav from "@/solid/MobileNav.tsx";
 import ThemeSwitcher from "@/solid/ThemeSwitcher.tsx";
+import { useTranslations } from "@/i18n";
+
+const t = useTranslations();
 ---
 
 <header class="flex items-center justify-between py-10">
   <div class="mr-3 md:w-40 w-20">
-    <a href="/" aria-label={SITE_METADATA.headerTitle}>
+    <a href="/" aria-label={t("siteMetadata.headerTitle")}>
       <Logo class="w-full" />
     </a>
   </div>
@@ -19,7 +22,7 @@ import ThemeSwitcher from "@/solid/ThemeSwitcher.tsx";
           href={link.href}
           class="hidden sm:block font-medium text-gray-900 dark:text-gray-100"
         >
-          {link.title}
+          {t(link.title)}
         </HeaderLink>
       ))
     }

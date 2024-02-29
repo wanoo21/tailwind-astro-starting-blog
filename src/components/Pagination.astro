@@ -1,6 +1,9 @@
 ---
 import type { Page } from "astro";
 import Link from "./Link.astro";
+import { useTranslations } from "@/i18n";
+
+const t = useTranslations();
 
 type Props = {
   page: Page;
@@ -20,14 +23,14 @@ const {
     {
       !prev && (
         <button class="cursor-auto disabled:opacity-50" disabled>
-          Previous
+          {t("components.pagination.previous")}
         </button>
       )
     }
     {
       prev && (
         <Link href={prev} rel="prev">
-          Previous
+          {t("components.pagination.previous")}
         </Link>
       )
     }
@@ -37,14 +40,14 @@ const {
     {
       !next && (
         <button class="cursor-auto disabled:opacity-50" disabled>
-          Next
+          {t("components.pagination.next")}
         </button>
       )
     }
     {
       next && (
         <Link href={next} rel="next">
-          Next
+          {t("components.pagination.next")}
         </Link>
       )
     }

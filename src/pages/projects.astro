@@ -1,6 +1,9 @@
 ---
 import Card from "@/components/Card.astro";
+import { useTranslations } from "@/i18n";
 import RootLayout from "@/layouts/RootLayout.astro";
+
+const t = useTranslations();
 
 const projectsData = [
   {
@@ -8,7 +11,8 @@ const projectsData = [
     description: `What if you could look up any information in the world? Webpages, images, videos
     and more. Google has many features to help you find exactly what you're looking
     for.`,
-    imgSrc: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+    imgSrc:
+      "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
     href: "https://www.google.com",
   },
   {
@@ -22,16 +26,19 @@ const projectsData = [
 ];
 ---
 
-<RootLayout title="Projects" description="My projects">
+<RootLayout
+  title={t("pages.projects.title")}
+  description={t("pages.projects.description")}
+>
   <div class="divide-y divide-gray-200 dark:divide-gray-700">
     <div class="space-y-2 pb-8 pt-6 md:space-y-5">
       <h1
         class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
       >
-        Projects
+        {t("pages.projects.allProjects")}
       </h1>
       <p class="text-lg leading-7 text-gray-500 dark:text-gray-400">
-        Showcase your projects with a hero image (16 x 9)
+        {t("pages.projects.showcase")}
       </p>
     </div>
     <div class="container py-12">
