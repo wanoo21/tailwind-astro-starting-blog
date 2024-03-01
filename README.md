@@ -4,13 +4,11 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/wanoo21/tailwind-astro-starting-blog?style=social)](https://GitHub.com/wanoo21/tailwind-astro-starting-blog/stargazers/)
 [![GitHub forks](https://img.shields.io/github/forks/wanoo21/tailwind-astro-starting-blog?style=social)](https://GitHub.com/wanoo21/tailwind-astro-starting-blog/network/)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fipwanciu)](https://twitter.com/ipwanciu)
-
-[//]: # ([![Sponsor]&#40;https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/timlrx&#41;]&#40;https://github.com/sponsors/timlrx&#41;)
+[![Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/wanoo21)](https://github.com/sponsors/wanoo21)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/wanoo21/tailwind-astro-starting-blog)
-    
 
-This template is perfect for those who want to use Tailwind CSS and Astro to build a blog. 
+This template is perfect for those who want to use Tailwind CSS and Astro to build a blog.
 
 It is inspired by the [Tailwind Next.js Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) - one of the most popular Next.js blogging templates.
 
@@ -36,10 +34,11 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - 2 different blog listing layouts
 - Support for nested routing of blog posts
 - Projects page
+- i18n support
 - **Fully SEO optimized**, including Open Graph and Twitter Cards
-- Almost Perfect lighthouse score (for mobile - 99/95/100/88) - [Lighthouse Report](https://pagespeed.web.dev/analysis/https-tasb-yon-fun/gp1vypobei?form_factor=mobile) 
+- Almost Perfect lighthouse score (for mobile - 99/95/100/91) - [Lighthouse Report](https://pagespeed.web.dev/analysis/https-tasb-yon-fun/gp1vypobei?form_factor=mobile) 
 
-![img_1.png](img_1.png)
+![lighthouse score](image.png)
 
 Even thought these features looks the same as the original template, they are implemented in a different way, and there are more to come.
 
@@ -51,6 +50,10 @@ However, there are some features that are not in the original template, like:
 - Pagination inside blog/tags pages - **each blog/tags page has** a pagination.
 - Cool animations provided by Astro.
 - And many more that would come in the future.
+
+## Internationalization
+
+This template has support for i18n, it's set up for English as default. You can add more languages in the `src/i18n/ui.ts` file. It doesn't have support for dynamic language change, but it's easy to implement.
 
 ## Extend / Customize
 
