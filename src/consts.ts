@@ -11,9 +11,9 @@ export const SITE_METADATA = {
 
   // These are not supported yet
   analytics: {
-    fantom: {
+    fathom: {
       site: "", // Add your site id here
-      src: "https://cdn.usefantom.com/fantom.js",
+      src: "https://cdn.usefathom.com/fathom.js",
     },
     googleAnalyticsId: null, // Add your Google Analytics id here
     metricalApp: null, // Add your Metrical app here
