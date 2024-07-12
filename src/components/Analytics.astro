@@ -13,7 +13,7 @@ import Umami from "./analytics/Umami.astro";
 const {
   analytics: {
     googleAnalyticsId,
-    fantom,
+    fathom,
     minimalAnalyticsId,
     simpleAnalytics,
     matomo,
@@ -26,7 +26,7 @@ const {
 ---
 
 {googleAnalyticsId && <GoogleAnalytics id={googleAnalyticsId} />}
-{fantom.site && <Fathom {...fantom} />}
+{fathom.site && <Fathom {...fathom} />}
 {minimalAnalyticsId && <MinimalAnalytics id={minimalAnalyticsId} />}
 {simpleAnalytics && <SimpleAnalytics />}
 {matomo.id && matomo.url && <Matomo {...matomo} />}
