@@ -1,4 +1,4 @@
-import { createSignal, createEffect, For, Show } from "solid-js";
+import { createSignal, createEffect, For, Show, onMount, onCleanup } from "solid-js";
 import { useTranslations } from "@/i18n";
 
 interface SearchResult {
@@ -19,6 +19,7 @@ export default function SearchButton() {
   const [results, setResults] = createSignal<SearchResult[]>([]);
   const [allPosts, setAllPosts] = createSignal<SearchResult[]>([]);
   const [isLoading, setIsLoading] = createSignal(false);
+  const [searchTimeout, setSearchTimeout] = createSignal<number | null>(null);
 
   // Load search data when component mounts
   createEffect(() => {
@@ -37,29 +38,40 @@ export default function SearchButton() {
     }
   });
 
-  // Perform search when query changes
+  // Perform search when query changes (with debouncing)
   createEffect(() => {
     const searchQuery = query().toLowerCase().trim();
+    
+    // Clear previous timeout
+    if (searchTimeout() !== null) {
+      clearTimeout(searchTimeout());
+    }
+    
     if (!searchQuery) {
       setResults([]);
       return;
     }
 
-    const filtered = allPosts().filter((post) => {
-      const titleMatch = post.title.toLowerCase().includes(searchQuery);
-      const summaryMatch = post.summary.toLowerCase().includes(searchQuery);
-      const contentMatch = post.content.toLowerCase().includes(searchQuery);
-      const tagsMatch = post.tags.some((tag) =>
-        tag.toLowerCase().includes(searchQuery)
-      );
-      return titleMatch || summaryMatch || contentMatch || tagsMatch;
-    });
+    // Debounce search by 150ms
+    const timeout = setTimeout(() => {
+      const filtered = allPosts().filter((post) => {
+        const titleMatch = post.title.toLowerCase().includes(searchQuery);
+        const summaryMatch = post.summary.toLowerCase().includes(searchQuery);
+        const contentMatch = post.content.toLowerCase().includes(searchQuery);
+        const tagsMatch = post.tags.some((tag) =>
+          tag.toLowerCase().includes(searchQuery)
+        );
+        return titleMatch || summaryMatch || contentMatch || tagsMatch;
+      });
 
-    setResults(filtered);
+      setResults(filtered);
+    }, 150);
+    
+    setSearchTimeout(timeout as unknown as number);
   });
 
   // Handle keyboard shortcuts
-  createEffect(() => {
+  onMount(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // CMD+K or CTRL+K to toggle search
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -73,7 +85,7 @@ export default function SearchButton() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    onCleanup(() => window.removeEventListener("keydown", handleKeyDown));
   });
 
   const openSearch = () => setIsOpen(true);
@@ -91,7 +103,8 @@ export default function SearchButton() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
+    // Use the browser's locale for consistent internationalization
+    return date.toLocaleDateString(undefined, {
       year: "numeric",
       month: "long",
       day: "numeric",
