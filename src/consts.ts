@@ -70,7 +70,7 @@ export const SITE_METADATA = {
   //     },
   // },
   search: {
-    provider: 'kbar', // kbar or algolia
+    provider: 'custom', // Custom Solid.js search implementation
     kbarConfig: {
       searchDocumentsPath: 'search.json', // path to load documents to search
     },
