@@ -3,7 +3,7 @@ import SectionContainer from "../components/SectionContainer.astro";
 import PageTitle from "../components/PageTitle.astro";
 import Link from "../components/Link.astro";
 import RootLayout from "./RootLayout.astro";
-import { type CollectionEntry, getEntries } from "astro:content";
+import { type CollectionEntry, getEntries, render } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
 import PostCover from "../components/PostCover.astro";
@@ -36,7 +36,7 @@ const articleOgDetails = {
   cover: post.data.cover,
 };
 
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 ---
 
 <RootLayout
@@ -150,7 +150,7 @@ const { Content, headings } = await post.render();
               prev && (
                 <div class="pt-4 xl:pt-8">
                   <Link
-                    href={`/blog/${prev.slug}`}
+                    href={`/blog/${prev.id}`}
                     class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                     aria-label={t("layouts.postLayout.previousPost", {
                       title: prev.data.title,
@@ -165,7 +165,7 @@ const { Content, headings } = await post.render();
               next && (
                 <div class="pt-4 xl:pt-8">
                   <Link
-                    href={`/blog/${next.slug}`}
+                    href={`/blog/${next.id}`}
                     class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                     aria-label={t("layouts.postLayout.nextPost", {
                       title: next.data.title,

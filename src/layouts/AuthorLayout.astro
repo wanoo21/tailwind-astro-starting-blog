@@ -32,13 +32,13 @@ const {
 const authorPosts = await getCollection(
   "blog",
   ({ data: { authors, draft } }) => {
-    return !draft && authors.some((author) => author.slug === Astro.props.slug);
+    return !draft && authors.some((ref) => ref.id === Astro.props.slug);
   }
 )
   .then(sortBlogPosts)
   .then((posts) => {
     return posts.slice(0, ITEMS_PER_PAGE).map((post) => {
-      return { title: post.data.title, slug: post.slug };
+      return { title: post.data.title, id: post.id };
     });
   });
 ---
@@ -90,9 +90,9 @@ const authorPosts = await getCollection(
                 {t("layouts.authorLayout.latestPosts")}
               </h2>
               <ul class="space-y-4 mt-4">
-                {authorPosts.map(({ slug, title }) => (
+                {authorPosts.map(({ id, title }) => (
                   <li>
-                    <Link href={`/blog/${slug}`}>{title}</Link>
+                    <Link href={`/blog/${id}`}>{title}</Link>
                   </li>
                 ))}
               </ul>

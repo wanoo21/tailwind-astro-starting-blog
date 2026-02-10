@@ -23,9 +23,9 @@ interface Props {
 const tags = await getCollection("tags");
 const posts = await getCollection("blog");
 
-function tagCount(slug: CollectionEntry<"tags">["slug"]) {
+function tagCount(id: CollectionEntry<"tags">["id"]) {
   if (!posts) return 0;
-  return posts.filter((post) => post.data.tags.some((tag) => tag.slug === slug))
+  return posts.filter((post) => post.data.tags.some((ref) => ref.id === id))
     .length;
 }
 
@@ -61,31 +61,33 @@ const isBlogPage = Astro.url.pathname.startsWith("/blog");
         <div class="py-4 px-6">
           {
             isBlogPage ? (
-              <h3 class="text-primary-500 font-bold uppercase">{t('layouts.listWithTagsLayout.allPosts')}</h3>
+              <h3 class="text-primary-500 font-bold uppercase">
+                {t("layouts.listWithTagsLayout.allPosts")}
+              </h3>
             ) : (
               <Link
                 href="/blog"
                 class="font-bold uppercase text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500"
               >
-                {t('layouts.listWithTagsLayout.allPosts')}
+                {t("layouts.listWithTagsLayout.allPosts")}
               </Link>
             )
           }
           <ul>
             {
-              tags.map(({ slug, data }) => (
+              tags.map(({ id, data }) => (
                 <li class="my-3">
-                  {isSamePath(`/tag/${slug}`) ? (
+                  {isSamePath(`/tag/${id}`) ? (
                     <h3 class="inline py-2 px-3 uppercase text-sm font-bold text-primary-500">
-                      {`${data.name} (${tagCount(slug)})`}
+                      {`${data.name} (${tagCount(id)})`}
                     </h3>
                   ) : (
                     <Link
-                      href={`/tags/${slug}`}
+                      href={`/tags/${id}`}
                       class="py-2 px-3 uppercase text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500"
                       aria-label={`View posts tagged ${data.name}`}
                     >
-                      {`${data.name} (${tagCount(slug)})`}
+                      {`${data.name} (${tagCount(id)})`}
                     </Link>
                   )}
                 </li>
@@ -97,11 +99,13 @@ const isBlogPage = Astro.url.pathname.startsWith("/blog");
       <div>
         <ul>
           {
-            page.data.map(({ slug, data: { date, title, summary, tags } }) => (
+            page.data.map(({ id, data: { date, title, summary, tags } }) => (
               <li class="py-5">
                 <article class="space-y-2 flex flex-col xl:space-y-0">
                   <dl>
-                    <dt class="sr-only">{t('layouts.listWithTagsLayout.publishedAt')}</dt>
+                    <dt class="sr-only">
+                      {t("layouts.listWithTagsLayout.publishedAt")}
+                    </dt>
                     <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                       <FormattedDate date={date} />
                     </dd>
@@ -110,15 +114,15 @@ const isBlogPage = Astro.url.pathname.startsWith("/blog");
                     <div>
                       <h3 class="text-2xl font-bold leading-8 tracking-tight">
                         <Link
-                          href={`/blog/${slug}`}
+                          href={`/blog/${id}`}
                           class="text-gray-900 dark:text-gray-100"
                         >
                           {title}
                         </Link>
                       </h3>
                       <div class="flex flex-wrap">
-                        {tags.map(({ slug }) => (
-                          <Tag slug={slug} />
+                        {tags.map(({ id }) => (
+                          <Tag slug={id} />
                         ))}
                       </div>
                     </div>

@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry, render } from "astro:content";
 
 // import ListLayout from "@/layouts/ListLayout.astro";
 import { ITEMS_PER_PAGE } from "@/consts";
@@ -21,18 +21,18 @@ export async function getStaticPaths({ paginate }) {
 
   return tags.flatMap((entry) => {
     const tagPosts = posts.filter((post) =>
-      post.data.tags.some(({ slug }) => slug === entry.slug)
+      post.data.tags.some((ref) => ref.id === entry.id)
     );
     return paginate(tagPosts, {
       pageSize: ITEMS_PER_PAGE,
-      params: { slug: entry.slug },
+      params: { slug: entry.id },
       props: { entry },
     });
   });
 }
 
 const { page, entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 let robots;
 let titleTemplate = "";
