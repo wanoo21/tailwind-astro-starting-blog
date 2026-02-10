@@ -1,10 +1,10 @@
 import { defineConfig, passthroughImageService} from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwind from "@astrojs/tailwind";
 import solidJs from "@astrojs/solid-js";
 import { SITE_METADATA } from "./src/consts.ts";
 import metaTags from "astro-meta-tags";
+import tailwindcss from "@tailwindcss/vite";
 
 import robotsTxt from "astro-robots-txt";
 
@@ -15,5 +15,8 @@ export default defineConfig({
   image: {
     service: passthroughImageService(),
   },
-  integrations: [mdx(), sitemap(), tailwind(), solidJs(), metaTags(), robotsTxt()]
+  integrations: [mdx(), sitemap(), solidJs(), metaTags(), robotsTxt()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

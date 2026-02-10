@@ -1,6 +1,7 @@
 ![img.png](img.png)
 
 # Tailwind Astro Starter Project
+
 [![GitHub Repo stars](https://img.shields.io/github/stars/wanoo21/tailwind-astro-starting-blog?style=social)](https://GitHub.com/wanoo21/tailwind-astro-starting-blog/stargazers/)
 [![GitHub forks](https://img.shields.io/github/forks/wanoo21/tailwind-astro-starting-blog?style=social)](https://GitHub.com/wanoo21/tailwind-astro-starting-blog/network/)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fipwanciu)](https://twitter.com/ipwanciu)
@@ -23,7 +24,7 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - Astro v4 with Typescript
 - Astro MDX support
 - [Solid-js](https://solidjs.com) for some interactivity
-- Easy styling customization with [Tailwind 3.3](https://tailwindcss.com/blog/tailwindcss-v3-3) and primary color attribute
+- Easy styling customization with [Tailwind 3.4](https://tailwindcss.com/blog/tailwindcss-v3-4) and primary color attribute
 - Mobile-friendly view
 - Light and dark theme
 - Font optimization via [@fontsource](https://fontsource.org/)
@@ -36,7 +37,7 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - Projects page
 - i18n support
 - **Fully SEO optimized**, including Open Graph and Twitter Cards
-- Almost Perfect lighthouse score (for mobile - 99/95/100/91) - [Lighthouse Report](https://pagespeed.web.dev/analysis/https-tasb-yon-fun/gp1vypobei?form_factor=mobile) 
+- Almost Perfect lighthouse score (for mobile - 99/95/100/91) - [Lighthouse Report](https://pagespeed.web.dev/analysis/https-tasb-yon-fun/gp1vypobei?form_factor=mobile)
 
 ![lighthouse score](image.png)
 
@@ -45,7 +46,7 @@ Even thought these features looks the same as the original template, they are im
 However, there are some features that are not in the original template, like:
 
 - Support for multiple authors pages - **each author will have** its own page, with a list of all the posts written by him/her.
-- Support for multiple tags pages - **each tag has its own page with custom description**, that can be customized with markdown. 
+- Support for multiple tags pages - **each tag has its own page with custom description**, that can be customized with markdown.
 - Related posts - **each post has** a list of related posts, provided by the author inside the markdown file.
 - Pagination inside blog/tags pages - **each blog/tags page has** a pagination.
 - Cool animations provided by Astro.
@@ -84,8 +85,8 @@ All commands are run from the root of the project, from a terminal:
 
 All Docker commands are run from the root of the project, from a terminal:
 
-| Command                               | Action                                                   |
-| :------------------------------------ | :------------------------------------------------------- |
-| `docker build -t app:1.0.0 .`         | Build the Docker image for the Astro application.        |
-| `docker run -p 80:4321 app:1.0.0`     | Run a Docker container with the built Astro application. |
-| `docker pull edwardb11/app:2.0.0`     | Download the Docker image from Docker Hub.               |
+| Command                           | Action                                                   |
+| :-------------------------------- | :------------------------------------------------------- |
+| `docker build -t app:1.0.0 .`     | Build the Docker image for the Astro application.        |
+| `docker run -p 80:4321 app:1.0.0` | Run a Docker container with the built Astro application. |
+| `docker pull edwardb11/app:2.0.0` | Download the Docker image from Docker Hub.               |
