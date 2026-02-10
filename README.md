@@ -21,10 +21,10 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 
 ## Features
 
-- Astro v4 with Typescript
+- Astro v5 with TypeScript
 - Astro MDX support
 - [Solid-js](https://solidjs.com) for some interactivity
-- Easy styling customization with [Tailwind 3.4](https://tailwindcss.com/blog/tailwindcss-v3-4) and primary color attribute
+- Easy styling customization with [Tailwind CSS v4](https://tailwindcss.com/docs/upgrade-guide) (via the official `@tailwindcss/vite` plugin) and primary color attribute
 - Mobile-friendly view
 - Light and dark theme
 - Font optimization via [@fontsource](https://fontsource.org/)

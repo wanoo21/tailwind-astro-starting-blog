@@ -915,3 +915,994 @@ yes, do it
 
 ---
 
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Exploring Tailwind CSS v4**
+
+In Tailwind v4, CSS custom properties can be defined, such as `--font-sans` and color variables. Utility class names like `text-primary-500` depend on configuration, and theme tokens are linked to these CSS variables, which is essential to replicate. 
+
+For example, in `global.css`, we can map color variables like `--color-primary-50` to `--color-pink-50`. However, I'll need to be cautious about the token names to avoid mistakes, considering the official mappings provided in the documentation. Keeping it simple and using built-in utilities might be the best approach!
+**Checking color usage in code**
+
+I need to verify where the `primary` and `gray` custom colors are utilized in the code. It’s important for me to understand how these colors are applied across various components, especially for extended typography. I think using a tool like Grep could help me quickly search through the codebase to find any instances of the `primary` color. That should make it easier to ensure consistency and make adjustments if necessary.</details></think>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search">
+<details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+
+Parameters:
+
+```json
+{
+  "pattern": "primary-",
+  "path": "/Users/ip/Projects/tailwind-astro-starting-blog/src",
+  "glob": "*.{astro,tsx,ts,mdx,md}",
+  "outputMode": "content",
+  "caseInsensitive": false
+}
+```
+Result:
+
+```json
+{
+  "success": {
+    "pattern": "primary-",
+    "path": "/Users/ip/Projects/tailwind-astro-starting-blog/src",
+    "outputMode": "content",
+    "workspaceResults": {
+      "/Users/ip/Projects/tailwind-astro-starting-blog": {
+        "content": {
+          "matches": [
+            {
+              "file": "src/layouts/ListWithTagsLayout.astro",
+              "matches": [
+                {
+                  "lineNumber": 64,
+                  "content": "              &lt;h3 class=\"text-primary-500 font-bold uppercase\"&gt;"
+                },
+                {
+                  "lineNumber": 70,
+                  "content": "                class=\"font-bold uppercase text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500\""
+                },
+                {
+                  "lineNumber": 81,
+                  "content": "                    &lt;h3 class=\"inline py-2 px-3 uppercase text-sm font-bold text-primary-500\"&gt;"
+                },
+                {
+                  "lineNumber": 87,
+                  "content": "                      class=\"py-2 px-3 uppercase text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-500\""
+                }
+              ]
+            },
+            {
+              "file": "src/pages/index.astro",
+              "matches": [
+                {
+                  "lineNumber": 66,
+                  "content": "                        class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\""
+                },
+                {
+                  "lineNumber": 86,
+                  "content": "          class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\""
+                }
+              ]
+            },
+            {
+              "file": "src/layouts/PostLayout.astro",
+              "matches": [
+                {
+                  "lineNumber": 117,
+                  "content": "                                class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\""
+                },
+                {
+                  "lineNumber": 232,
+                  "content": "                        &lt;div class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\"&gt;"
+                },
+                {
+                  "lineNumber": 244,
+                  "content": "                        &lt;div class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\"&gt;"
+                },
+                {
+                  "lineNumber": 262,
+                  "content": "                        &lt;li class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\"&gt;"
+                },
+                {
+                  "lineNumber": 276,
+                  "content": "                class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\""
+                }
+              ]
+            },
+            {
+              "file": "src/components/Tag.astro",
+              "matches": [
+                {
+                  "lineNumber": 20,
+                  "content": "    class=\"mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\""
+                }
+              ]
+            },
+            {
+              "file": "src/layouts/SimplePostLayout.astro",
+              "matches": [
+                {
+                  "lineNumber": 154,
+                  "content": "                    class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\""
+                },
+                {
+                  "lineNumber": 169,
+                  "content": "                    class=\"text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\""
+                }
+              ]
+            },
+            {
+              "file": "src/components/ListPostCover.astro",
+              "matches": [
+                {
+                  "lineNumber": 19,
+                  "content": "&lt;div class=\"relative h-[200px] overflow-hidden bg-primary-50 dark:bg-opacity-10 rounded-lg\" class:list={Astro.props.class}&gt;"
+                },
+                {
+                  "lineNumber": 34,
+                  "content": "      class=\"text-xs py-0 px-2 font-medium leading-6 text-primary-50 bg-primary-700 rounded-lg m-1 absolute bottom-0 z-10\""
+                }
+              ]
+            },
+            {
+              "file": "src/components/Card.astro",
+              "matches": [
+                {
+                  "lineNumber": 63,
+                  "content": "            class=\"text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400\""
+                }
+              ]
+            },
+            {
+              "file": "src/components/social-icons/index.astro",
+              "matches": [
+                {
+                  "lineNumber": 34,
+                  "content": "            class={&#96;fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}&#96;}/&gt;"
+                }
+              ]
+            }
+          ],
+          "totalLines": 18,
+          "totalMatchedLines": 18
+        }
+      }
+    }
+  }
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/ip/Projects/tailwind-astro-starting-blog/src/styles/global.css</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/ip/Projects/tailwind-astro-starting-blog/astro.config.mjs</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/ip/Projects/tailwind-astro-starting-blog/tailwind.config.cjs</summary>
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Reviewing CSS Configurations**
+
+I think we can skip redefining gray since we're set to use the default version. But I need to check that `--color-pink-50` and similar variables exist in version 4. The docs confirm they do, so we can proceed. Now, looking at line heights and font specifications, I see we're using specific typography plugins. The typography plugin in version 4 is imported with `@import "tailwindcss/typography";`, and it employs the `prose` class, which I should check for current usage for any adjustments.</details></think>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search">
+<details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+
+Parameters:
+
+```json
+{
+  "pattern": "prose",
+  "path": "/Users/ip/Projects/tailwind-astro-starting-blog/src",
+  "glob": "*.{astro,mdx,md,tsx,ts}",
+  "outputMode": "content",
+  "caseInsensitive": false
+}
+```
+Result:
+
+```json
+{
+  "success": {
+    "pattern": "prose",
+    "path": "/Users/ip/Projects/tailwind-astro-starting-blog/src",
+    "outputMode": "content",
+    "workspaceResults": {
+      "/Users/ip/Projects/tailwind-astro-starting-blog": {
+        "content": {
+          "matches": [
+            {
+              "file": "src/layouts/ListWithTagsLayout.astro",
+              "matches": [
+                {
+                  "lineNumber": 51,
+                  "content": "          &lt;div class=\"prose dark:prose-invert py-4\"&gt;"
+                },
+                {
+                  "lineNumber": 129,
+                  "content": "                    &lt;div class=\"prose max-w-none text-gray-500 dark:text-gray-400\"&gt;"
+                }
+              ]
+            },
+            {
+              "file": "src/pages/index.astro",
+              "matches": [
+                {
+                  "lineNumber": 59,
+                  "content": "                      &lt;div class=\"prose max-w-none text-gray-500 dark:text-gray-400\"&gt;"
+                }
+              ]
+            },
+            {
+              "file": "src/layouts/PostLayout.astro",
+              "matches": [
+                {
+                  "lineNumber": 181,
+                  "content": "            &lt;div class=\"prose max-w-none pb-8 pt-10 dark:prose-invert\"&gt;"
+                }
+              ]
+            },
+            {
+              "file": "src/layouts/AuthorLayout.astro",
+              "matches": [
+                {
+                  "lineNumber": 83,
+                  "content": "        &lt;div class=\"prose pb-8 pt-8 dark:prose-invert\"&gt;"
+                }
+              ]
+            },
+            {
+              "file": "src/layouts/SimplePostLayout.astro",
+              "matches": [
+                {
+                  "lineNumber": 127,
+                  "content": "          &lt;div class=\"prose max-w-none pb-8 pt-10 dark:prose-invert\"&gt;"
+                }
+              ]
+            },
+            {
+              "file": "src/components/Card.astro",
+              "matches": [
+                {
+                  "lineNumber": 56,
+                  "content": "      &lt;p class=\"prose mb-3 max-w-none text-gray-500 dark:text-gray-400\"&gt;"
+                }
+              ]
+            },
+            {
+              "file": "src/components/DetailsSummary.astro",
+              "matches": [
+                {
+                  "lineNumber": 12,
+                  "content": "  class=\"prose dark:prose-invert block w-full max-w-none\""
+                }
+              ]
+            },
+            {
+              "file": "src/layouts/ListLayout.astro",
+              "matches": [
+                {
+                  "lineNumber": 33,
+                  "content": "          &lt;div class=\"prose dark:prose-invert py-4\"&gt;"
+                },
+                {
+                  "lineNumber": 67,
+                  "content": "                  &lt;div class=\"prose max-w-none text-gray-500 dark:text-gray-400\"&gt;"
+                }
+              ]
+            }
+          ],
+          "totalLines": 10,
+          "totalMatchedLines": 10
+        }
+      }
+    }
+  }
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Exploring Tailwind setup**
+
+I need to import the typography layer in my Tailwind CSS setup. The recommended imports are:
+
+```css
+@import "tailwindcss";
+@import "tailwindcss/typography";
+@import "tailwindcss/forms";
+```
+
+I should also check for form classes like `form-input`, as the forms plugin offers a better base. It’s essential to set up dark mode correctly; I need to verify if the configuration can be defined in CSS as `@theme { --dark-mode: 'class'; }`. Tailwind v4’s dark mode seems to be using media queries by default. I want to ensure compatibility for my project as I utilize dark mode utilities.</details></think>
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="web_search">
+<details>
+            <summary>Tool use: **web_search** • Searched web `undefined` • **1** results</summary>
+        
+| Title | URL | Chunk |
+|-------|-----|-------|
+| Web search results for query: Tailwind CSS v4 dark mode class configuration |  | Links:<br/>1. [Tailwind CSS 4.0 Dark Mode: A Comprehensive Guide](https://medium.com/@asyncme/tailwind-css-4-0-dark-mode-a-comprehensive-guide-2499a43d867b)<br/>2. [How to Implement Centralized Dark Mode Custom Theme in Tailwind CSS v4](https://dev.to/generatecodedev/how-to-implement-centralized-dark-mode-custom-theme-in-tailwind-css-v4-2l5a)<br/>3. [Dark mode - Core concepts - Tailwind CSS](https://tailwindcss.com/docs/dark-mode)<br/>4. [TailwindCSS v4 dark theme by class not working without dark tag](https://stackoverflow.com/questions/79487101/tailwindcss-v4-dark-theme-by-class-not-working-without-dark-tag)<br/>5. [Flexible Dark Mode with Tailwind CSS v4 Custom Variants](https://schoen.world/n/tailwind-dark-mode-custom-variant)<br/><br/># Tailwind CSS v4 Dark Mode Class Configuration<br/><br/>## Default Behavior<br/>Tailwind CSS v4 uses the `prefers-color-scheme` CSS media query by default, which automatically applies dark mode styling based on the user's operating system settings.[1][3]<br/><br/>## Manual Dark Mode Toggle with CSS Class<br/><br/>To override dark mode to use a CSS class instead of system preferences, add this to your CSS file:[3]<br/><br/>```css<br/>@import "tailwindcss";<br/>@custom-variant dark (&&:where(.dark, .dark *));<br/>```<br/><br/>Then apply the `dark` class to your `html` element to toggle dark mode:[3]<br/><br/>```html<br/><html class="dark"><br/>  <body><br/>    <div class="bg-white dark:bg-black"><!-- ... --></div><br/>  </body><br/></html><br/>```<br/><br/>## Using Data Attributes<br/><br/>To use a data attribute instead of a class, override the dark variant with an attribute selector:[3]<br/><br/>```css<br/>@import "tailwindcss";<br/>@custom-variant dark (&&:where([data-theme=dark], [data-theme=dark] *));<br/>```<br/><br/>Then set the data attribute on your `html` element:[3]<br/><br/>```html<br/><html data-theme="dark"><br/>  <body><br/>    <div class="bg-white dark:bg-black"><!-- ... --></div><br/>  </body><br/></html><br/>```<br/><br/>## Combined System Preference Fallback<br/><br/>To support both manual theme selection and system preference fallback, use:[5]<br/><br/>```css<br/>@custom-variant dark \{<br/>  &:where([data-theme='dark'], [data-theme='dark'] *) \{@slot;\}<br/>  @media (prefers-color-scheme: dark) \{<br/>    &:where(:not([data-theme]*)) \{@slot;\}<br/>  \}<br/>\}<br/>```<br/><br/>This applies dark styles when `data-theme="dark"` is set, or falls back to system preferences when no data-theme attribute is present.[5] |
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Planning tool usage**
+
+I need to make sure I’m following the right steps here by using ReadLints after significant edits, so I’ll start with dependencies and config edits. I should use multi_tool_use.parallel, but I remember that ApplyPatch can't run in parallel with other tools. My sequence will be to first adjust dependencies with Shell, then ApplyPatch for astro.config, followed by global.css, delete tailwind.config, run ReadLints, and finally execute pnpm run build. Let’s get to it!</details></think>
+
+---
+
+I’ll install Tailwind 4 + the Vite plugin, update `astro.config.mjs` and `global.css` to the new CSS-first config with dark mode and typography/forms, remove the old Tailwind 3 config/integration, then run a build to confirm everything works.
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: pnpm add @tailwindcss/vite tailwindcss@^4</summary>
+
+```bash
+pnpm add @tailwindcss/vite tailwindcss@^4
+```
+
+```
+(eval):1: no matches found: tailwindcss@^4
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: pnpm remove @astrojs/tailwind</summary>
+
+```bash
+pnpm remove @astrojs/tailwind
+```
+
+```
+Progress: resolved 0, reused 1, downloaded 0, added 0
+Packages: -4
+----
+Progress: resolved 586, reused 515, downloaded 0, added 0, done
+
+dependencies:
+- @astrojs/tailwind 6.0.2
+
+Done in 740ms using pnpm v10.18.1
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: pnpm add @tailwindcss/vite tailwindcss@4</summary>
+
+```bash
+pnpm add @tailwindcss/vite tailwindcss@4
+```
+
+```
+Progress: resolved 0, reused 1, downloaded 0, added 0
+Progress: resolved 541, reused 458, downloaded 1, added 0
+Packages: +20 -62
++++++++++++++++++++-------------------------------------------------------------
+Progress: resolved 565, reused 471, downloaded 2, added 20, done
+
+dependencies:
++ @tailwindcss/vite 4.1.18
+- tailwindcss 3.4.19
++ tailwindcss 4.1.18
+
+Done in 2s using pnpm v10.18.1
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="todo_write">
+<details><summary>Tool use: **todo_write** • Todo List</summary>
+
+- [x] Add Tailwind 4 support via Astro CLI and Vite plugin
+- [-] Remove @astrojs/tailwind integration and legacy Tailwind 3 config
+- [ ] Run Astro dev or build to verify Tailwind 4 and Vite setup works
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/ip/Projects/tailwind-astro-starting-blog/astro.config.mjs</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+Failed to find context:
+.task-list-item::before {
+    @apply hidden;
+}
+.
+.task-list-item {
+    @apply list-none;
+}
+.
+.footnotes {
+    @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+.
+.data-footnote-backref {
+    @apply no-underline;
+}
+.
+.csl-entry {
+    @apply my-5;
+}
+.
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/ip/Projects/tailwind-astro-starting-blog/src/styles/global.css</summary>
+
+</details>
+</tool-use>
+
+---
+
+Failed to find context:
+.task-list-item::before {
+    @apply hidden;
+}
+.
+.task-list-item {
+    @apply list-none;
+}
+.
+.footnotes {
+    @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+.
+.data-footnote-backref {
+    @apply no-underline;
+}
+.
+.csl-entry {
+    @apply my-5;
+}
+.
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+---
+
+Failed to find context:
+.task-list-item::before {
+    @apply hidden;
+}
+.
+.task-list-item {
+    @apply list-none;
+}
+.
+.footnotes {
+    @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+.
+.data-footnote-backref {
+    @apply no-underline;
+}
+.
+.csl-entry {
+    @apply my-5;
+}
+.
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+---
+
+Failed to find context:
+.task-list-item::before {
+    @apply hidden;
+}
+.
+.task-list-item {
+    @apply list-none;
+}
+.
+.footnotes {
+    @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+.
+.data-footnote-backref {
+    @apply no-underline;
+}
+.
+.csl-entry {
+    @apply my-5;
+}
+.
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+---
+
+I’ve updated Astro config and dependencies for Tailwind 4, and now I’ll wire in the new CSS-based Tailwind config, remove the old Tailwind config file, and run a build to confirm everything works.
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/ip/Projects/tailwind-astro-starting-blog/src/styles/global.css</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="delete_file">
+<details><summary>Tool use: **delete_file**</summary>
+
+Explanation: undefined
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="todo_write">
+<details><summary>Tool use: **todo_write** • Todo List</summary>
+
+- [x] Add Tailwind 4 support via Astro CLI and Vite plugin
+- [x] Remove @astrojs/tailwind integration and legacy Tailwind 3 config
+- [-] Run Astro dev or build to verify Tailwind 4 and Vite setup works
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: pnpm run build</summary>
+
+```bash
+pnpm run build
+```
+
+```
+
+&gt; tailwind-astro-starting-blog@0.0.1 build /Users/ip/Projects/tailwind-astro-starting-blog
+&gt; astro build
+
+11:25:47 [vite] Re-optimizing dependencies because lockfile has changed
+11:25:47 [content] Syncing content
+11:25:47 [content] Astro config changed
+11:25:47 [content] Clearing content store
+11:25:47 [content] Synced content
+11:25:47 [types] Generated 309ms
+11:25:47 [build] output: "static"
+11:25:47 [build] mode: "static"
+11:25:47 [build] directory: /Users/ip/Projects/tailwind-astro-starting-blog/dist/
+11:25:47 [build] Collecting build info...
+11:25:47 [build] ✓ Completed in 328ms.
+11:25:47 [build] Building static entrypoints...
+ ELIFECYCLE  Command failed with exit code 1.
+11:25:48 [ERROR] [vite] ✗ Build failed in 740ms
+[@tailwindcss/vite:generate:build] "./typography" is not exported under the condition "style" from package /Users/ip/Projects/tailwind-astro-starting-blog/node_modules/tailwindcss (see exports field in /Users/ip/Projects/tailwind-astro-starting-blog/node_modules/tailwindcss/package.json)
+file: /Users/ip/Projects/tailwind-astro-starting-blog/src/styles/global.css
+  Stack trace:
+    at /Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/ExportsFieldPlugin.js:123:7
+    at Resolver.doResolve (/Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/Resolver.js:736:16)
+    at /Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/DescriptionFileUtils.js:161:24
+    at onJson (/Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/DescriptionFileUtils.js:96:6)
+    at SyncAsyncFileSystemDecorator.readJson (/Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/SyncAsyncFileSystemDecorator.js:204:6)
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "src/styles/global.css",
+    "astro.config.mjs"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "src/styles/global.css"
+    },
+    {
+      "relativeWorkspacePath": "astro.config.mjs"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/ip/Projects/tailwind-astro-starting-blog/src/styles/global.css</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: pnpm run build</summary>
+
+```bash
+pnpm run build
+```
+
+```
+
+&gt; tailwind-astro-starting-blog@0.0.1 build /Users/ip/Projects/tailwind-astro-starting-blog
+&gt; astro build
+
+11:26:00 [content] Syncing content
+11:26:00 [content] Synced content
+11:26:00 [types] Generated 219ms
+11:26:00 [build] output: "static"
+11:26:00 [build] mode: "static"
+11:26:00 [build] directory: /Users/ip/Projects/tailwind-astro-starting-blog/dist/
+11:26:00 [build] Collecting build info...
+11:26:00 [build] ✓ Completed in 233ms.
+11:26:00 [build] Building static entrypoints...
+ ELIFECYCLE  Command failed with exit code 1.
+11:26:01 [ERROR] [vite] ✗ Build failed in 694ms
+[@tailwindcss/vite:generate:build] "./typography" is not exported under the condition "style" from package /Users/ip/Projects/tailwind-astro-starting-blog/node_modules/tailwindcss (see exports field in /Users/ip/Projects/tailwind-astro-starting-blog/node_modules/tailwindcss/package.json)
+file: /Users/ip/Projects/tailwind-astro-starting-blog/src/styles/global.css
+  Stack trace:
+    at /Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/ExportsFieldPlugin.js:123:7
+    at Resolver.doResolve (/Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/Resolver.js:736:16)
+    at /Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/DescriptionFileUtils.js:161:24
+    at onJson (/Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/DescriptionFileUtils.js:96:6)
+    at SyncAsyncFileSystemDecorator.readJson (/Users/ip/Projects/tailwind-astro-starting-blog/node_modules/.pnpm/enhanced-resolve@5.19.0/node_modules/enhanced-resolve/lib/SyncAsyncFileSystemDecorator.js:204:6)
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="web_search">
+<details>
+            <summary>Tool use: **web_search** • Searched web `undefined` • **1** results</summary>
+        
+| Title | URL | Chunk |
+|-------|-----|-------|
+| Web search results for query: Tailwind CSS 4 import typography forms from tailwindcss package exports |  | Links:<br/>1. [How to configure @tailwindcss/typography plugin from TailwindCSS v4](https://stackoverflow.com/questions/79626704/how-to-configure-tailwindcss-typography-plugin-from-tailwindcss-v4)<br/>2. [tailwindlabs/tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)<br/>3. [How to Use the Tailwind Forms Plugin](https://tailkits.com/blog/tailwind-forms-plugin)<br/>4. [Search code, repositories, users, issues, pull requests...](https://github.com/tailwindlabs/tailwindcss/discussions/15262)<br/>5. [Configuration](https://v3.tailwindcss.com/docs/configuration)<br/><br/># Tailwind CSS 4 Typography and Forms Imports<br/><br/>## Typography Plugin<br/><br/>In Tailwind CSS v4, typography and forms are loaded differently than v3. The typography plugin is not built into the main `tailwindcss` package exports—it remains a separate plugin that must be explicitly imported.[1]<br/><br/>However, with Tailwind v4's CSS-first approach, you cannot extend plugin configuration directly in a CSS config file. The `@plugin` directive in your stylesheet loads the plugin, but customization of plugin-specific settings (like typography styles) requires additional setup.[4]<br/><br/>## Forms Plugin<br/><br/>For the `@tailwindcss/forms` plugin in Tailwind v4, use the `@plugin` directive in your main stylesheet:[3]<br/><br/>```css<br/>/* app.css */<br/>@import "tailwindcss";<br/>@plugin "@tailwindcss/forms";<br/>```<br/><br/>This is the v4 way to load legacy JS plugins. The directive must appear **after** `@import "tailwindcss"`.[3]<br/><br/>For v3, register it in `tailwind.config.js`:<br/>```javascript<br/>plugins: [require('@tailwindcss/forms')]<br/>```<br/><br/>## Key Difference from v3<br/><br/>In v3, both typography and forms were configured via `tailwind.config.js` under the `plugins` array. In v4's CSS-first architecture, plugins are loaded via the `@plugin` directive in your CSS file instead.[3] |
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/ip/Projects/tailwind-astro-starting-blog/src/styles/global.css</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: pnpm run build</summary>
+
+```bash
+pnpm run build
+```
+
+```
+
+&gt; tailwind-astro-starting-blog@0.0.1 build /Users/ip/Projects/tailwind-astro-starting-blog
+&gt; astro build
+
+11:26:35 [content] Syncing content
+11:26:35 [content] Synced content
+11:26:35 [types] Generated 220ms
+11:26:35 [build] output: "static"
+11:26:35 [build] mode: "static"
+11:26:35 [build] directory: /Users/ip/Projects/tailwind-astro-starting-blog/dist/
+11:26:35 [build] Collecting build info...
+11:26:35 [build] ✓ Completed in 233ms.
+11:26:35 [build] Building static entrypoints...
+11:26:36 [vite] ✓ built in 1.22s
+11:26:36 [build] ✓ Completed in 1.24s.
+
+ building client (vite) 
+11:26:36 [vite] transforming...
+11:26:37 [vite] ✓ 29 modules transformed.
+11:26:37 [vite] rendering chunks...
+11:26:37 [vite] computing gzip size...
+11:26:37 [vite] dist/_astro/page.DTPp-pk-.js                                                0.05 kB │ gzip: 0.07 kB
+11:26:37 [vite] dist/_astro/ScrollTopAndComments.Dbk-ZOJZ.js                                1.06 kB │ gzip: 0.63 kB
+11:26:37 [vite] dist/_astro/ThemeSwitcher.Cs2Jay4k.js                                       1.75 kB │ gzip: 0.91 kB
+11:26:37 [vite] dist/_astro/index.E2NZU3JX.js                                               2.29 kB │ gzip: 1.04 kB
+11:26:37 [vite] dist/_astro/utils.VdnVkyPt.js                                               2.59 kB │ gzip: 0.94 kB
+11:26:37 [vite] dist/_astro/MobileNav.DGVQ_T3U.js                                           2.63 kB │ gzip: 1.16 kB
+11:26:37 [vite] dist/_astro/client.C-97uuM-.js                                              5.61 kB │ gzip: 2.43 kB
+11:26:37 [vite] dist/_astro/ClientRouter.astro_astro_type_script_index_0_lang.DxD8ucBX.js  13.11 kB │ gzip: 4.54 kB
+11:26:37 [vite] dist/_astro/web.DQ6Rwegl.js                                                13.35 kB │ gzip: 5.43 kB
+11:26:37 [vite] ✓ built in 200ms
+
+ generating static routes 
+11:26:37 ▶ src/pages/404.astro
+11:26:37   └─ /404.html (+10ms) 
+11:26:37 ▶ src/pages/about.astro
+11:26:37   └─ /about/index.html (+7ms) 
+11:26:37 ▶ src/pages/blog/[...page].astro
+11:26:37   └─ /blog/index.html (+6ms) 
+11:26:37 ▶ src/pages/blog/[...slug].astro
+11:26:37   ├─ /blog/exploring-gpt/index.html (+7ms) 
+11:26:37   ├─ /blog/sample-post/index.html (+5ms) 
+11:26:37   ├─ /blog/simple-layout/index.html (+4ms) 
+11:26:37   ├─ /blog/two-columns-with-cover/index.html (+5ms) 
+11:26:37   └─ /blog/simple-layout-with-cover/index.html (+4ms) 
+11:26:37 ▶ src/pages/projects.astro
+11:26:37   └─ /projects/index.html (+2ms) 
+11:26:37 λ src/pages/rss.xml.js
+11:26:37   └─ /rss.xml (+4ms) 
+11:26:37 ▶ src/pages/tags/[slug]/[...page].astro
+11:26:37   └─ /tags/default/index.html (+8ms) 
+11:26:37 ▶ src/pages/tags/index.astro
+11:26:37   └─ /tags/index.html (+16ms) 
+11:26:37 ▶ src/pages/index.astro
+11:26:37   └─ /index.html (+4ms) 
+11:26:37 ✓ Completed in 128ms.
+
+ generating optimized images 
+11:26:37   ▶ /_astro/favicon.vp_fBu0c_19DKCs.svg (before: 0kB, after: 0kB) (+1ms) (1/3)
+11:26:37   ▶ /_astro/logo.-XIpowEb_19DKCs.svg (before: 1kB, after: 1kB) (+1ms) (2/3)
+11:26:37   ▶ /_astro/og-image.DFznCMcF_Z214ywo.png (before: 579kB, after: 579kB) (+3ms) (3/3)
+11:26:37 ✓ Completed in 3ms.
+
+11:26:37 [@astrojs/sitemap] &#96;sitemap-index.xml&#96; created at &#96;dist&#96;
+[32mastro-robots-txt:[0m &#96;robots.txt&#96; is created.
+
+11:26:37 [build] 12 page(s) built in 1.83s
+11:26:37 [build] Complete!
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="todo_write">
+<details><summary>Tool use: **todo_write** • Todo List</summary>
+
+- [x] Add Tailwind 4 support via Astro CLI and Vite plugin
+- [x] Remove @astrojs/tailwind integration and legacy Tailwind 3 config
+- [x] Run Astro dev or build to verify Tailwind 4 and Vite setup works
+
+</details>
+</tool-use>
+
+---
+
+### What I changed
+
+- **Tailwind 4 + Vite plugin**
+  - Installed Tailwind 4 and the official Vite plugin:
+    - `tailwindcss` upgraded to `4.1.18`
+    - Added `@tailwindcss/vite` as a dependency
+  - Updated `astro.config.mjs` to remove the old integration and wire the Vite plugin:
+
+```12:19:astro.config.mjs
+import { defineConfig, passthroughImageService} from 'astro/config';
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import solidJs from "@astrojs/solid-js";
+import { SITE_METADATA } from "./src/consts.ts";
+import metaTags from "astro-meta-tags";
+import tailwindcss from "@tailwindcss/vite";
+
+import robotsTxt from "astro-robots-txt";
+
+// https://astro.build/config
+export default defineConfig({
+  prefetch: true,
+  site: SITE_METADATA.siteUrl,
+  image: {
+    service: passthroughImageService(),
+  },
+  integrations: [mdx(), sitemap(), solidJs(), metaTags(), robotsTxt()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});
+```
+
+- **Removed legacy Tailwind 3 setup**
+  - Uninstalled `@astrojs/tailwind` (per the Astro guide you linked: [“Upgrade from Tailwind 3”](https://docs.astro.build/en/guides/styling/#upgrade-from-tailwind-3)).
+  - Deleted `tailwind.config.cjs` since Tailwind 4 uses CSS-first configuration.
+
+- **New Tailwind 4 CSS config (global)**
+  - Converted your Tailwind config to Tailwind 4’s CSS-first style in `src/styles/global.css`:
+    - Import base Tailwind
+    - Load typography and forms via `@plugin`
+    - Recreate your custom theme pieces: `primary` color scale (mapped to `pink`), extended line-heights 11–14, and `Onest` as the default sans font.
+    - Preserve your existing global helpers (task list, footnotes, autofill fix).
+    - Re-established class-based dark mode using `@custom-variant dark` so your existing `dark:` utilities and theme switcher still work.
+
+```1:40:src/styles/global.css
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+@custom-variant dark (&&:where(.dark, .dark *));
+
+@theme {
+    /* Use Onest as the primary sans font */
+    --font-sans: "Onest", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+
+    /* Additional line-heights that existed in the Tailwind v3 config */
+    --line-height-11: 2.75rem;
+    --line-height-12: 3rem;
+    --line-height-13: 3.25rem;
+    --line-height-14: 3.5rem;
+
+    /* Map custom primary color scale to the default pink palette */
+    --color-primary-50: var(--color-pink-50);
+    --color-primary-100: var(--color-pink-100);
+    --color-primary-200: var(--color-pink-200);
+    --color-primary-300: var(--color-pink-300);
+    --color-primary-400: var(--color-pink-400);
+    --color-primary-500: var(--color-pink-500);
+    --color-primary-600: var(--color-pink-600);
+    --color-primary-700: var(--color-pink-700);
+    --color-primary-800: var(--color-pink-800);
+    --color-primary-900: var(--color-pink-900);
+    --color-primary-950: var(--color-pink-950);
+}
+
+.task-list-item::before {
+    @apply hidden;
+}
+
+.task-list-item {
+    @apply list-none;
+}
+
+.footnotes {
+    @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+
+.data-footnote-backref {
+    @apply no-underline;
+}
+
+.csl-entry {
+    @apply my-5;
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition:
+        background-color 600000s 0s,
+        color 600000s 0s;
+}
+```
+
+- **Build verification & Vite**
+  - Ran `pnpm run build`; it now completes successfully with Tailwind 4 and `@tailwindcss/vite` wired into Astro.
+  - You’re on **Astro 5.17.1**, which internally uses **Vite 6**, so you’re effectively on the latest Vite major supported by this Astro version (no separate `vite` dependency needed).
+
+### How to validate locally
+
+- Run `pnpm run dev` and confirm:
+  - `text-primary-*` colors and `bg-primary-*` (e.g. in cards, tags, hero links) still look as before.
+  - Dark mode toggle still switches `dark:` styles.
+  - `prose` / `dark:prose-invert` blocks render correctly with typography.
+
+If you want, I can next tweak the typography styles in CSS to more closely mirror your old `typography` config (e.g. link colors, heading weights) using `.prose` rules.
+
+---
+
+_**User**_
+
+Let's update @README.md file with relevand info.
+
+---
+
