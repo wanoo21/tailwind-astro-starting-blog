@@ -32,6 +32,7 @@ export const ui = {
 
     // Components
     'components.scrollTopAndComments.scrollTop': 'Scroll To Top',
+    'components.scrollTopAndComments.scrollToComment': 'Scroll To Comment',
     'components.themeSwitcher.toggleDarkMode': 'Toggle Dark Mode',
     'components.card.linkToPost': 'Read more about {title}',
     'components.mobileNav.toggleMenu': 'Toggle Menu',

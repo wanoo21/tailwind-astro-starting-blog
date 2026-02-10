@@ -11,7 +11,8 @@ import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
 import PostCover from "../components/PostCover.astro";
 import DetailsSummary from "../components/DetailsSummary.astro";
 import SocialShareButtons from "../components/social-icons/SocialShareButtons.astro";
-import { POST_METADATA } from "@/consts";
+import Comments from "../components/Comments.astro";
+import { POST_METADATA, SITE_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
 
 const t = useTranslations();
@@ -47,7 +48,10 @@ const { Content, headings } = await render(post);
   article={articleOgDetails}
 >
   <SectionContainer>
-    <ScrollTopAndComments client:only="solid-js" />
+    <ScrollTopAndComments 
+      client:only="solid-js" 
+      showComments={SITE_METADATA.comments?.provider === 'disqus' && !!SITE_METADATA.comments?.disqusConfig?.shortname}
+    />
     <article>
       <div class="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
         <header class="pt-6 xl:pb-6">
@@ -187,21 +191,7 @@ const { Content, headings } = await render(post);
                 <SocialShareButtons title={post.data.title} description={post.data.summary} />
               ) : null
             }
-            <!--    <div class="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">-->
-            <!--        <Link href={discussUrl(path)} rel="nofollow">-->
-            <!--            Discuss on Twitter-->
-            <!--        </Link>-->
-            <!--        {` • `}-->
-            <!--        <Link href={editUrl(filePath)}>View on GitHub</Link>-->
-            <!--    </div>-->
-            <!--    {SITE_METADATA.comments && (-->
-            <!--            <div-->
-            <!--                    class="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"-->
-            <!--                    id="comment"-->
-            <!--            >-->
-            <!--                <Comments slug={slug}/>-->
-            <!--            </div>-->
-            <!--    )}-->
+            <Comments slug={post.id} />
           </div>
           <footer>
             <div

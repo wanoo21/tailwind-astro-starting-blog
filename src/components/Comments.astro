@@ -1,0 +1,23 @@
+---
+import { SITE_METADATA } from "@/consts";
+import Disqus from "@/components/solidjs/Disqus.tsx";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const comments = SITE_METADATA.comments;
+---
+
+{
+  comments && comments.provider === "disqus" && comments.disqusConfig.shortname && (
+    <div class="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+      <Disqus 
+        client:only="solid-js" 
+        slug={slug} 
+        config={comments.disqusConfig}
+      />
+    </div>
+  )
+}

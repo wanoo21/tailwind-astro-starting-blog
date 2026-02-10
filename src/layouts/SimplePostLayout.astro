@@ -9,7 +9,8 @@ import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
 import PostCover from "../components/PostCover.astro";
 import DetailsSummary from "../components/DetailsSummary.astro";
 import SocialShareButtons from "../components/social-icons/SocialShareButtons.astro";
-import { POST_METADATA } from "@/consts";
+import Comments from "../components/Comments.astro";
+import { POST_METADATA, SITE_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
 
 const t = useTranslations();
@@ -45,7 +46,10 @@ const { Content, headings } = await render(post);
   article={articleOgDetails}
 >
   <SectionContainer>
-    <ScrollTopAndComments client:only="solid-js" />
+    <ScrollTopAndComments 
+      client:only="solid-js"
+      showComments={SITE_METADATA.comments?.provider === 'disqus' && !!SITE_METADATA.comments?.disqusConfig?.shortname}
+    />
     <article>
       <header>
         <div class="space-y-1 pb-10 text-center dark:border-gray-700">
@@ -137,11 +141,7 @@ const { Content, headings } = await render(post);
             />
           ) : null
         }
-        <!--{siteMetadata.comments && (-->
-        <!--        <div class="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">-->
-        <!--            <Comments slug={slug} />-->
-        <!--        </div>-->
-        <!--)}-->
+        <Comments slug={post.id} />
         <footer>
           <div
             class="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base"
