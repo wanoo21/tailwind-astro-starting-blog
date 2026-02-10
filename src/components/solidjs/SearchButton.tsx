@@ -19,7 +19,6 @@ export default function SearchButton() {
   const [results, setResults] = createSignal<SearchResult[]>([]);
   const [allPosts, setAllPosts] = createSignal<SearchResult[]>([]);
   const [isLoading, setIsLoading] = createSignal(false);
-  const [searchTimeout, setSearchTimeout] = createSignal<number | null>(null);
 
   // Load search data when component mounts
   createEffect(() => {
@@ -39,17 +38,19 @@ export default function SearchButton() {
   });
 
   // Perform search when query changes (with debouncing)
-  createEffect(() => {
+  createEffect((prevTimeout?: number) => {
     const searchQuery = query().toLowerCase().trim();
     
-    // Clear previous timeout
-    if (searchTimeout() !== null) {
-      clearTimeout(searchTimeout());
-    }
+    // Clear previous timeout using onCleanup
+    onCleanup(() => {
+      if (prevTimeout !== undefined) {
+        clearTimeout(prevTimeout);
+      }
+    });
     
     if (!searchQuery) {
       setResults([]);
-      return;
+      return undefined;
     }
 
     // Debounce search by 150ms
@@ -67,7 +68,7 @@ export default function SearchButton() {
       setResults(filtered);
     }, 150);
     
-    setSearchTimeout(timeout);
+    return timeout;
   });
 
   // Handle keyboard shortcuts
