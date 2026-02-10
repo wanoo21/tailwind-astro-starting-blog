@@ -1,4 +1,4 @@
-import { onMount, onCleanup, createEffect } from "solid-js";
+import { onMount, onCleanup, createEffect, on } from "solid-js";
 
 interface DisqusProps {
   slug: string;
@@ -45,21 +45,22 @@ export default function Disqus(props: DisqusProps) {
     }
   });
 
-  // Reload Disqus when slug changes (skip initial mount)
-  let isInitialMount = true;
-  createEffect(() => {
-    const slug = props.slug;
-    if (!isInitialMount && slug && (window as any).DISQUS) {
-      (window as any).DISQUS.reset({
-        reload: true,
-        config: function () {
-          this.page.identifier = slug;
-          this.page.url = window.location.href;
-        },
-      });
+  // Reload Disqus when slug changes (using on() to skip initial run)
+  createEffect(on(
+    () => props.slug,
+    (slug, prevSlug) => {
+      // Only reset if slug actually changed and DISQUS is loaded
+      if (slug && prevSlug !== undefined && slug !== prevSlug && (window as any).DISQUS) {
+        (window as any).DISQUS.reset({
+          reload: true,
+          config: function () {
+            this.page.identifier = slug;
+            this.page.url = window.location.href;
+          },
+        });
+      }
     }
-    isInitialMount = false;
-  });
+  ));
 
   return (
     <div>
