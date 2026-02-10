@@ -1906,3 +1906,108 @@ Let's update @README.md file with relevand info.
 
 ---
 
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Updating README info**
+
+I need to update the README to include information about Tailwind4 and Vite. First, I should read through the current README to understand what's there. Once I have that context, I can patch it with the new info. I want to keep it concise since being overly verbose isn't ideal. I'll apply the patch as a single file for clarity. Let's get started by reading the README!</details></think>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/ip/Projects/tailwind-astro-starting-blog/README.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Updating project versions**
+
+I need to update some versions: I see that it's referencing Astro v4 and Tailwind 3.4, but the current versions are Astro 5.17 and Tailwind 4.1.18. It looks like Tailwind 4 is being used via a Vite plugin, but the command table mentions npm while the repo has both pnpm-lock and package-lock files. I think I’ll change the features bullets and add a section called "Tech stack / Tooling" to clarify this. I’ll also make sure to correct the Astro and Tailwind version mentions. I’ll check the package.json for verification too!</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/ip/Projects/tailwind-astro-starting-blog/README.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/ip/Projects/tailwind-astro-starting-blog/README.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+### README updates done
+
+- **Updated feature list** to reflect the migration:
+  - Now says **Astro v5 with TypeScript**.
+  - Tailwind line now mentions **Tailwind CSS v4** with a link to the v4 upgrade guide and notes it uses the official `@tailwindcss/vite` plugin.
+
+```24:31:README.md
+## Features
+
+- Astro v5 with TypeScript
+- Astro MDX support
+- [Solid-js](https://solidjs.com) for some interactivity
+- Easy styling customization with [Tailwind CSS v4](https://tailwindcss.com/docs/upgrade-guide) (via the official `@tailwindcss/vite` plugin) and primary color attribute
+```
+
+- **Added a small tech stack section** documenting the key versions and how Tailwind is wired:
+
+```71:78:README.md
+## Tech stack
+
+- **Astro**: `^5.17.1`
+- **Tailwind CSS**: `^4.1.18` (configured with `@tailwindcss/vite` in `astro.config.mjs` and `@import "tailwindcss";` in `src/styles/global.css`)
+- **Vite**: bundled via Astro 5 (Vite 6)
+- **TypeScript**: `^5.9.3`
+
+## 🧞 Commands
+```
+
+If you want, I can also add a short “Migrating from Tailwind 3” note pointing to the Astro Tailwind upgrade section you shared.
+
+---
+
+_**User**_
+
+no need of tech stack
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Removing tech stack from README**
+
+I'm thinking it’s time to remove the tech stack section from the README to keep it minimal. It seems like a good idea to streamline things. I’ll use the ApplyPatch method to make this change. Keeping things neat and clear is important, right? I just want to ensure the project documentation stays straightforward and focuses on what's essential. Let’s get this done efficiently!</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/ip/Projects/tailwind-astro-starting-blog/README.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+All set — I removed the **Tech stack** section from `README.md` and left the updated features (Astro v5, Tailwind v4) intact.
+
+---
+
