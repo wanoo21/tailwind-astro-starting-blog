@@ -10,7 +10,7 @@ import PostCover from "../components/PostCover.astro";
 import DetailsSummary from "../components/DetailsSummary.astro";
 import SocialShareButtons from "../components/social-icons/SocialShareButtons.astro";
 import Comments from "../components/Comments.astro";
-import { POST_METADATA, SITE_METADATA } from "@/consts";
+import { POST_METADATA, areCommentsEnabled } from "@/consts";
 import { useTranslations } from "@/i18n";
 
 const t = useTranslations();
@@ -48,7 +48,7 @@ const { Content, headings } = await render(post);
   <SectionContainer>
     <ScrollTopAndComments 
       client:only="solid-js"
-      showComments={SITE_METADATA.comments?.provider === 'disqus' && !!SITE_METADATA.comments?.disqusConfig?.shortname}
+      showComments={areCommentsEnabled()}
     />
     <article>
       <header>

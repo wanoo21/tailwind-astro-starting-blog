@@ -1,4 +1,4 @@
-import { onMount, createSignal } from "solid-js";
+import { onMount } from "solid-js";
 import { useTranslations } from "@/i18n";
 
 const t = useTranslations();
@@ -9,7 +9,6 @@ interface Props {
 
 export default function ScrollTopAndComments(props: Props) {
   let divRef!: HTMLDivElement;
-  const [showComments] = createSignal(props.showComments ?? false);
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -32,7 +31,7 @@ export default function ScrollTopAndComments(props: Props) {
 
   return (
     <div class="fixed bottom-8 right-8 hidden flex-col gap-3 md:hidden z-10" ref={divRef}>
-      {showComments() && (
+      {props.showComments && (
         <button
           aria-label={t('components.scrollTopAndComments.scrollToComment')}
           onClick={handleScrollToComment}

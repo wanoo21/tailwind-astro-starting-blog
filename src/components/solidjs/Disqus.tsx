@@ -1,4 +1,4 @@
-import { onMount, createEffect } from "solid-js";
+import { onMount, onCleanup, createEffect } from "solid-js";
 
 interface DisqusProps {
   slug: string;
@@ -11,7 +11,7 @@ interface DisqusProps {
 }
 
 export default function Disqus(props: DisqusProps) {
-  let disqusDiv!: HTMLDivElement;
+  let scriptElement: HTMLScriptElement | null = null;
 
   const loadDisqus = () => {
     const { shortname, url, identifier, title } = props.config;
@@ -30,6 +30,7 @@ export default function Disqus(props: DisqusProps) {
     script.src = `https://${shortname}.disqus.com/embed.js`;
     script.setAttribute("data-timestamp", String(+new Date()));
     (document.head || document.body).appendChild(script);
+    scriptElement = script;
   };
 
   onMount(() => {
@@ -38,10 +39,17 @@ export default function Disqus(props: DisqusProps) {
     }
   });
 
-  // Reload Disqus when slug changes
+  onCleanup(() => {
+    if (scriptElement && scriptElement.parentNode) {
+      scriptElement.parentNode.removeChild(scriptElement);
+    }
+  });
+
+  // Reload Disqus when slug changes (skip initial mount)
+  let isInitialMount = true;
   createEffect(() => {
     const slug = props.slug;
-    if (slug && (window as any).DISQUS) {
+    if (!isInitialMount && slug && (window as any).DISQUS) {
       (window as any).DISQUS.reset({
         reload: true,
         config: function () {
@@ -50,11 +58,12 @@ export default function Disqus(props: DisqusProps) {
         },
       });
     }
+    isInitialMount = false;
   });
 
   return (
     <div>
-      <div id="disqus_thread" ref={disqusDiv}></div>
+      <div id="disqus_thread"></div>
       <noscript>
         Please enable JavaScript to view the{" "}
         <a href="https://disqus.com/?ref_noscript">

@@ -99,3 +99,10 @@ export const POST_METADATA = {
   showTableOfContents: true, // Show table of contents in blog post
   showShareButtons: 'both', // Show share buttons in blog post, options: top, bottom, both, none
 };
+
+/**
+ * Helper function to check if comments are enabled
+ */
+export const areCommentsEnabled = () => {
+  return SITE_METADATA.comments?.provider === 'disqus' && !!SITE_METADATA.comments?.disqusConfig?.shortname;
+};
