@@ -41,12 +41,10 @@ export default function SearchButton() {
   createEffect((prevTimeout?: number) => {
     const searchQuery = query().toLowerCase().trim();
     
-    // Clear previous timeout using onCleanup
-    onCleanup(() => {
-      if (prevTimeout !== undefined) {
-        clearTimeout(prevTimeout);
-      }
-    });
+    // Clear previous timeout before setting up new one
+    if (prevTimeout !== undefined) {
+      clearTimeout(prevTimeout);
+    }
     
     if (!searchQuery) {
       setResults([]);
@@ -68,6 +66,7 @@ export default function SearchButton() {
       setResults(filtered);
     }, 150);
     
+    // Return timeout to be passed as prevTimeout in next run
     return timeout;
   });
 
