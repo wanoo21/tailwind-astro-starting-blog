@@ -1,5 +1,4 @@
 import { createSignal, createEffect, For, Show, onMount, onCleanup } from "solid-js";
-import { useTranslations } from "@/i18n";
 
 interface SearchResult {
   id: string;
@@ -10,8 +9,6 @@ interface SearchResult {
   date: string;
   tags: string[];
 }
-
-const t = useTranslations();
 
 export default function SearchButton() {
   const [isOpen, setIsOpen] = createSignal(false);
@@ -103,7 +100,7 @@ export default function SearchButton() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    // Use the browser's locale for consistent internationalization
+    // Use browser's default locale for automatic internationalization
     return date.toLocaleDateString(undefined, {
       year: "numeric",
       month: "long",
