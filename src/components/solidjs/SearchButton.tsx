@@ -67,7 +67,7 @@ export default function SearchButton() {
       setResults(filtered);
     }, 150);
     
-    setSearchTimeout(timeout as unknown as number);
+    setSearchTimeout(timeout);
   });
 
   // Handle keyboard shortcuts
@@ -211,10 +211,10 @@ export default function SearchButton() {
                             <time>{formatDate(result.date)}</time>
                             <Show when={result.tags.length > 0}>
                               <span>•</span>
-                              <div class="flex gap-1">
+                              <div class="flex gap-1" role="list" aria-label="Tags">
                                 <For each={result.tags.slice(0, 3)}>
                                   {(tag) => (
-                                    <span class="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded">
+                                    <span class="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded" role="listitem">
                                       {tag}
                                     </span>
                                   )}
