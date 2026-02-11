@@ -5,11 +5,12 @@ import Link from "../components/Link.astro";
 import RootLayout from "./RootLayout.astro";
 import { type CollectionEntry, getEntries, render } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
-import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
+import ScrollTopAndComments from "@/components/solidjs/ScrollTopAndComments.tsx";
 import PostCover from "../components/PostCover.astro";
 import DetailsSummary from "../components/DetailsSummary.astro";
 import SocialShareButtons from "../components/social-icons/SocialShareButtons.astro";
-import { POST_METADATA } from "@/consts";
+import Comments from "../components/Comments.astro";
+import { POST_METADATA, SITE_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
 
 const t = useTranslations();
@@ -136,6 +137,13 @@ const { Content, headings } = await render(post);
               description={post.data.summary}
             />
           ) : null
+        }
+        {
+          SITE_METADATA.comments?.provider === 'giscus' && POST_METADATA.showComments && (
+            <div id="comments">
+              <Comments />
+            </div>
+          )
         }
         <!--{siteMetadata.comments && (-->
         <!--        <div class="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">-->

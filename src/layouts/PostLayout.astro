@@ -7,11 +7,12 @@ import RootLayout from "./RootLayout.astro";
 import { type CollectionEntry, getEntries, render } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import Tag from "../components/Tag.astro";
-import ScrollTopAndComments from "@/solid/ScrollTopAndComments.tsx";
+import ScrollTopAndComments from "@/components/solidjs/ScrollTopAndComments.tsx";
 import PostCover from "../components/PostCover.astro";
 import DetailsSummary from "../components/DetailsSummary.astro";
 import SocialShareButtons from "../components/social-icons/SocialShareButtons.astro";
-import { POST_METADATA } from "@/consts";
+import Comments from "../components/Comments.astro";
+import { POST_METADATA, SITE_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
 
 const t = useTranslations();
@@ -186,6 +187,13 @@ const { Content, headings } = await render(post);
               ['bottom', 'both'].includes(POST_METADATA.showShareButtons) ? (
                 <SocialShareButtons title={post.data.title} description={post.data.summary} />
               ) : null
+            }
+            {
+              SITE_METADATA.comments?.provider === 'giscus' && POST_METADATA.showComments && (
+                <div id="comments">
+                  <Comments />
+                </div>
+              )
             }
             <!--    <div class="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">-->
             <!--        <Link href={discussUrl(path)} rel="nofollow">-->

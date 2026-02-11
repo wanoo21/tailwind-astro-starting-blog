@@ -1,0 +1,16 @@
+---
+import { SITE_METADATA } from "@/consts";
+import Giscus from "@/components/solidjs/Giscus.tsx";
+
+const isConfigured =
+  SITE_METADATA.comments?.provider === "giscus" &&
+  SITE_METADATA.comments?.giscusConfig?.repo;
+---
+
+{
+  isConfigured && (
+    <div class="giscus-wrapper pb-6 pt-6 text-center">
+      <Giscus client:only="solid-js" />
+    </div>
+  )
+}

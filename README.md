@@ -34,6 +34,7 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - 2 different blog post layouts, including a full-width cover image
 - 2 different blog listing layouts
 - Support for nested routing of blog posts
+- Support for [Giscus](https://giscus.app/) comments (powered by GitHub Discussions)
 - Projects page
 - i18n support
 - **Fully SEO optimized**, including Open Graph and Twitter Cards
@@ -67,6 +68,51 @@ This template has support for i18n, it's set up for English as default. You can 
 `src/content/tags/default.mdx` contains the default tag information. You can add more tags by adding more `.mdx` files in the `src/content/tags` folder.
 
 `src/content/config.ts` contains all fields for author, blog and tags pages. Check what's required and what's not. You can also add more fields if you want to.
+
+## Comments
+
+This template now supports [Giscus](https://giscus.app/) comments, which uses GitHub Discussions as a backend. To enable comments on your blog:
+
+1. **Enable GitHub Discussions** on your repository:
+   - Go to your repository settings
+   - Scroll down to the "Features" section
+   - Enable "Discussions"
+
+2. **Install the Giscus app**:
+   - Visit [giscus.app](https://giscus.app/)
+   - Follow the configuration steps to get your repository details
+
+3. **Configure Giscus in your blog**:
+   - Open `src/consts.ts`
+   - Find the `comments` section in `SITE_METADATA`
+   - Fill in your Giscus configuration:
+     ```typescript
+     comments: {
+       provider: 'giscus', // Set to 'giscus' to enable comments or null to disable
+       giscusConfig: {
+         repo: 'username/repo', // Your GitHub repository
+         repositoryId: 'R_xxxxx', // Your repository ID from giscus.app
+         category: 'General', // Discussion category
+         categoryId: 'DIC_xxxxx', // Category ID from giscus.app
+         mapping: 'pathname', // How to map pages to discussions
+         reactionsEnabled: '1', // Enable reactions: '1' or '0'
+         emitMetadata: '0', // Emit discussion metadata: '1' or '0'
+         inputPosition: 'top', // Comment box position: 'top' or 'bottom'
+         theme: 'light', // Theme for light mode
+         darkTheme: 'dark', // Theme for dark mode
+         lang: 'en', // Language code
+         loading: 'lazy', // Loading mode: 'lazy' or 'eager'
+       },
+     }
+     ```
+
+4. **Control comment visibility** (optional):
+   - In `src/consts.ts`, under `POST_METADATA`, you can disable comments globally:
+     ```typescript
+     showComments: false, // Set to false to hide comments on all posts
+     ```
+
+The comments section will automatically adapt to your site's theme (light/dark mode).
 
 ## 🧞 Commands
 

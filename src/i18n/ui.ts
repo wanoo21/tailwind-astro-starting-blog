@@ -32,6 +32,7 @@ export const ui = {
 
     // Components
     'components.scrollTopAndComments.scrollTop': 'Scroll To Top',
+    'components.scrollTopAndComments.scrollToComments': 'Scroll To Comments',
     'components.themeSwitcher.toggleDarkMode': 'Toggle Dark Mode',
     'components.card.linkToPost': 'Read more about {title}',
     'components.mobileNav.toggleMenu': 'Toggle Menu',
@@ -39,6 +40,7 @@ export const ui = {
     'components.pagination.previous': 'Previous',
     'components.pagination.next': 'Next',
     'components.socialShareButtons.sharing': 'Sharing is caring!',
+    'components.comments.title': 'Comments',
 
     // Navigation
     'nav.home': 'Home',
