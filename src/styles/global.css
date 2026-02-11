@@ -1,3 +1,34 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+@custom-variant dark (&&:where(.dark, .dark *));
+
+@theme {
+    /* Use Onest as the primary sans font */
+    --font-sans: "Onest", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+
+    /* Additional line-heights that existed in the Tailwind v3 config */
+    --line-height-11: 2.75rem;
+    --line-height-12: 3rem;
+    --line-height-13: 3.25rem;
+    --line-height-14: 3.5rem;
+
+    /* Map custom primary color scale to the default pink palette */
+    --color-primary-50: var(--color-pink-50);
+    --color-primary-100: var(--color-pink-100);
+    --color-primary-200: var(--color-pink-200);
+    --color-primary-300: var(--color-pink-300);
+    --color-primary-400: var(--color-pink-400);
+    --color-primary-500: var(--color-pink-500);
+    --color-primary-600: var(--color-pink-600);
+    --color-primary-700: var(--color-pink-700);
+    --color-primary-800: var(--color-pink-800);
+    --color-primary-900: var(--color-pink-900);
+    --color-primary-950: var(--color-pink-950);
+}
+
 .task-list-item::before {
     @apply hidden;
 }
@@ -21,6 +52,7 @@
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
-    transition: background-color 600000s 0s,
-    color 600000s 0s;
+    transition:
+        background-color 600000s 0s,
+        color 600000s 0s;
 }
