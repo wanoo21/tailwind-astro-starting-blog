@@ -4,8 +4,12 @@ import { SITE_METADATA, POST_METADATA } from "@/consts";
 
 const t = useTranslations();
 
+const SCROLL_TOP_THRESHOLD = 50;
+const BOTTOM_THRESHOLD = 400; // px from bottom to show scroll-to-comments
+
 export default function ScrollTopAndComments() {
-  let divRef!: HTMLDivElement;
+  let scrollTopRef!: HTMLDivElement;
+  let scrollCommentsRef!: HTMLDivElement;
   const showComments = SITE_METADATA.comments?.provider === 'giscus' && POST_METADATA.showComments;
 
   const handleScrollToTop = () => {
@@ -21,40 +25,59 @@ export default function ScrollTopAndComments() {
 
   onMount(() => {
     const handleScroll = () => {
-      divRef.classList.toggle('md:hidden', window.scrollY < 50)
-      divRef.classList.toggle('md:flex', window.scrollY >= 50)
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+      // Scroll to top: show when scrolled down
+      scrollTopRef.classList.toggle('md:hidden', scrollY < SCROLL_TOP_THRESHOLD);
+      scrollTopRef.classList.toggle('md:flex', scrollY >= SCROLL_TOP_THRESHOLD);
+
+      // Scroll to comments: show when near the bottom (or on short pages)
+      if (showComments && scrollCommentsRef) {
+        const nearBottom =
+          docHeight <= BOTTOM_THRESHOLD || scrollY >= docHeight - BOTTOM_THRESHOLD;
+        scrollCommentsRef.classList.toggle('hidden', !nearBottom);
+        scrollCommentsRef.classList.toggle('flex', nearBottom);
+      }
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // initial state
   });
 
   return (
-    <div class="fixed bottom-8 right-8 hidden flex-col gap-3 md:hidden z-10" ref={divRef}>
-      {showComments && (
-        <button
-          aria-label={t('components.scrollTopAndComments.scrollToComments')}
-          onClick={handleScrollToComments}
+    <>
+      {/* Scroll to top: shown when user has scrolled down */}
+      <div class="fixed bottom-8 right-8 hidden flex-col gap-3 md:hidden z-10" ref={scrollTopRef}>
+        <button aria-label={t('components.scrollTopAndComments.scrollTop')} onClick={handleScrollToTop}
           class="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
         >
           <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path
               fill-rule="evenodd"
-              d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+              d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
               clip-rule="evenodd"
             />
           </svg>
         </button>
+      </div>
+      {/* Scroll to comments: shown when scrolled near the bottom */}
+      {showComments && (
+        <div class="fixed bottom-20 right-8 hidden z-10" ref={scrollCommentsRef}>
+          <button
+            aria-label={t('components.scrollTopAndComments.scrollToComments')}
+            onClick={handleScrollToComments}
+            class="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
       )}
-      <button aria-label={t('components.scrollTopAndComments.scrollTop')} onClick={handleScrollToTop}
-        class="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
-      >
-        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path
-            fill-rule="evenodd"
-            d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      </button>
-    </div>
+    </>
   )
 }

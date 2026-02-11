@@ -34,44 +34,25 @@ export const SITE_METADATA = {
     },
     minimalAnalyticsId: null, // Add your Minimal Analytics id here
   },
-  // newsletter: {
-  //     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
-  //     // Please add your .env file and modify it according to your selection
-  //     provider: 'buttondown',
-  // },
   comments: {
     // Visit https://giscus.app/ to get your configuration
     // Enable discussions in your repository settings and install the Giscus app
     provider: 'giscus', // Set to 'giscus' to enable comments or null to disable
     giscusConfig: {
-      repo: '', // Your GitHub repository (e.g., 'username/repo')
-      repositoryId: '', // Your repository ID from giscus.app
-      category: '', // Discussion category (e.g., 'General')
-      categoryId: '', // Category ID from giscus.app
-      mapping: 'pathname', // How to map pages to discussions: 'pathname', 'url', 'title', etc.
+      repo: 'wanoo21/tailwind-astro-starting-blog', // Your GitHub repository (e.g., 'username/repo')
+      repositoryId: 'R_kgDOKSBMHw', // Your repository ID from giscus.app
+      category: 'General', // Discussion category (e.g., 'General')
+      categoryId: 'DIC_kwDOKSBMH84CZOdK', // Category ID from giscus.app
+      mapping: 'title', // How to map pages to discussions: 'pathname', 'url', 'title', etc.
       reactionsEnabled: '1', // Enable reactions: '1' or '0'
       emitMetadata: '0', // Emit discussion metadata: '1' or '0'
       inputPosition: 'top', // Comment box position: 'top' or 'bottom'
-      theme: 'light', // Theme for light mode: 'light', 'dark', 'dark_dimmed', 'dark_high_contrast', 'transparent_dark', 'preferred_color_scheme', or custom CSS URL
+      theme: 'preferred_color_scheme', // Theme for light mode: 'light', 'dark', 'dark_dimmed', 'dark_high_contrast', 'transparent_dark', 'preferred_color_scheme', or custom CSS URL
       darkTheme: 'dark', // Theme for dark mode: same options as theme
       lang: 'en', // Language code
       loading: 'lazy', // Loading mode: 'lazy' or 'eager'
     },
-  },
-  // search: {
-  //     provider: 'kbar', // kbar or algolia
-  //     kbarConfig: {
-  //         searchDocumentsPath: 'search.json', // path to load documents to search
-  //     },
-  //     // provider: 'algolia',
-  //     // algoliaConfig: {
-  //     //   // The application ID provided by Algolia
-  //     //   appId: 'R2IYF7ETH7',
-  //     //   // Public API key: it is safe to commit it
-  //     //   apiKey: '599cec31baffa4868cae4e79f180729b',
-  //     //   indexName: 'docsearch',
-  //     // },
-  // },
+  }
 };
 
 /**

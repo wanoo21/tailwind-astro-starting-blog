@@ -1,79 +1,16 @@
 ---
 import { SITE_METADATA } from "@/consts";
+import Giscus from "@/components/solidjs/Giscus.tsx";
 
-const comments = SITE_METADATA.comments;
-const isGiscus = comments?.provider === "giscus";
-
-// Only proceed if Giscus is enabled and properly configured
-const isConfigured = isGiscus && comments?.giscusConfig?.repo;
-
-const config = isConfigured ? comments.giscusConfig : null;
-
-// Get theme based on document theme
-const theme = config?.theme || 'light';
-const darkTheme = config?.darkTheme || 'dark';
+const isConfigured =
+  SITE_METADATA.comments?.provider === "giscus" &&
+  SITE_METADATA.comments?.giscusConfig?.repo;
 ---
 
 {
-  isConfigured && config && (
+  isConfigured && (
     <div class="giscus-wrapper pb-6 pt-6 text-center">
-      <script
-        is:inline
-        data-repo={config.repo}
-        data-repo-id={config.repositoryId}
-        data-category={config.category}
-        data-category-id={config.categoryId}
-        data-mapping={config.mapping}
-        data-strict="0"
-        data-reactions-enabled={config.reactionsEnabled}
-        data-emit-metadata={config.emitMetadata}
-        data-input-position={config.inputPosition}
-        data-theme={theme}
-        data-lang={config.lang}
-        data-loading={config.loading}
-        crossorigin="anonymous"
-        async
-        src="https://giscus.app/client.js"
-      />
-      <script
-        is:inline
-        define:vars={{ theme, darkTheme }}
-      >
-        // Delay to ensure Giscus iframe is fully loaded before attempting theme update
-        const GISCUS_LOAD_DELAY = 1000;
-
-        // Update Giscus theme when the site theme changes
-        function updateGiscusTheme() {
-          const isDark = document.documentElement.classList.contains('dark');
-          const giscusTheme = isDark ? darkTheme : theme;
-          
-          const iframe = document.querySelector('iframe.giscus-frame') as HTMLIFrameElement | null;
-          if (iframe?.contentWindow) {
-            iframe.contentWindow.postMessage(
-              { giscus: { setConfig: { theme: giscusTheme } } },
-              'https://giscus.app'
-            );
-          }
-        }
-
-        // Listen for theme changes
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'class') {
-              updateGiscusTheme();
-            }
-          });
-        });
-
-        // Start observing the document element for class changes
-        observer.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ['class']
-        });
-
-        // Set initial theme after a short delay to ensure Giscus is loaded
-        setTimeout(updateGiscusTheme, GISCUS_LOAD_DELAY);
-      </script>
+      <Giscus client:only="solid-js" />
     </div>
   )
 }
