@@ -52,6 +52,12 @@ export const SITE_METADATA = {
       lang: 'en', // Language code
       loading: 'lazy', // Loading mode: 'lazy' or 'eager'
     },
+  },
+  search: {
+    provider: 'custom', // Custom Solid.js search implementation
+    kbarConfig: {
+      searchDocumentsPath: 'search.json', // path to load documents to search
+    },
   }
 };
 
