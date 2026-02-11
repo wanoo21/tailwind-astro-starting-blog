@@ -39,36 +39,25 @@ export const SITE_METADATA = {
   //     // Please add your .env file and modify it according to your selection
   //     provider: 'buttondown',
   // },
-  // comments: {
-  //     // If you want to use an analytics provider you have to add it to the
-  //     // content security policy in the `next.config.js` file.
-  //     // Select a provider and use the environment variables associated to it
-  //     // https://vercel.com/docs/environment-variables
-  //     provider: 'giscus', // supported providers: giscus, utterances, disqus
-  //     giscusConfig: {
-  //         // Visit the link below, and follow the steps in the 'configuration' section
-  //         // https://giscus.app/
-  //         repo: process.env.NEXT_PUBLIC_GISCUS_REPO,
-  //         repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
-  //         category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
-  //         categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
-  //         mapping: 'pathname', // supported options: pathname, url, title
-  //         reactions: '1', // Emoji reactions: 1 = enable / 0 = disable
-  //         // Send discussion metadata periodically to the parent window: 1 = enable / 0 = disable
-  //         metadata: '0',
-  //         // theme example: light, dark, dark_dimmed, dark_high_contrast
-  //         // transparent_dark, preferred_color_scheme, custom
-  //         theme: 'light',
-  //         // theme when dark mode
-  //         darkTheme: 'transparent_dark',
-  //         // If the theme option above is set to 'custom`
-  //         // please provide a link below to your custom theme css file.
-  //         // example: https://giscus.app/themes/custom_example.css
-  //         themeURL: '',
-  //         // This corresponds to the `data-lang="en"` in giscus's configurations
-  //         lang: 'en',
-  //     },
-  // },
+  comments: {
+    // Visit https://giscus.app/ to get your configuration
+    // Enable discussions in your repository settings and install the Giscus app
+    provider: 'giscus', // Set to 'giscus' to enable comments or null to disable
+    giscusConfig: {
+      repo: '', // Your GitHub repository (e.g., 'username/repo')
+      repositoryId: '', // Your repository ID from giscus.app
+      category: '', // Discussion category (e.g., 'General')
+      categoryId: '', // Category ID from giscus.app
+      mapping: 'pathname', // How to map pages to discussions: 'pathname', 'url', 'title', etc.
+      reactionsEnabled: '1', // Enable reactions: '1' or '0'
+      emitMetadata: '0', // Emit discussion metadata: '1' or '0'
+      inputPosition: 'top', // Comment box position: 'top' or 'bottom'
+      theme: 'light', // Theme for light mode
+      darkTheme: 'dark', // Theme for dark mode
+      lang: 'en', // Language code
+      loading: 'lazy', // Loading mode: 'lazy' or 'eager'
+    },
+  },
   // search: {
   //     provider: 'kbar', // kbar or algolia
   //     kbarConfig: {
@@ -117,4 +106,5 @@ export const POST_METADATA = {
   showRelatedPosts: true, // Show related posts in blog post, TODO: Add support for hiding related posts
   showTableOfContents: true, // Show table of contents in blog post
   showShareButtons: 'both', // Show share buttons in blog post, options: top, bottom, both, none
+  showComments: true, // Show comments section in blog post
 };
