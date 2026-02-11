@@ -39,13 +39,16 @@ const darkTheme = config?.darkTheme || 'dark';
         is:inline
         define:vars={{ theme, darkTheme }}
       >
+        // Delay to ensure Giscus iframe is fully loaded before attempting theme update
+        const GISCUS_LOAD_DELAY = 1000;
+
         // Update Giscus theme when the site theme changes
         function updateGiscusTheme() {
           const isDark = document.documentElement.classList.contains('dark');
           const giscusTheme = isDark ? darkTheme : theme;
           
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (iframe) {
+          const iframe = document.querySelector('iframe.giscus-frame') as HTMLIFrameElement | null;
+          if (iframe?.contentWindow) {
             iframe.contentWindow.postMessage(
               { giscus: { setConfig: { theme: giscusTheme } } },
               'https://giscus.app'
@@ -69,7 +72,7 @@ const darkTheme = config?.darkTheme || 'dark';
         });
 
         // Set initial theme after a short delay to ensure Giscus is loaded
-        setTimeout(updateGiscusTheme, 1000);
+        setTimeout(updateGiscusTheme, GISCUS_LOAD_DELAY);
       </script>
     </div>
   )

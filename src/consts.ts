@@ -52,8 +52,8 @@ export const SITE_METADATA = {
       reactionsEnabled: '1', // Enable reactions: '1' or '0'
       emitMetadata: '0', // Emit discussion metadata: '1' or '0'
       inputPosition: 'top', // Comment box position: 'top' or 'bottom'
-      theme: 'light', // Theme for light mode
-      darkTheme: 'dark', // Theme for dark mode
+      theme: 'light', // Theme for light mode: 'light', 'dark', 'dark_dimmed', 'dark_high_contrast', 'transparent_dark', 'preferred_color_scheme', or custom CSS URL
+      darkTheme: 'dark', // Theme for dark mode: same options as theme
       lang: 'en', // Language code
       loading: 'lazy', // Loading mode: 'lazy' or 'eager'
     },
