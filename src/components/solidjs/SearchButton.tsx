@@ -1,8 +1,8 @@
 import { createSignal, createEffect, For, Show, onMount, onCleanup } from "solid-js";
+import { formatDate } from "@/utils";
 
 interface SearchResult {
   id: string;
-  slug: string;
   title: string;
   summary: string;
   content: string;
@@ -35,7 +35,7 @@ export default function SearchButton() {
   });
 
   // Perform search when query changes (with debouncing)
-  createEffect((prevTimeout?: number) => {
+  createEffect((prevTimeout?: NodeJS.Timeout) => {
     const searchQuery = query().toLowerCase().trim();
     
     // Clear previous timeout before setting up new one
@@ -98,16 +98,6 @@ export default function SearchButton() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    // Use browser's default locale for automatic internationalization
-    return date.toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   return (
     <>
       {/* Search Button */}
@@ -163,7 +153,7 @@ export default function SearchButton() {
                   class="flex-1 px-4 py-4 bg-transparent border-0 focus:outline-none text-gray-900 dark:text-gray-100 placeholder-gray-400"
                   value={query()}
                   onInput={(e) => setQuery(e.currentTarget.value)}
-                  autofocus
+                  autofocus={isOpen()}
                 />
                 <button
                   onClick={closeSearch}
@@ -194,9 +184,8 @@ export default function SearchButton() {
                     {(result) => (
                       <li>
                         <a
-                          href={`/blog/${result.slug}`}
+                          href={`/blog/${result.id}`}
                           class="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                          onClick={closeSearch}
                         >
                           <div class="font-semibold text-gray-900 dark:text-gray-100">
                             {result.title}

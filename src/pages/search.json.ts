@@ -8,7 +8,6 @@ export const GET: APIRoute = async () => {
   // Create searchable data structure
   const searchData = posts.map((post) => ({
     id: post.id,
-    slug: post.slug,
     title: post.data.title,
     summary: post.data.summary,
     content: post.body, // Include the markdown content for full-text search
